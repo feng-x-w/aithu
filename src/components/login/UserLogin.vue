@@ -49,18 +49,6 @@
 		width: 30%;
 		float: right;
 	}
-	.el-form-item__label{
-		color: #FFFFFF;
-	}
-	.cool{
-		position: relative;
-	}
-	.dd,.dd1{
-		position: absolute;
-		left: -60px;
-		top: 0;
-		font-family: "宋体";
-	}
 	.midLeft>h2{
 		margin-bottom: 15px;
 	}
@@ -69,6 +57,36 @@
 		border-radius: 10px;
 		padding: 10px;
 		margin-right: 112px;
+	}
+	.userform{
+		width: 100%;
+		/*background-color: red;*/
+	}
+	.userform>.form_ipt{
+		width: 100%;
+		/*background-color: green;*/
+		margin: 20px 0;
+	}
+	.userform>.form_ipt>span{
+		width: 20%;
+		display: inline-block;
+		/*background-color: aqua;*/
+		font-size: 16px;
+	}
+	.userform>.form_ipt>.form_ipt_txt{
+		width: 70%;
+		display: inline-block;
+		/*background-color: aqua;*/
+		outline: none;
+		border: none;
+		padding: 14px;
+		border-radius: 8px;
+	}
+	.error{
+		color: red;
+	}
+	.elseErr{
+		color: green;
 	}
 </style>
 
@@ -80,21 +98,21 @@
 		<div class="mid">
 			<div class="midLeft">
 				<h2>用户登录</h2>
-				<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-					<el-form-item label="" prop="txt" id="cool">
-						<span class="dd">用户名</span>
-						<el-input type="text" v-model="ruleForm2.txt" auto-complete="off"></el-input>
-					</el-form-item>
-					<el-form-item label="" prop="pass">
-						<span class="dd1">密码</span>
-						<el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
-					</el-form-item>
-					<el-form-item>
-						<router-link tag="el-button" type="primary" @click="submitForm('ruleForm2')" to="/home">提交</router-link>
-						<!--<>提交</el-button>-->
-						<el-button @click="resetForm('ruleForm2')">重置</el-button>
-					</el-form-item>
-				</el-form>
+				<form class="userform">
+					<div class="form_ipt">
+						<span>用户名：</span>
+						<input class="form_ipt_txt" type="text" v-model="value" v-on:blur="val(value)" :placeholder="placeholder"/>
+					</div>
+					<span v-bind:class="classobject">{{placeholder}}</span>
+					<div class="form_ipt">
+						<span>密码：</span>
+						<input class="form_ipt_txt" type="password" v-model="pass"/>
+					</div>
+					
+					<router-link tag="el-button" type="primary" @click="submitForm('ruleForm2')" to="/home">提交</router-link>
+					<el-button type="primary">重置</el-button>
+				</form>
+						
 			</div>
 			<div class="midRight">
 				<h2>公司简介:</h2>
@@ -120,48 +138,14 @@
 <script>
 	export default {
     data() {
-    	
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-          isShow: true;
-        } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-          isShow: false;
-        }
-      };
-      
-      var validateTxt = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入用户名'));
-          isShow: true;
-        } else {
-          if (this.ruleForm2.checkTxt !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
-          }
-          callback();
-          isShow: false;
-        }
-      };
-      
       return {
-        ruleForm2: {
-          pass: '',
-          txt: '',
-          isShow: false,
-          iSshow: false
-        },
-        rules2: {
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          txt: [
-            { validator: validateTxt, trigger: 'blur' }
-          ]
-        }
+      	value:"",
+      	pass:"",
+      	placeholder:"4到16位字母、数字、下划线、减号",
+      	classobject:{
+      		clasas:false,
+      		clsasa:true
+      	}
       };
     },
     methods: {
@@ -175,9 +159,19 @@
           }
         });
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      }
+//    resetForm(formName) {
+//      this.$refs[formName].resetFields();
+//    }
+	val:function(value){
+		var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+        if( uPattern.test(value)){
+        	alert(666);
+        	clasas=false;
+        }else{
+        	clasas=true;
+        }
+//      return 
     }
+  }
   }
 </script>
