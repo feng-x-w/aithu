@@ -13,6 +13,7 @@
 		border-top: none;
 		/*background-color: #ffffff;*/
 		color: #3a8ee6;
+		padding-left: 10px;
 	}
 	.el-button:first-child {
 		border-top: 1px solid #dcdfe6;
@@ -29,18 +30,11 @@
 	.router-link-active{
 		background-color: #409eff;
 		color: #f1f1f1;
+		border-left: 3px solid #b92a2a;
 	}
 	.el-collapse-item__header{
 		background-color: #F1F1F1;
 	}
-	/*.el-container{
-		width: 100%;
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		top: 60px;
-		height: 100%;
-	}*/
 	.beforee{
 		position: fixed;
 		top: 0;
@@ -48,7 +42,7 @@
 		bottom: 0;
 		z-index: -10;
 		background-color: #f1f1f1;
-		width: 200px;
+		width: 230px;
 		height: 100%;
 		border-right: 1px solid #aebdc4;
 	}
@@ -57,11 +51,9 @@
 <template>
 	<div id="app">
 		<headTop></headTop>
-		<div class="beforee">
-			
-		</div>
+		<div class="beforee"></div>
 		<el-container>
-			<el-aside width="200px">
+			<el-aside width="230px">
 				<el-collapse v-model="activeName" accordion>
 					<el-collapse-item v-for="i in $t('arr1')" :title="i.title" :name="i.name" style="text-align: center;" :key="i.id">
 						<router-link :to="i.Urlo" tag="el-button"><!---->
