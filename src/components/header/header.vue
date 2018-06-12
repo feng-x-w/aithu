@@ -95,7 +95,7 @@
 				</ul>
 			</div>
 		</div>
-		<el-button @click="switchLanguage" size="mini" round>{{language == 'en' ? '切换中文' : 'lang english'}}</el-button>
+		<el-button @click="switchLanguage" size="mini" round v-model="langg">{{langg}}</el-button><!--{{language == 'en' ? '切换中文' : 'lang english'}}-->
 		
 	</div>
 </template>
@@ -110,14 +110,16 @@
 		data(){
 			return{
 				language: Cookies.get('language'),
-				isShow:false
+				isShow:false,
+				langg:"切换中文"
 			}
 		},
 		methods:{
 			
 			switchLanguage() {
-				let locale = this.$i18n.locale
-	            locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh'
+				let locale = this.$i18n.locale;
+	            locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh';
+	            locale === 'zh' ? this.langg = "切换中文" : this.langg = "Lang English";
 			},
 
 			OpenThe() {

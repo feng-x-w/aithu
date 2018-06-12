@@ -34,46 +34,52 @@
 	
 	.mid>.midLeft {
 		text-align: center;
-		width: 30%;
+		width: 20%;
 		float: left;
-		background-color: rgba(167,167,167,.5);
+		background-color: rgba(167, 167, 167, .5);
 		margin-left: 240px;
 		margin-top: 60px;
 		color: white !important;
 		font-family: "宋体";
 		padding: 20px;
-		padding-left: 0;
 		border-radius: 10px;
 	}
+	
 	.mid>.midRight {
 		width: 30%;
 		float: right;
 	}
-	.midLeft>h2{
+	
+	.midLeft>h2 {
 		margin-bottom: 15px;
 	}
-	.midRight{
-		background-color: rgba(255,255,255,.5);
+	
+	.midRight {
+		background-color: rgba(255, 255, 255, .5);
 		border-radius: 10px;
 		padding: 10px;
 		margin-right: 112px;
 	}
-	.userform{
+	
+	.userform {
 		width: 100%;
 		/*background-color: red;*/
 	}
-	.userform>.form_ipt{
+	
+	.userform>.form_ipt {
 		width: 100%;
 		/*background-color: green;*/
 		margin: 20px 0;
 	}
-	.userform>.form_ipt>span{
+	
+	.userform>.form_ipt>span {
 		width: 20%;
 		display: inline-block;
 		/*background-color: aqua;*/
 		font-size: 16px;
 	}
-	.userform>.form_ipt>.form_ipt_txt{
+	
+	.userform>.form_ipt>.form_ipt_txt {
 		width: 70%;
 		display: inline-block;
 		/*background-color: aqua;*/
@@ -82,10 +88,12 @@
 		padding: 14px;
 		border-radius: 8px;
 	}
-	.error{
+	
+	.error {
 		color: red;
 	}
-	.elseErr{
+	
+	.elseErr {
 		color: green;
 	}
 </style>
@@ -93,85 +101,88 @@
 <template>
 	<div class="user_login">
 		<div class="top">
-			我是标题我是标题
+			{{$t('tianfu.eng')}}
 		</div>
 		<div class="mid">
 			<div class="midLeft">
-				<h2>用户登录</h2>
-				<form class="userform">
-					<div class="form_ipt">
-						<span>用户名：</span>
-						<input class="form_ipt_txt" type="text" v-model="value" v-on:blur="val(value)" :placeholder="placeholder"/>
-					</div>
-					<span v-bind:class="classobject">{{placeholder}}</span>
-					<div class="form_ipt">
-						<span>密码：</span>
-						<input class="form_ipt_txt" type="password" v-model="pass"/>
-					</div>
-					
-					<router-link tag="el-button" type="primary" @click="submitForm('ruleForm2')" to="/home">提交</router-link>
-					<el-button type="primary">重置</el-button>
-				</form>
-						
+				<h2>{{$t('UserLog.login')}}</h2>
+				<el-form :model="loginForm" :rules="loginRules">         
+            <h2>Ray商城登录</h2>
+            <el-form-item prop="username">
+                <el-input v-model="loginForm.username" name="username" placeholder="请输入用户名/手机号" auto-complete="on"></el-input>
+            </el-form-item>
+
+            <el-form-item prop="password">
+                <el-input  v-model="loginForm.password" name="password" placeholder="请输入密码" auto-complete="on"></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="handleLogin">登录</el-button>
+            </el-form-item>
+       </el-form>
 			</div>
 			<div class="midRight">
-				<h2>公司简介:</h2>
-				<p>
-					巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉<!--
-				 -->巴拉巴拉巴拉巴拉巴拉巴拉巴拉
-				</p>
+				<h2>{{$t('UserLog.gs')}}:</h2>
+				<p>{{$t('UserLog.content')}}</p>
+				<p>{{$t('UserLog.content')}}</p>
+				<p>{{$t('UserLog.content')}}</p>
+				<p>{{$t('UserLog.content')}}</p>
+				<p>{{$t('UserLog.content')}}</p>
+				<p>{{$t('UserLog.content')}}</p>
 			</div>
 		</div>
 		<!--<h1>用户登录页面</h1>-->
-		<router-link to="/home">123</router-link>
+		<router-link @click="func">123</router-link>
 	</div>
 </template>
 <script>
-	export default {
-    data() {
-      return {
-      	value:"",
-      	pass:"",
-      	placeholder:"4到16位字母、数字、下划线、减号",
-      	classobject:{
-      		clasas:false,
-      		clsasa:true
-      	}
-      };
-    },
+	//先引入接口
+	import { loginReq } from '@/api/Login'
+	export default {  
+    name: 'login',  
+    data() {  
+      return {  
+          loginForm: {
+			username: '',
+			password: '',
+		},
+		loginRules: {
+        username: [
+            {
+                required: true,
+                message: "请输入用户名",
+                trigger: "blur"
+            }
+        ],
+        password: [
+           {
+               required: true,
+               message: '请输入密码',
+               trigger: 'blur'
+           }
+        ]
+     },
+      }  
+    },  
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-//    resetForm(formName) {
-//      this.$refs[formName].resetFields();
-//    }
-	val:function(value){
-		var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
-        if( uPattern.test(value)){
-        	alert(666);
-        	clasas=false;
-        }else{
-        	clasas=true;
-        }
-//      return 
-    }
-  }
-  }
+        handleLogin (){
+           this.$refs.loginForm.validate((valid) => {
+               if(valid){
+                  loginReq(this.loginForm.username,this.loginForm.password).then((res) => {
+                      console.log(res.data.status);
+                      this.$router.push({
+				          name: "Home",
+				          params: {
+				          	username: this.loginForm.username
+				       }
+					});
+                  })
+               }else{
+               	this.$message.error("用户名或密码错误");
+                   console.log('用户名或密码错误')
+               }
+           })
+      }
+    }  
+   } 
 </script>

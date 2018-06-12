@@ -1,17 +1,17 @@
 export default {
-logo:{
-	title:'intelligent voice system'
-},
-//header
-header_deng:{
-	UserName:'UserName',
-	user:'userdata',
-	LogOut :'logOut'
-},
-//Breadcrumb
-Breadcrumb:{
-	home:"home"
-},
+	logo: {
+		title: 'intelligent voice system'
+	},
+	//header
+	header_deng: {
+		UserName: 'UserName',
+		user: 'userdata',
+		LogOut: 'logOut'
+	},
+	//Breadcrumb
+	Breadcrumb: {
+		home: "home"
+	},
 	//NextClass
 	btn: [{
 		id: 1,
@@ -30,8 +30,8 @@ Breadcrumb:{
 		name: "primary",
 		Txt: "Update the sound print model"
 	}],
-// 导航栏
-arr1: [{
+	// 导航栏
+	arr1: [{
 			id: 1,
 			Urlo: '/home',
 			Urltw: '/homeTwo',
@@ -50,12 +50,12 @@ arr1: [{
 			Urlo: '/langD',
 			Urltw: '/homeTwo',
 			Urlth: '/home',
-//			Urlf: '/homeTwo',
+			//			Urlf: '/homeTwo',
 			name: "language identification",
 			nameone: "Language model training",
 			nametwo: "Language category recognition",
 			namethree: "Language recognition results",
-//			namefour: "声纹识别结果查询8",
+			//			namefour: "声纹识别结果查询8",
 			title: "language identification",
 			num: "2"
 		},
@@ -64,12 +64,12 @@ arr1: [{
 			Urlo: '/home',
 			Urltw: '/homeTwo',
 			Urlth: '/home',
-//			Urlf: '/homeTwo',
+			//			Urlf: '/homeTwo',
 			name: "gender identification",
 			nameone: "model management",
 			nametwo: "test",
 			namethree: "results query",
-//			namefour: "声纹识别结果查询12",
+			//			namefour: "声纹识别结果查询12",
 			title: "gender identification",
 			num: "3"
 		},
@@ -78,61 +78,69 @@ arr1: [{
 			Urlo: '/home',
 			Urltw: '/homeTwo',
 			Urlth: '/home',
-//			Urlf: '/homeTwo',
+			//			Urlf: '/homeTwo',
 			name: "Keyword recognition",
 			nameone: "model training",
 			nametwo: "Speech keyword recognition",
 			namethree: "results query",
-//			namefour: "声纹识别结果查询16",
+			//			namefour: "声纹识别结果查询16",
 			title: "Keyword recognition",
 			num: "4"
 		}
 	],
-	home_slot:{
-		slotOne:"Voiceprint Recognition",
-		slotTwo:"Sound pattern management"
+	home_slot: {
+		slotOne: "Voiceprint Recognition",
+		slotTwo: "Sound pattern management"
 	},
-	NextC:{
-		h2:"model set",
-		placeholder:"Enter keywords for filtering"
+	NextC: {
+		h2: "model set",
+		placeholder: "Enter keywords for filtering"
 	},
 	NextClass: [{
-					id: 1,
-					label: 'FirstClass 1',
-					children: [{
-						id: 4,
-						label: 'TwoClass 1-1',
-						children: [{
-							id: 9,
-							label: 'ThreeClass 1-1-1'
-						}, {
-							id: 10,
-							label: 'Threeclass 1-1-2'
-						}]
-					}]
-				}, {
-					id: 2,
-					label: 'FirstClass 2',
-					children: [{
-						id: 5,
-						label: 'TwoClass 2-1'
-					}, {
-						id: 6,
-						label: 'TwoClass 2-2'
-					}]
-				}, {
-					id: 3,
-					label: 'FirstClass 3',
-					children: [{
-						id: 7,
-						label: 'TwoClass 3-1'
-					}, {
-						id: 8,
-						label: 'TwoClass 3-2'
-					}]
-				}],
-route: {
-    Readme: 'Readme',
-    permission: 'permission'
-}
+		id: 1,
+		label: 'FirstClass 1',
+		children: [{
+			id: 4,
+			label: 'TwoClass 1-1',
+			children: [{
+				id: 9,
+				label: 'ThreeClass 1-1-1'
+			}, {
+				id: 10,
+				label: 'Threeclass 1-1-2'
+			}]
+		}]
+	}, {
+		id: 2,
+		label: 'FirstClass 2',
+		children: [{
+			id: 5,
+			label: 'TwoClass 2-1'
+		}, {
+			id: 6,
+			label: 'TwoClass 2-2'
+		}]
+	}, {
+		id: 3,
+		label: 'FirstClass 3',
+		children: [{
+			id: 7,
+			label: 'TwoClass 3-1'
+		}, {
+			id: 8,
+			label: 'TwoClass 3-2'
+		}]
+	}],
+	tianfu: {
+		eng: 'Talent is given by god, be humble.Fame is given, be grateful.Self - conceit is given, be careful'
+	},
+	UserLog: {
+		login: "User Login",
+		name: "UserName",
+		pass: "Password",
+		primary: "login",
+		res: "reset",
+		gs: "company profile",
+		content: "I'm the content. A lot"
+	}
 }

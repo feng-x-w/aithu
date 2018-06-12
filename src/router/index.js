@@ -13,15 +13,16 @@ export default new Router({
 	mode: 'history',
 	base: '/ttms/', //添加的地方
 	routes: [
-//		{
-//			path: '/index',
-//			name: 'index',
-//			component: index
-//		},
 		{
 			path: '/',
 			name: 'login',
 			component: login
+		},
+		{
+			path: '/login',
+			name: '',
+			component: login,//_import('Login/login')
+			hidden: true
 		},
 		{
 			path: '/index',
