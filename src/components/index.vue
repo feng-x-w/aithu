@@ -28,9 +28,13 @@
 		background-color: #f1f1f1;
 	}
 	.router-link-active{
-		background-color: #409eff;
+		/*background-color: #409eff;*/
+		background: -webkit-linear-gradient(#409EFF, #1C76D2); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#409EFF, #1C76D2); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#409EFF, #1C76D2); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#409EFF, #1C76D2); /* 标准的语法 */
 		color: #f1f1f1;
-		border-left: 3px solid #b92a2a;
+		border-left: 3px solid #08c230;
 	}
 	.el-collapse-item__header{
 		background-color: #F1F1F1;

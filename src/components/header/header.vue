@@ -91,7 +91,7 @@
 			<div class="deng" v-show="isShow">
 				<ul>
 					<router-link tag="li" to="/userdata" @click="user">{{$t('header_deng.user')}}</router-link>
-					<router-link tag="li" to="/homeTwo" @click="login">{{$t('header_deng.LogOut')}}</router-link>
+					<router-link tag="li" to="/login" @click="login">{{$t('header_deng.LogOut')}}</router-link>
 				</ul>
 			</div>
 		</div>
@@ -114,16 +114,12 @@
 			}
 		},
 		methods:{
+			
 			switchLanguage() {
-				const language = Cookies.get('language')
-				console.log('lang', language)
-				if (language == 'zh') {
-					Cookies.set('language', 'en')
-				} else {
-					Cookies.set('language', 'zh')
-				}
-				window.location.reload()
+				let locale = this.$i18n.locale
+	            locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh'
 			},
+
 			OpenThe() {
         		this.isShow = !this.isShow;
 //      		alert(666)
