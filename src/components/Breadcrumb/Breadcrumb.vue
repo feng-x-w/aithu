@@ -1,10 +1,10 @@
 <style scoped>
 	.Breadcrumb{
 		padding: 15px;
-		background: -webkit-linear-gradient(#a4d1ff, #85b0da); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(#a4d1ff, #85b0da); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(#a4d1ff, #85b0da); /* Firefox 3.6 - 15 */
-		background: linear-gradient(#a4d1ff, #85b0da); /* 标准的语法 */
+		background: -webkit-linear-gradient(#fbfbfb, #e7e7e7); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#fbfbfb, #e7e7e7); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#fbfbfb, #e7e7e7); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#fbfbfb, #e7e7e7); /* 标准的语法 */
 	}
 </style>
 

@@ -10,52 +10,50 @@ import login from '@/components/login/UserLogin'
 Vue.use(Router)
 
 export default new Router({
-	mode: 'history',
-	base: '/ttms/', //添加的地方
-	routes: [
-		{
-			path: '/',
-			name: 'login',
-			component: login
-		},
-		{
-			path: '/login',
-			name: '',
-			component: login,//_import('Login/login')
-			hidden: true
-		},
-		{
-			path: '/index',
-			name: 'index',
-			component: index,
-			children: [
+  mode: 'history',
+  base: '/ttms/', //添加的地方
+  routes: [{
+      path: '/',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/login',
+      name: '',
+      component: login, //_import('Login/login')
+      hidden: true
+    },
+    {
+      path: '/index',
+      name: 'index',
+      component: index,
+      children: [
 //				{
 //					path: '/',
 //					name: 'home',
 //					component: home
 //				},
-		        {
-		            path: '/langD',
-		            name: 'langD',
-		            component: langD
-		        },
-				{
-					path: '/home',
-					name: 'home',
-					component: home
-				},
-				{
-					path: '/homeTwo',
-					name: 'homeTwo',
-					component: homeTwo
-				},
-				{
-					path: '/userdata',
-					name: 'userdata',
-					component: userdata
-				}
-			]
-		}
-
-	]
+        {
+          path: '/langD',
+          name: 'langD',
+          component: langD
+        },
+        {
+          path: '/home',
+          name: 'home',
+          component: home
+        },
+        {
+          path: '/homeTwo',
+          name: 'homeTwo',
+          component: homeTwo
+        },
+        {
+          path: '/userdata',
+          name: 'userdata',
+          component: userdata
+        }
+      ]
+    }
+  ]
 })

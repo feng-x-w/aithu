@@ -11,9 +11,10 @@
 		border-left: none;
 		border-right: none;
 		border-top: none;
-		/*background-color: #ffffff;*/
-		color: #3a8ee6;
+		background-color: #f7f7f7;
+		color: rgb(0, 0, 0);
 		padding-left: 10px;
+		border: 1px solid #f1efef;
 	}
 	.el-button:first-child {
 		border-top: 1px solid #dcdfe6;
@@ -25,16 +26,16 @@
 	}
 	.el-aside{
 		overflow: visible;
-		background-color: #f1f1f1;
+		background-color: #f7f7f7;
 	}
 	.router-link-active{
 		/*background-color: #409eff;*/
-		background: -webkit-linear-gradient(#409EFF, #1C76D2); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(#409EFF, #1C76D2); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(#409EFF, #1C76D2); /* Firefox 3.6 - 15 */
-		background: linear-gradient(#409EFF, #1C76D2); /* 标准的语法 */
-		color: #f1f1f1;
-		border-left: 3px solid #08c230;
+		background: -webkit-linear-gradient(#e1e1e1, #cacaca); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#e1e1e1, #cacaca); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#e1e1e1, #cacaca); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#e1e1e1, #cacaca); /* 标准的语法 */
+		/*color: rgb(191, 203, 217);
+		border-left: 3px solid #343434;*/
 	}
 	.el-collapse-item__header{
 		background-color: #F1F1F1;
@@ -45,11 +46,16 @@
 		left: 0;
 		bottom: 0;
 		z-index: -10;
-		background-color: #f1f1f1;
+		background-color: #f7f7f7;
 		width: 230px;
 		height: 100%;
 		border-right: 1px solid #aebdc4;
 	}
+</style>
+<style>
+  /*.el-collapse-item__header{
+    background-clip: red;
+  }*/
 </style>
 
 <template>
@@ -59,19 +65,29 @@
 		<el-container>
 			<el-aside width="230px">
 				<el-collapse v-model="activeName" accordion>
-					<el-collapse-item v-for="i in $t('arr1')" :title="i.title" :name="i.name" style="text-align: center;" :key="i.id">
-						<router-link :to="i.Urlo" tag="el-button"><!---->
-							<span class="el-icon-star-on"></span>{{i.nameone}}
+					<el-collapse-item title="任务管理" name="ccc" style="text-align: center;" key="1">
+						<router-link to="/home" tag="el-button"><!---->
+							<span class="el-icon-star-on"></span>任务管理
 						</router-link>
-						<router-link :to="i.Urltw" tag="el-button" >
-							<span class="el-icon-star-on"></span>{{i.nametwo}}
+					</el-collapse-item>
+					<el-collapse-item title="识别结果管理" name="aaa" style="text-align: center;" key="2">
+						<router-link to="/homeTwo" tag="el-button"><!---->
+							<span class="el-icon-star-on"></span>识别任务管理
 						</router-link>
-						<router-link :to="i.Urlth" tag="el-button" >
-							<span class="el-icon-star-on"></span>{{i.namethree}}
-						</router-link>
-						<router-link :to="i.Urlf" tag="el-button" >
-							<span class="el-icon-star-on"></span>{{i.namefour}}
-						</router-link>
+					</el-collapse-item>
+					<el-collapse-item title="模型管理" name="bbb" style="text-align: center;" key="3">
+						<router-link to="/home" tag="el-button"><!---->
+              <span class="el-icon-star-on"></span>声纹模型
+            </router-link>
+						<router-link to="/homeTwo" tag="el-button"><!---->
+              <span class="el-icon-star-on"></span>语种模型
+            </router-link>
+						<router-link to="/home" tag="el-button"><!---->
+              <span class="el-icon-star-on"></span>性别模型
+            </router-link>
+						<router-link to="/homeTwo" tag="el-button"><!---->
+              <span class="el-icon-star-on"></span>关键词模型
+          </router-link>
 					</el-collapse-item>
 				</el-collapse>
 			</el-aside>
@@ -85,67 +101,13 @@
 <script>
 	import headTop from "../components/header/header";
 	export default {
-//		name: 'HelloWorld',
 
 		components: {
 			headTop
 		},
 		data() {
 			return {
-				activeName: '1',
-//				arr1:[{
-//					id:1,
-//					Urlo:'/home',
-//					Urltw:'/homeTwo',
-//					Urlth:'/home',
-//					Urlf:'/homeTwo',
-//					nameone:"声纹模型管理1",
-//					nametwo:"更新声纹模型2",
-//					namethree:"语音身份识别3",
-//					namefour:"声纹识别结果查询4",
-//					title:"声纹识别",
-//					num:"1"
-//				},
-//				{
-//					id:2,
-//					Urlo:'/langD',
-//					Urltw:'/homeTwo',
-//					Urlth:'/home',
-//					Urlf:'/homeTwo',
-//					nameone:"声纹模型管理5",
-//					nametwo:"更新声纹模型6",
-//					namethree:"语音身份识别7",
-//					namefour:"声纹识别结果查询8",
-//					title:"语种识别",
-//					num:"2"
-//				},
-//				{
-//					id:3,
-//					Urlo:'/home',
-//					Urltw:'/homeTwo',
-//					Urlth:'/home',
-//					Urlf:'/homeTwo',
-//					nameone:"声纹模型管理9",
-//					nametwo:"更新声纹模型10",
-//					namethree:"语音身份识别11",
-//					namefour:"声纹识别结果查询12",
-//					title:"性别识别",
-//					num:"3"
-//				},
-//				{
-//					id:4,
-//					Urlo:'/home',
-//					Urltw:'/homeTwo',
-//					Urlth:'/home',
-//					Urlf:'/homeTwo',
-//					nameone:"声纹模型管理13",
-//					nametwo:"更新声纹模型14",
-//					namethree:"语音身份识别15",
-//					namefour:"声纹识别结果查询16",
-//					title:"关键词识别",
-//					num:"4"
-//				}
-//				]
+				activeName: '1'
 			}
 
 		},

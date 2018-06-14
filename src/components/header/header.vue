@@ -5,14 +5,15 @@
 		line-height: 60px;
 		padding: 0 20px;
 		/*background-color: #409EFF;*/
-		background: -webkit-linear-gradient(#409EFF, #1C76D2); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(#409EFF, #1C76D2); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(#409EFF, #1C76D2); /* Firefox 3.6 - 15 */
-		background: linear-gradient(#409EFF, #1C76D2); /* 标准的语法 */
+		background: -webkit-linear-gradient(#2c3e50, #2c3e50); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(#2c3e50, #2c3e50); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(#2c3e50, #2c3e50); /* Firefox 3.6 - 15 */
+		background: linear-gradient(#2c3e50, #2c3e50); /* 标准的语法 */
 		overflow: hidden;
 		box-sizing: border-box;
 	}
 	.header>.LeftLogo{
+	  color: rgb(191, 203, 217);
 		float: left;
 	}
 	.header>.LoginUser{
@@ -71,11 +72,20 @@
 		margin-top: 10px;
 		margin: 16px 20px 16px 0;
 		border: 1px solid #767676;
+		background-color: #32465b;
+    color: #b7bcba;
 	}
 	.el-button:hover{
-		border: 1px solid #409EFF;
+		border: 1px solid #d4d4d4;
+    background-color: #272727;
+    color: #efefef;
 	}
 	
+</style>
+<style>
+	.el-input__inner{
+	  padding: 0 8px;
+	}
 </style>
 
 <template>
