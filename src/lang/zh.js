@@ -35,7 +35,7 @@ export default {
 	  
 	},
 	home_slot:{
-		slotOne:"声纹识别",
+		slotOne:"模型管理",
 		slotTwo:"声纹模型管理"
 	},
 	NextC:{

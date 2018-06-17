@@ -1,53 +1,73 @@
 <style scoped>
-	h1{
-		color: darkred;
-		background-color: pink;
-		padding: 15px;
-	}
+  h1 {
+    color: darkred;
+    background-color: pink;
+    padding: 15px;
+  }
 </style>
 
 <template>
-	<div class="homeTwo">
-		<Breadcrumb>
-			<span slot="one">222</span>
-			<span slot="two">333</span>
-		</Breadcrumb>
-		<div id="shangchuan">
-			<el-upload class="upload-demo" ref="upload"
-  action="http://192.168.1.118/sr/model/speech/add"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
-  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
-		</div>
-	</div>
+  <div class="homeTwo">
+    <Breadcrumb>
+      <span slot="one">222</span>
+      <span slot="two">333</span>
+    </Breadcrumb>
+    <div id="shangchuan">
+      <form :model="uploadForm" ref="uploadForm">
+        <input type="file" :model="uploadForm.files" name="mid">
+        <button @click="UpLoad">上传服务器</button>
+      </form>
+
+    </div>
+  </div>
 </template>
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
+  //先引入接口
+  import { UpLoading } from '@/api/UpLoading'
   export default {
-    components:{Breadcrumb},
+    components: {
+      Breadcrumb
+    },
     data() {
       return {
-        fileList: [
-          {name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
-          {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}
-        ]
+        uploadForm: {
+          files: []
+        }
+        //                 fileList: [{
+        //                         name: 'food.jpeg',
+        //                         url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        //                     },
+        //                     {
+        //                         name: 'food2.jpeg',
+        //                         url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        //                     }
+        //                 ]
       };
     },
     methods: {
-      submitUpload() {
-        this.$refs.upload.submit();
-      },
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
+      UpLoad() {
+        this.$refs.uploadForm.submit();
+//      (
+//        (valid) => {
+//        if(valid) {
+//          UpLoading(this.mid, this.files).then((res) => {
+//            console.log(res);
+//          })
+//        } else {
+//          this.$message.error("请上传文件")
+//        }
+//      })
+        //             submitUpload() {
+        //                 this.$refs.upload.submit();
+        //             },
+        //             handleRemove(file, fileList) {
+        //                 console.log(file, fileList);
+        //             },
+        //             handlePreview(file) {
+        //                 console.log(file);
+        //             }
       }
     }
   }

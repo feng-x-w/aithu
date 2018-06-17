@@ -166,6 +166,7 @@
         that.$refs.loginForm.validate((valid) => {
           if(valid) {
             loginReq(this.loginForm.username, this.loginForm.password).then((res) => {
+              console.log(res);
               if(res.data.ret == 200){
                 this.$router.push({
                   name: "home",

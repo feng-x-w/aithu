@@ -6,12 +6,13 @@ import homeTwo from '@/components/home/homeTwo'
 import userdata from '@/components/login/userdata'
 import langD from '@/components/language/drill'
 import login from '@/components/login/UserLogin'
+import disindex from '@/components/discern/index'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: '/ttms/', //添加的地方
+  base: '', //添加的地方
   routes: [{
       path: '/',
       name: 'login',
@@ -52,6 +53,11 @@ export default new Router({
           path: '/userdata',
           name: 'userdata',
           component: userdata
+        },
+        {
+          path: '/disindex',
+          name: 'disindex',
+          component: disindex
         }
       ]
     }

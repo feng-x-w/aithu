@@ -82,7 +82,7 @@
 						<router-link to="/homeTwo" tag="el-button"><!---->
               <span class="el-icon-star-on"></span>语种模型
             </router-link>
-						<router-link to="/home" tag="el-button"><!---->
+						<router-link to="/disindex" tag="el-button"><!---->
               <span class="el-icon-star-on"></span>性别模型
             </router-link>
 						<router-link to="/homeTwo" tag="el-button"><!---->
