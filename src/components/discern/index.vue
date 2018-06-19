@@ -9,25 +9,23 @@
       <span slot="two">333</span>
     </Breadcrumb>
     <div id="shangchuan"><!--?mid=1-->
+      <!--:action="action"-->
       <el-upload 
         class="upload-demo" 
         ref="upload" 
-        action="http://192.168.1.118/sr/model/speech/add" 
+         action="http://192.168.1.118/sr/model/speech/add"
         :on-preview="handlePreview" 
         :on-remove="handleRemove" 
         :file-list="fileList" 
-        :auto-upload="false"
-        >
-        
+        :data="data"
+        :auto-upload="false">
         <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-        
       </el-upload>
     </div>
   </div>
 </template>
-
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
   export default {
@@ -36,6 +34,8 @@
     },
     data() {
       return {
+        
+        filemid:10,
         fileList: [{
           name: 'food.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
@@ -44,6 +44,13 @@
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }]
       };
+    },
+    computed:{
+      data() {
+        return {
+          mid: this.filemid
+        }
+      }
     },
     methods: {
       submitUpload() {
