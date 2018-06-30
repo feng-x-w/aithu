@@ -6,3 +6,40 @@ export function UpLoading(files) {
       }
     })
 }
+export function useredit(idnumber, tel, email, address, signature) {
+    return request.get('/user/info/edit',{
+      params:{
+		    idnumber:idnumber,
+		    tel:tel,
+		    email:email,
+		    address:address,
+		    signature:signature
+      }
+    })
+}
+export function userinfo() {
+    return request.get('/user/info',{
+//    params:{
+//		    username:username,
+//		    password:password,
+//		    email:email,
+//		    description:description,
+//		    role:role,
+//    }
+    })
+}
+export function userchecked(passwd) {
+    return request.get('/user/passwd/check',{
+      params:{
+		    passwd:passwd
+      }
+    })
+}
+export function userpasswdedit(newpasswd, confirm) {
+    return request.get('/user/passwd/edit',{
+      params:{
+		    newpasswd:newpasswd,
+        confirm:confirm
+      }
+    })
+}

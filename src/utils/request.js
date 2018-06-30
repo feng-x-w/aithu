@@ -4,7 +4,7 @@ import axios from 'axios'
 import Qs from 'Qs'
 const service = axios.create({
   baseURL: process.env.BASE_API,
-  timeout: 5000,
+//timeout: 5000,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
   },

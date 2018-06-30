@@ -15,7 +15,12 @@
 		color: rgb(0, 0, 0);
 		padding-left: 10px;
 		border: 1px solid #f1efef;
+		font-size: 13px;
 	}
+	.el-button:hover {
+		background-color: #ababab;
+	}
+
 	.el-button:first-child {
 		border-top: 1px solid #dcdfe6;
 	}
@@ -29,11 +34,11 @@
 		background-color: #f7f7f7;
 	}
 	.router-link-active{
-		/*background-color: #409eff;*/
-		background: -webkit-linear-gradient(#e1e1e1, #cacaca); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(#e1e1e1, #cacaca); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(#e1e1e1, #cacaca); /* Firefox 3.6 - 15 */
-		background: linear-gradient(#e1e1e1, #cacaca); /* 标准的语法 */
+		background-color: #e1e1e1;
+		/*background: -webkit-linear-gradient(#e1e1e1, #cacaca);  Safari 5.1 - 6.0 */
+		/*background: -o-linear-gradient(#e1e1e1, #cacaca);  Opera 11.1 - 12.0 */
+		/*background: -moz-linear-gradient(#e1e1e1, #cacaca);  Firefox 3.6 - 15 */
+		/*background: linear-gradient(#e1e1e1, #cacaca);  标准的语法 */
 		/*color: rgb(191, 203, 217);
 		border-left: 3px solid #343434;*/
 	}
@@ -51,11 +56,20 @@
 		height: 100%;
 		border-right: 1px solid #aebdc4;
 	}
+	.btn{
+	  margin-left: 0;
+	}
 </style>
 <style>
-  /*.el-collapse-item__header{
-    background-clip: red;
-  }*/
+  .btn{
+    margin-left: 0 !important;
+  }
+ .el-button+.el-button{
+   margin-left: 0 !important;
+ }
+ .el-collapse-item__content{
+   padding-bottom: 0 !important;
+ }
 </style>
 
 <template>
@@ -66,27 +80,27 @@
 			<el-aside width="230px">
 				<el-collapse v-model="activeName" accordion>
 					<el-collapse-item title="任务管理" name="ccc" style="text-align: center;" key="1">
-						<router-link to="/home" tag="el-button"><!---->
-							<span class="el-icon-star-on"></span>任务管理
+						<router-link class="btn" to="/taskM" tag="el-button"><!---->
+							<i class="el-icon-document"></i> 任务管理
 						</router-link>
 					</el-collapse-item>
 					<el-collapse-item title="识别结果管理" name="aaa" style="text-align: center;" key="2">
-						<router-link to="/homeTwo" tag="el-button"><!---->
-							<span class="el-icon-star-on"></span>识别任务管理
+						<router-link class="btn" to="/result" tag="el-button"><!---->
+							<!--<span class="el-icon-star-on"></span>-->识别任务管理
 						</router-link>
 					</el-collapse-item>
 					<el-collapse-item title="模型管理" name="bbb" style="text-align: center;" key="3">
-						<router-link to="/home" tag="el-button"><!---->
-              <span class="el-icon-star-on"></span>声纹模型
+						<router-link class="btn" to="/home" tag="el-button"><!---->
+              <!--<span class="el-icon-star-on"></span>-->声纹模型
             </router-link>
-						<router-link to="/homeTwo" tag="el-button"><!---->
-              <span class="el-icon-star-on"></span>语种模型
+						<router-link class="btn" to="/drill" tag="el-button"><!---->
+              <!--<span class="el-icon-star-on"></span>-->语种模型
             </router-link>
-						<router-link to="/disindex" tag="el-button"><!---->
-              <span class="el-icon-star-on"></span>性别模型
+						<router-link class="btn" to="/disindex" tag="el-button"><!---->
+              <!--<span class="el-icon-star-on"></span>-->性别模型
             </router-link>
-						<router-link to="/homeTwo" tag="el-button"><!---->
-              <span class="el-icon-star-on"></span>关键词模型
+						<router-link class="btn" to="/homeTwo" tag="el-button"><!---->
+              <!--<span class="el-icon-star-on"></span>-->关键词模型
           </router-link>
 					</el-collapse-item>
 				</el-collapse>

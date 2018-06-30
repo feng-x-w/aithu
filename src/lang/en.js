@@ -1,35 +1,45 @@
 export default {
+  DefaultHome:{
+    intro:"Welcome to the intelligent speech processing systems, which can handle all kinds of speech data efficiently with advanced speech technology, including speech cleaning, speaker recognition, keyword spotting, language identification, voice indexing/segmentation and language scripting.",
+    title:"Intelligent voice recognition system",
+    h3:'Test Notes',
+    ulli1:"Recommended Browser: Chrome",
+    ulli2:"Recommended Operating system: Windows 7/Windows 10",
+    ulli3:"Data format: *.mp3,*.ape,*.flac,*.wav",
+    ulli4:"Speaker recognition data preparation：Target speaker’s speech should be more than 300-sec valid speech (Not included silence, nose etc.)."
+  },
 	logo: {
-		title: 'intelligent voice system'
+		title: 'Intelligent speech processing system'
 	},
 	//header
 	header_deng: {
-		UserName: 'UserName',
+		UserName: 'admin',
 		user: 'userdata',
-		LogOut: 'logOut'
+		LogOut: 'logOut',
+		changepass: 'ChangePassword'
 	},
 	//Breadcrumb
 	Breadcrumb: {
 		home: "home"
 	},
 	//NextClass
-	btn: [{
-		id: 1,
-		name: "primary",
-		Txt: "New model group"
-	}, {
-		id: 2,
-		name: "primary",
-		Txt: "Speaker information"
-	}, {
-		id: 3,
-		name: "primary",
-		Txt: "New Model"
-	}, {
-		id: 4,
-		name: "primary",
-		Txt: "Update the sound print model"
-	}],
+	iptss:{
+	  target:"TheTargetPerson",
+	  id:"Id",
+    sex:"Sex",
+	  man:"man",
+	  woman:"woman",
+	  all:"all",
+	  dada:'DateOfBirth',
+	  dass:'OptionDate',
+	  nation:'Nation',
+	  room:'HomeAddress',
+	  currentResidence:'CurrentResidence',
+	  TargetGroup:'TargetGroup',
+	  inquire:'Inquire',
+	  alter:"alter",
+	  del:"delete"
+	},
 	// 导航栏
 	arr1: {
 	  

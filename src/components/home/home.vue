@@ -40,9 +40,9 @@
 		methods: {
 			funnn(){
 				alert(666)
-				axios.get('http://192.168.1.118/login?username=1123&password=11232').then(res => {
-					console.log(res);
-				}).catch(error => console.log(error));
+//				axios.get('http://192.168.1.118/login?username=1123&password=11232').then(res => {
+//					console.log(res);
+//				}).catch(error => console.log(error));
 			}
 		}
 	}

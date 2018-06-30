@@ -4,10 +4,10 @@
   #app {
     width: 100%;
     height: 100%;
-  }
-  
+  }/*../../assets/bg6.jpg*/
+  /*https://47.92.38.162/isps/admin/themes/simplebootx/Public/assets/images/bg6.jpg*/
   .user_login {
-    background-image: url(https://47.92.38.162/isps/admin/themes/simplebootx/Public/assets/images/bg6.jpg);
+    /*background-image: url(../../assets/backgroundImage.jpg);*/
     background-size: 100%;
     width: 100%;
     height: 100%;
@@ -96,10 +96,19 @@
   .elseErr {
     color: green;
   }
+  .dd{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -10;
+  }
 </style>
 
 <template>
   <div class="user_login">
+    <div class="dd"><img src="../../assets/backgroundImage.jpg" width="100%" height="100%"/></div>
     <div class="top">
       {{$t('tianfu.eng')}}
     </div>
@@ -112,7 +121,7 @@
           </el-form-item>
 
           <el-form-item prop="password">
-            <el-input v-model="loginForm.password" name="password" placeholder="请输入密码" auto-complete="on"></el-input>
+            <el-input v-model="loginForm.password" type="password" name="password" placeholder="请输入密码" auto-complete="on"></el-input>
           </el-form-item>
 
           <el-form-item>
@@ -131,7 +140,6 @@
       </div>
     </div>
     <!--<h1>用户登录页面</h1>-->
-    <router-link @click="func">123</router-link>
   </div>
 </template>
 <script>
@@ -139,8 +147,14 @@
   import { loginReq } from '@/api/login'
   export default {
     name: 'login',
+//  created:{
+//    bfq(){
+//      console.log("            ◥◤~~~~◥◤            ┃ 　　   ┃             ≡━ ﹏ ━≡            ┗━━┳∞┳━━┛    _..,------┏┫　┣┓------,.._   ;'-.,------------------,.-';   |                          |   、                         ;    \                        /  .-' `,._________________.,' '-.(       '----------------'       ) `-=..________________________..-快到碗里来！简历请投放 wan@appadhoc.com");
+//    };
+//    bfq()
+//  },
     data() {
-
+      
       return {
         loginForm: {
           username: '',
@@ -169,7 +183,7 @@
               console.log(res);
               if(res.data.ret == 200){
                 this.$router.push({
-                  name: "home",
+                  name: "DefaultHome",
                   params: {
                     username: this.loginForm.username
                   }

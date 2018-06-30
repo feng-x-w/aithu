@@ -1,35 +1,45 @@
 export default {
+  DefaultHome:{
+    intro:"欢迎来到智能语音处理系统，使用先进的语音技术，包括语音清洗、语音识别、关键字查找、语言识别、语音索引/分割、语言脚本等，有效处理各种语音数据。",
+    title:"智能语音识别系统",
+    h3:"测试笔记",
+    ulli1:"推荐浏览器：谷歌",
+    ulli2:"推荐操作系统：Windows 7 / Windows 10",
+    ulli3:"数据格式：*.mp3，*.ape，*.flac，*.wav",
+    ulli4:"说话人识别数据准备：目标说话人的语音应超过300秒有效语音（不包括沉默，鼻子等）。"
+  },
 	logo: {
-		title: '智能语音系统'
+		title: '智能语音处理系统'
 	},
 	//header
 	header_deng: {
-		UserName: '用户名',
+		UserName: '管理员',
 		user: '用户资料',
-		LogOut: '退出登录'
+		LogOut: '退出登录',
+		changepass:'修改密码'
 	},
 	//Breadcrumb
 	Breadcrumb: {
 		home: "首页"
 	},
 	//NextClass
-	btn: [{
-		id: 1,
-		name: "primary",
-		Txt: "新建模型组"
-	}, {
-		id: 2,
-		name: "primary",
-		Txt: "说话人信息"
-	}, {
-		id: 3,
-		name: "primary",
-		Txt: "新建模型"
-	}, {
-		id: 4,
-		name: "primary",
-		Txt: "更新声纹模型"
-	}],
+	iptss:{
+    target:"目标人",
+    id:"证件号",
+    sex:"性别",
+    man:"男",
+    woman:"女",
+    all:"全部",
+    dada:'出生年月',
+    dass:'选择日期',
+    nation:'民族',
+    room:'家庭住址',
+    currentResidence:'现居住地',
+    TargetGroup:'目标组',
+    inquire:'查询',
+    alter:"修改",
+    del:"删除"
+  },
 	// 导航栏
 	arr1: {
 	  
