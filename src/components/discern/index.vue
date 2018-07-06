@@ -17,12 +17,10 @@
   .Nlanguage>.NLG {
     position: fixed;
     width: 66%;
-    /* height: 100%; */
     top: 50%;
     left: 50%;
+    transform: translate(-50%,-50%);
     background-color: white;
-    margin-top: -17%;
-    margin-left: -32%;
     z-index: 120;
     overflow: hidden;
     border-radius: 9px;
@@ -53,7 +51,10 @@
   }
   .target_add {
     width: 40%;
-    margin: 8% auto 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     background-color: white;
     padding: 25px 50px;
     padding-left: 0;
@@ -111,12 +112,15 @@
   .tasktable>tr>th {
     border: 1px solid #e3e3e3;
     padding: 10px;
+    background-color: #f3f3f3;
+    font-size: 13px;
     font-weight: 600;
     color: #909399;
   }
   .tasktable>tr>td {
     border: 1px solid #e3e3e3;
-    padding: 10px;
+    padding: 0 10px;
+    font-size: 13px;
   }
   .el-select{
     float: left;
@@ -197,13 +201,13 @@ ref="upload"
 :on-success="handleSuccess"
 :on-error="handleError"
 :data="UpData"
-accept=".wav,.mp3,.flac,.ape"
+accept=".wav,.mp3,.flac"
 multiple
 :auto-upload="false">
 <el-button slot="trigger" size="small" type="primary" @click="dianjia">选取文件</el-button>
 <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
 <el-button size="small" type="primary" @click="Remote" v-show="dianji1">远端上传</el-button>
-<div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC,.APE文件</div>
+<div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
 </el-upload>
         </div>
         <div class="shangR" v-show="xiaoshi">
@@ -256,33 +260,65 @@ multiple
   :on-success="handleS"
   :file-list="fileList" 
   :data="UpData"
-  accept=".wav,.mp3,.flac,.ape"
+  accept=".wav,.mp3,.flac"
   multiple
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC,.APE文件</div>
+  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
 </el-upload>
-                  <el-button type="primary" @click="Train" :loading="xunlian" :disabled="xli">训练</el-button><!---->
+    <el-button style="margin: 3px 0;" type="primary" @click="Train" :loading="xunlian" :disabled="xli">训练</el-button><!---->
   <template>
-    <el-table :data="speechi" style="width: 100%">
-      <el-table-column label="文件名" prop="filename"><!-- width="180"-->
+    <table class="tasktable">
+      <tr>
+        <th>文件名</th>
+        <th>文件大小</th>
+        <th>操作</th>
+      </tr>
+      <tr v-for="i in speechi">
+        <td>
+          {{i.filename}}
+        </td>
+        <td>
+          {{i.filesize}}
+        </td>
+        <td>
+            <el-button type="text" @click="newTask(i.id)" title="详情">
+              <i class="el-icon-caret-right"></i><!--播放-->
+            </el-button>
+            <el-button type="text" @click="modelDelete(i.id)" style="color: red;" title="删除">
+              <i class="el-icon-delete"></i><!--删除-->
+            </el-button>
+        </td>
+      </tr>
+    </table>
+    <!--<el-table :data="speechi" style="width: 100%">
+      <el-table-column label="文件名" prop="filename">
       </el-table-column>
-      <el-table-column label="文件大小" prop="filesize"><!-- width="180"-->
+      <el-table-column label="文件大小" prop="filesize">
       </el-table-column>
-      <!--<el-table-column label="tsid" prop="tsid">
-      </el-table-column>-->
       <el-table-column label="操作">
         <template slot-scope="scope">
 <el-button size="mini" @click="plays(scope)">
-  <i class="el-icon-caret-right"></i><!--播放-->
+  <i class="el-icon-caret-right"></i>
 </el-button>
 <el-button size="mini" type="danger" @click="speechDele(scope)">
-  <i class="el-icon-delete"></i><!--删除-->
+  <i class="el-icon-delete"></i>
 </el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table>-->
+    <!--<el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          @prev-click="handlePrevChange"
+          @next-click="handleNextChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="pagesize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalCount">
+        </el-pagination>-->
   </template>
 <div class="block">
 </div> 
@@ -312,13 +348,24 @@ multiple
             <td>
                 <el-button type="text" @click="newTask(i.id)" title="详情">
                   <i class="el-icon-info"></i>
-                </el-button><!--播放-->
+                </el-button><!--详情-->
                 <el-button type="text" @click="modelDelete(i.id)" style="color: red;" title="删除">
                   <i class="el-icon-delete"></i>
                 </el-button><!--删除-->
             </td>
           </tr>
         </table>
+        <!--<el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          @prev-click="handlePrevChange"
+          @next-click="handleNextChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="pagesize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalCount">
+        </el-pagination>-->
     </div>
   </div>
 </template>

@@ -68,7 +68,7 @@
             <el-col :span="12">
               <div class="grid-content bg-purple">
                  <el-form-item label="密码" prop="pass">
-              <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
+              <el-input type="password" v-model="ruleForm.pass" :disabled="mima" auto-complete="off"></el-input>
             </el-form-item>
               </div>
             </el-col>
@@ -77,7 +77,7 @@
             <el-col :span="12">
               <div class="grid-content bg-purple">
                 <el-form-item label="确认密码" prop="checkPass">
-              <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
+              <el-input type="password" v-model="ruleForm.checkPass" :disabled="mima" auto-complete="off"></el-input>
             </el-form-item>
               </div>
             </el-col>
@@ -132,6 +132,7 @@
         }
       };
       return {
+        mima:true,
         responsed:0,
         ruleForm: {
           formerpass: '',
@@ -159,11 +160,15 @@
         userchecked(this.ruleForm.formerpass).then((res)=>{
           console.log(res);
           if(res.data.ret == 200){
-            this.$message.success("666");
+            this.$message.success("密码正确");
             this.responsed = 200;
+            this.mima = false;
+            console.log(this.responsed);
           }if(res.data.ret == 400){
             this.$message.error('密码错误');
             this.responsed = 400;
+            this.mima = true;
+            console.log(this.responsed);
           }
         })
       },
@@ -171,17 +176,21 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if(valid) {
-            userpasswdedit(this.ruleForm.pass,this.ruleForm.checkPass).then((res)=>{
-              console.log(res);
-              if(res.data.ret == 200){
-                this.$message.success('修改成功')
-                this.ruleForm.formerpass = "";
-                this.ruleForm.pass = "";
-                this.ruleForm.checkPass = "";
-              }if(res.data.ret == 400){
-                this.$message.error('修改失败')
-              }
-            })
+            if(this.responsed == 200){
+              userpasswdedit(this.ruleForm.pass,this.ruleForm.checkPass).then((res)=>{
+                console.log(res);
+                if(res.data.ret == 200){
+                  this.$message.success('修改成功')
+                  this.ruleForm.formerpass = "";
+                  this.ruleForm.pass = "";
+                  this.ruleForm.checkPass = "";
+                }if(res.data.ret == 400){
+                  this.$message.error('修改失败')
+                }
+              })
+            }else{
+              this.$message.error('旧密码错误')
+            }
           } else {
             console.log('error submit!!');
             return false;

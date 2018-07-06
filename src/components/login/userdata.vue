@@ -46,11 +46,20 @@
     </Breadcrumb>
     <el-container>
       <el-aside width="200px" class="user_main">
-        <!--action="https://jsonplaceholder.typicode.com/posts/"-->
-        <!--<el-upload class="avatar-uploader" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-					<img v-if="imageUrl" :src="imageUrl" class="avatar">
-					<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-				</el-upload>-->
+        
+<!--<el-upload
+  class="upload-demo"
+  ref="upload"
+  action="https://192.168.1.118/user/info/edit"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :file-list="fileList"
+  :data="UpData"
+  :auto-upload="false">
+  <el-button slot="trigger" size="small" type="primary">选取头像</el-button>
+  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+</el-upload>-->
+        
       </el-aside>
       <el-main class="Udatas">
         <div class="UserData" v-show="former">
@@ -91,24 +100,6 @@
               </div>
             </el-col>
           </el-row>
-          <!--<el-row>
-            <el-col :span="12">
-              <div class="grid-content bg-purple">
-                <el-form-item label="微信号" prop="wechat">
-                  <el-input v-model="ruleFormOne.wechat" disabled></el-input>
-                </el-form-item>
-              </div>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="12">
-              <div class="grid-content bg-purple">
-                <el-form-item label="QQ号" prop="qq">
-                  <el-input v-model="ruleFormOne.qq" disabled></el-input>
-                </el-form-item>
-              </div>
-            </el-col>
-          </el-row>-->
           <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
@@ -157,6 +148,7 @@
     },
     data() {
       return {
+        fileList:[],
         disab:true,
         req:false,
         cang:true,
@@ -179,7 +171,29 @@
         
       };
     },
+//  计算属性
+    computed:{
+      UpData() {
+        return {
+          idnumber:this.ruleFormOne.idnumber,
+          tel:this.ruleFormOne.tel,
+          email:this.ruleFormOne.email,
+          address:this.ruleFormOne.address,
+          signature:this.ruleFormOne.signature
+        }
+      }
+    },
     methods: {
+//    上传头像
+       submitUpload() {
+        this.$refs.upload.submit();
+      },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
 //    点击修改用户资料
       amend(){
         this.disab = false;
@@ -189,6 +203,7 @@
       },
 //    确定
       confirm(){
+//      this.$refs.upload.submit();
         useredit(this.ruleFormOne.idnumber,this.ruleFormOne.tel,this.ruleFormOne.email,this.ruleFormOne.address,this.ruleFormOne.signature,).then((res)=>{
           console.log();
           if(res.data.ret == 200){

@@ -29,7 +29,7 @@
       <span slot="one">{{$t('DefaultHome.title')}}</span>
     </Breadcrumb>
     <div class="tasktop">
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$t('DefaultHome.intro')}}</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$t('DefaultHome.intro')}}</p>
     </div>
     <div class="taskmid">
       <h3>{{$t('DefaultHome.h3')}}:</h3>

@@ -5,7 +5,8 @@ export default {
     h3:'Test Notes',
     ulli1:"Recommended Browser: Chrome",
     ulli2:"Recommended Operating system: Windows 7/Windows 10",
-    ulli3:"Data format: *.mp3,*.ape,*.flac,*.wav",
+    ulli3:"Data format: .mp3,.flac,.wav",
+    ulli3:"Data format: *.mp3,*.flac,*.wav",
     ulli4:"Speaker recognition data preparation：Target speaker’s speech should be more than 300-sec valid speech (Not included silence, nose etc.)."
   },
 	logo: {
@@ -20,29 +21,44 @@ export default {
 	},
 	//Breadcrumb
 	Breadcrumb: {
-		home: "home"
+		home: "Home",
+    taskmg: "Task Manager",
+    taskstu:"Task Status",
+    identifyrs:"Identify Results",
+    taskdetail:"Task Details",
+    modelmg:"Model Manager",
+    voiceprint:"Voiceprint Recognition",
+    langs:"Language Identification",
+    genderident:"Gender identification",
+    keywordident:"keyword identication"
 	},
 	//NextClass
 	iptss:{
-	  target:"TheTargetPerson",
-	  id:"Id",
+	  target:"Target",
+	  id:"ID",
     sex:"Sex",
-	  man:"man",
-	  woman:"woman",
+	  man:"male",
+	  woman:"female",
+    unknown:"unknown",
 	  all:"all",
-	  dada:'DateOfBirth',
-	  dass:'OptionDate',
+	  dada:'Birthday',
+	  dass:'Option Date',
 	  nation:'Nation',
-	  room:'HomeAddress',
-	  currentResidence:'CurrentResidence',
-	  TargetGroup:'TargetGroup',
-	  inquire:'Inquire',
-	  alter:"alter",
-	  del:"delete"
+	  room:'Address',
+	  currentResidence:'Current Residence',
+	  TargetGroup:'Target Group',
+	  inquire:'Search',
+	  alter:"Alter",
+	  del:"Delete",
+    addgroup:"Add Group",
+    addtarget:"Add Target",
+    status:"status",
+    operation:"operation",
+    nodata:"No search matched data"
 	},
 	// 导航栏
 	arr1: {
-	  
+
 	},
 	home_slot: {
 		slotOne: "Voiceprint Recognition",
@@ -50,7 +66,7 @@ export default {
 	},
 	NextC: {
 		h2: "Target group",
-		placeholder: "Enter keywords for filtering"
+		placeholder: "Keywords for filtering"
 	},
 	NextClass: [{
 		id: 1,
@@ -88,7 +104,7 @@ export default {
 //		}]
 	}],
 	tianfu: {
-		eng: 'Talent is given by god, be humble.Fame is given, be grateful.Self - conceit is given, be careful'
+		eng: 'Welcome to the intelligent speech processing systems'
 	},
 	UserLog: {
 		login: "User Login",

@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+var webpack = require("webpack")
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -46,7 +47,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: utils.assetsPath('img/[name].[ext]')//.[hash:7]
         }
       },
       {
@@ -54,7 +55,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+          name: utils.assetsPath('media/[name].[hash:7].[ext]')//
         }
       },
       {
@@ -62,9 +63,17 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')//
         }
       }
+//    {
+//      test: /\.(spng)(\?.*)?$/,
+//      loader: 'url-loader',
+//      options: {
+//        limit: 1,
+//        name: utils.assetsPath('img/[name].png')
+//      }
+//    },
     ]
   },
   node: {
@@ -78,5 +87,12 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
     child_process: 'empty'
-  }
+  },
+  plugins: [
+new webpack.optimize.CommonsChunkPlugin('common.js'),
+new webpack.ProvidePlugin({
+    jQuery: "jquery",
+    $: "jquery"
+})
+]
 }

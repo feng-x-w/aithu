@@ -63,7 +63,7 @@ function checkCode(res) {
 //          baseURL: '/backapis',
 //          url,
 //          data: qs.stringify(data),
-//          timeout: 5000,
+////          timeout: 5000,
 //          headers: {
 //              'X-Requested-With': 'XMLHttpRequest',
 //              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -84,7 +84,7 @@ function checkCode(res) {
 //          baseURL: '/backapis',
 //          url,
 //          params, // get 请求时带的参数
-//          timeout: 5000,
+////          timeout: 5000,
 //          headers: {
 //              'X-Requested-With': 'XMLHttpRequest'
 //          }

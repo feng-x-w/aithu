@@ -8,6 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import i18n from './lang'
 import axios from 'axios'
 import Vuelidate from 'vuelidate'
+import $ from 'jquery'
+
 
 Vue.use(Vuelidate)
 Vue.prototype.$axios = axios;

@@ -19,14 +19,15 @@
   .taskmid>.tasktable>tr>th {
     border: 1px solid #e3e3e3;
     color: #909399;
-    /*background-color: #f3f3f3;*/
-    font-size: 14px;
+    background-color: #f3f3f3;
+    font-size: 13px;
     font-weight: 600;
     padding: 10px;
   }
   .taskmid>.tasktable>tr>td {
     border: 1px solid #e3e3e3;
-    padding: 10px;
+    padding: 0px 10px;
+    font-size: 13px;
   }
   .mask{
     width: 100%;
@@ -39,12 +40,11 @@
   }
   .mask>.mask_new_task{
     text-align: center;
-    width: 50%;
+    width: max-content;
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-top: -176px;
-    margin-left: -28.5%;
+    transform: translate(-50%,-50%);
     padding: 25px 50px;
     background-color: white;
     overflow: hidden;
@@ -56,8 +56,7 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    margin-top: -100px;
-    margin-left: -23.5%;
+    transform: translate(-50%,-50%);
     max-height: 300px;
     padding: 25px 50px;
     background-color: white;
@@ -99,11 +98,12 @@
     margin: 0 10px;
   }
   .wei{
-    width: 100%;
+    width: 99.8%;
     text-align: center;
     font-size: 16px;
     color: #6F7180;
-    border-bottom: 1px solid #bebebe;
+    border: 1px solid #e3e3e3;
+    border-top: none;
     padding: 15px 0;
   }
   .shangR>h1{
@@ -129,8 +129,27 @@
   .shangR>ul>.asdd:hover{
     background-color: #e3e3e3;
   }
+  .qwe{
+    text-align: left;/* !important*/
+  }
+  .show{
+    font-size: 15px;
+    border: 1px solid #cecece;
+    float: right;
+    color: #5d5d5d;
+    padding: 0px 4px;
+    display: inline-block;
+    height: 19px;
+    line-height: 19px;
+  }
+  .show:hover{
+    background-color: #ffbebe85;
+    border: 1px solid #ff0000;
+    color: #f53c3c;
+  }
 </style>
 <style>
+  
   .el-form-item__content{
     margin: 0;
   }
@@ -166,6 +185,7 @@
             <el-option label="关键词" value="4"></el-option>
             <el-option label="增强" value="5"></el-option>
             <el-option label="清洗" value="6"></el-option>
+            <el-option label="语音索引" value="7"></el-option>
             <el-option label="全部" value=""></el-option>
           </el-select>
         </el-form-item>
@@ -207,22 +227,31 @@
   <!--<el-form-item label="任务编号">
     <el-input v-model="form.tasknum" disabled></el-input>
   </el-form-item>-->
+  <el-form-item class="qwe" label="组名" v-show="targetantistop">
+    
+    <el-select v-model="form.typeId" @change="change" placeholder="请选择组名">
+      <el-option label=" " value="0"></el-option>
+      <el-option v-for="item in targetname" :label="item.name" :value="item.id"></el-option>
+    </el-select>
+    <span class="show" @click="show">X</span>
+  </el-form-item>
+  <el-form-item label="关键词" v-show="targetantistop">
+    <el-input v-model="form.antistop" :placeholder="formaaa.pla" @change="keyup"></el-input>
+  </el-form-item>
+  <el-form-item label="人数" v-show="voice">
+    <el-input v-model="form.pnum" placeholder="请输入语音索引人数"></el-input><!-- @change="keyup"-->
+  </el-form-item>
   <el-form-item label="任务类别">
     <template>
       <el-checkbox label="语音增强" v-model="form.enhance" true-label="1" false-label="0"></el-checkbox>
       <el-checkbox label="语音清洗" v-model="form.cleaning" true-label="1" false-label="0"></el-checkbox>
       <el-checkbox label="声纹识别" v-model="form.sr" true-label="1" false-label="0"></el-checkbox>
-      <el-checkbox label="关键词识别" v-model="form.ks" true-label="1" false-label="0"></el-checkbox>
+      <el-checkbox label="关键词识别" v-model="form.ks" true-label="1" false-label="0" @change="guan"></el-checkbox>
       <el-checkbox label="语种识别" v-model="form.li" true-label="1" false-label="0"></el-checkbox>
       <el-checkbox label="性别识别" v-model="form.gi" true-label="1" false-label="0"></el-checkbox>
+      <el-checkbox label="语音索引" v-model="form.idx" true-label="1" false-label="0" @change="idex"></el-checkbox>
     </template>
   </el-form-item>
-  <!--<span>{{form.enhance}}</span>
-  <span>{{form.cleaning}}</span>
-  <span>{{form.sr}}</span>
-  <span>{{form.ks}}</span>
-  <span>{{form.li}}</span>
-  <span>{{form.gi}}</span>-->
   <el-form-item>
     <el-button type="primary" @click="onSubmit">创建</el-button>
     <el-button @click="conceal" style="margin-left: 10px !important;">取消</el-button>
@@ -235,7 +264,7 @@
 <el-upload 
 class="upload-demo" 
 ref="upload" 
- action="http://192.168.1.118/task/upload"
+:action="http"
 :on-preview="handlePreview" 
 :on-remove="handleRemove" 
 :file-list="fileList" 
@@ -286,6 +315,7 @@ multiple
           	  <span v-if="i.ks==1">关键词识别</span>
           	  <span v-if="i.li==1">语种识别</span>
           	  <span v-if="i.gi==1">性别识别</span>
+          	  <span v-if="i.idx==1">语音索引</span>
           	</td>
           	<td>
           	  <span v-if="i.status==0">处理中</span>
@@ -303,6 +333,17 @@ multiple
         	</tr>
         </table>
        <div class="wei" v-show="kong">暂无数据</div>
+       <!--<el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          @prev-click="handlePrevChange"
+          @next-click="handleNextChange"
+          :current-page="currentPage"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="pagesize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalCount">
+        </el-pagination>-->
     </div>
   </div>
 </template>
@@ -310,6 +351,7 @@ multiple
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
   import { newtaskadd, tasklist, taskStart, result, files, ftot, search } from '@/api/newtask'
+  import { list } from '@/api/antistop'
   export default {
     components: {
       Breadcrumb
@@ -349,9 +391,9 @@ multiple
         }else{
           edt = this.tasksearch.endtime = "";
         }
-console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt);
+//console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt);
         search(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt).then((res)=>{
-          console.log(res);
+//        console.log(res);
           this.tableData = res.data.data;
         })
       },
@@ -366,19 +408,23 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
             this.kong=false;
           }
         })
+        list().then((res)=>{
+          this.targetname = res.data.data;
+          console.log(this.targetname);
+        })
       },
 //    点击远端上传文件按钮
       Remote(){
         files().then((res)=>{
           console.log(res);
-          if(res.data.ret == 404){
+          if(res.data.ret == 200){
+            this.addfiles = res.data.data;
+          }if(res.data.ret == 404){
             this.$message.error("未找到文件夹");
           }else{
             this.xiaoshi1 = false;
             this.xiaoshi = true;
-            this.form.enhance = 0;this.form.cleaning = 0;
-            this.form.sr = 0;this.form.ks = 0;this.form.li = 0;
-            this.form.name = '';this.form.tasknum = '';this.form.gi = 0;
+            this.initall();
           }
         })
         
@@ -409,6 +455,7 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
               taskStart(this.taskid).then((res)=>{
 //              console.log(res.data);
                 this.$message.success("上传成功,正在开始任务");
+                this.loading();
               })
             }
           })
@@ -417,36 +464,87 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
       },
 //    点击创建任务
       onSubmit() {
-        files().then((res)=>{
-          console.log(res);
-          this.addfiles = res.data.data;
-          console.log(this.addfiles)
-        })
-        if(this.form.enhance ==1 || this.form.cleaning == 1 || this.form.sr == 1 || this.form.ks == 1 || this.form.li == 1 || this.form.gi == 1){
-          newtaskadd(this.form.name,this.form.tasknum,this.form.enhance,this.form.cleaning,this.form.sr,this.form.ks,this.form.li,this.form.gi).then((res)=>{
-            if(res.data.ret == 200){
-              this.taskid = res.data.data.taskid;
-              console.log(this.taskid);
-              this.$message.success("创建成功");
-              this.show_task_childen=false;
-              this.show_task_add=true;
-//            tasklist().then((res)=>{
-//              console.log(res.data);
-//              this.tableData = res.data.data;
-//              if(res.data.data==''){
-//                this.kong=true;
-//              }else{
-//                this.kong=false;
-//              }
-//            })
-            }if(res.data.ret == 405){
-              this.$message.error(res.data.msg);
+        function changedouhao(str){ 
+          str=str.replace(/，/ig,','); 
+          return str; 
+        }
+        function unique(arr){
+          var res = [];
+          for(var i=0; i<arr.length; i++){
+            if(res.indexOf(arr[i]) == -1){
+             res.push(arr[i]);
             }
-          })
+          }
+          return res;
+        }
+        let arr = changedouhao(this.form.antistop).split(',');
+        let ArrAy = unique(arr).join(',');
+        console.log(ArrAy);
+        if(this.form.enhance ==1 || this.form.cleaning == 1 || this.form.sr == 1 || this.form.ks == 1 || this.form.li == 1 || this.form.gi == 1 || this.form.idx == 1){
+          if(this.form.ks == 1){
+            if(this.form.typeId != '' || ArrAy !=''){
+              if(this.form.idx == 1 && this.form.pnum == ''){
+                this.$message.error("请填上人数");
+              }else{this.feng(ArrAy);}
+            }else{this.$message.error('请将关键词组或和关键词填写完整')}
+          }else{
+            this.form.typeId = 0;
+            if(this.form.idx == 1 && this.form.pnum == ''){
+              this.$message.error("请填上人数");//$t('logo.title')
+            }else{this.feng(ArrAy);}
+          }
         }else{
           this.$message.error("请至少选择一个任务类别");
         }
       },
+keyup(val){
+  function changedouhao(str){ 
+  str=str.replace(/，/ig,','); 
+  return str; 
+}
+function unique(arr){
+  var res = [];
+  for(var i=0; i<arr.length; i++){
+    if(res.indexOf(arr[i]) == -1){
+     res.push(arr[i]);
+    }
+  }
+  return res;
+}
+let arr = changedouhao(this.form.antistop).split(',');
+let ArrAy = unique(arr).join(',');
+console.log(ArrAy);
+
+  console.log(ArrAy);
+  var str=ArrAy;
+  if (str.length>0){
+    for (var i = str.length-1; i >= 0; i--){
+      let unicode=str.charCodeAt(i);
+      if (unicode>65280 && unicode<65375){
+        this.$message.error("不能输入全角字符，请输入半角字符");
+        this.form.antistop = '';
+        this.formaaa.pla = "不能输入全角字符，请输入半角字符"
+      }
+    }
+  }
+},
+//    创建任务封装函数
+feng(ArrAy){
+newtaskadd(this.form.name,this.form.tasknum,this.form.enhance,this.form.cleaning,this.form.sr,this.form.ks,this.form.li,this.form.gi,this.form.typeId,ArrAy,this.form.pnum,this.form.idx).then((res)=>{
+if(res.data.ret == 200){
+  this.taskid = res.data.data.taskid;
+  console.log(this.taskid);
+  this.$message.success("创建成功");
+  this.show_task_childen=false;
+  this.show_task_add=true;
+}if(res.data.ret == 405){
+  this.$message.error(res.data.msg);
+}
+}).catch((error)=>{
+  
+    console.log(error);
+  });
+},
       dianjia(){
         this.dianji1 = false;
       },
@@ -459,7 +557,6 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
         this.show_task = true; 
         this.show_task_childen = true;
         var myDate = new Date();
-//      console.log(myDate);
         var y = myDate.getFullYear().toString(),//年份
         m = ("0" + (myDate.getMonth() + 1)).slice(-2).toString(),//月份
         d = myDate.getDate().toString(),//日
@@ -469,16 +566,30 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
         var mydate = y + m + d + h + fen + s;
         var mydates = y + "年" + m + "月" + d + "日" + h + "时" + fen + "分";
         console.log(mydates);
-//      console.log(mydate);
         this.form.tasknum = mydate;
         this.form.name = mydate;
+      },
+//    点击关键词展开相关数据
+      guan(){
+        this.form.antistop = '';
+        this.form.typeId = "0";
+        this.targetantistop = !this.targetantistop;
+      },
+      idex(){
+        this.form.pnum = '';
+        this.voice = !this.voice;
+      },
+      
+      show(){
+        this.targetantistop = false;
+        this.voice = false;
+        this.form.ks = 0;
+        this.form.idx = 0;
       },
 //    点击隐藏蒙板
       conceal(){
         this.show_task = false;
-        this.form.enhance = 0;this.form.cleaning = 0;
-        this.form.sr = 0;this.form.ks = 0;this.form.li = 0;
-        this.form.name = '';this.form.tasknum = '';this.form.gi = 0;
+        this.initall();
       },
 //    上传语音
       submitUpload() {
@@ -516,12 +627,18 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
               this.kong=false;
             }
           })
-          this.form.enhance = 0;this.form.cleaning = 0;
-          this.form.sr = 0;this.form.ks = 0;this.form.li = 0;
-          this.form.name = '';this.form.tasknum = '';this.form.gi = 0;
+          this.initall();
         }
         
       },
+//    初始化所有
+initall(){
+  this.targetantistop = false;
+  this.voice = false;
+  this.form.enhance = 0;this.form.cleaning = 0;this.form.idx = 0;
+  this.form.sr = 0;this.form.ks = 0;this.form.li = 0;this.form.typeId = "0";
+  this.form.name = '';this.form.tasknum = '';this.form.gi = 0;this.form.antistop = ''
+},
 //    文件上传失败时的回调函数
       handleError(err, file, fileList){ 
 //      console.log(this.type);
@@ -529,10 +646,25 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
       },
       addfile(file, fileList){
         console.log(file, fileList);
-      }
+      },
+      change(){
+        console.log(this.form.typeId);
+        for(var i=0; i<this.targetname.length; i++){
+          if(this.targetname[i].id==this.form.typeId){
+            this.form.typeName = this.targetname[i].name;
+          }
+        }
+        console.log(this.form.typeName);
+      },
     },
     data() {
       return {
+        formaaa:{
+          typeId:'',
+          pla:'使用","逗号分割，不支持全角字符'
+        },
+        targetantistop:false,
+        voice:false,
         addfiles:[],
         inde:"",
         i:0,
@@ -556,40 +688,25 @@ console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tas
           starttime:'',
           endtime:''
         },
-        fileList: [
-//      {name: 'food.jpeg',url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-//      }, {name: 'food2.jpeg',url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-//      }
-        ],
-        tableData: [
-{
-  date: '2016-05-02',
-  name: '王小虎',
-  address: '上海市普陀区金沙江路 1518 弄'
-}, {
-  date: '2016-05-04',
-  name: '王小虎',
-  address: '上海市普陀区金沙江路 1517 弄'
-}, {
-  date: '2016-05-01',
-  name: '王小虎',
-  address: '上海市普陀区金沙江路 1519 弄'
-}, {
-  date: '2016-05-03',
-  name: '王小虎',
-  address: '上海市普陀区金沙江路 1516 弄'
-}
-        ],
+        fileList: [],
+        tableData: [],
+        targetname: [],
         form: {
+          typeId:'',
+          typeName:'',
           name: '',
           tasknum: '',
+          antistop: '',
+          pnum:'',
           enhance:0, 
           cleaning:0, 
           sr:0, 
           ks:0, 
           li:0, 
-          gi:0
-        }
+          gi:0,
+          idx:0
+        },
+        http:"http://192.168.1.118/task/upload"
       }
     }
     

@@ -12,6 +12,8 @@ import disindex from '@/components/discern/index'
 //import router from './router'result
 import taskM from '@/components/task/taskM'
 import result from '@/components/result/result'
+import newfile from '@/components/aaa/new_file'
+import voice from '@/components/VoiceIndexing/voice'
 
 Vue.use(Router)
 
@@ -96,6 +98,16 @@ const router = new Router({
           path: '/result',
           name: 'result',
           component: result
+        },
+        {
+          path: '/voice',
+          name: 'voice',
+          component: voice
+        },
+        {
+          path: '/newfile',
+          name: 'newfile',
+          component: newfile
         }
       ]
     }

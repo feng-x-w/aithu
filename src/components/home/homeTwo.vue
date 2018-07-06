@@ -1,5 +1,7 @@
 <style scoped>
-  .drill {}
+  .drill {
+    box-sizing: border-box;
+  }
   
   .drillTop {
     margin: 10px;
@@ -37,113 +39,103 @@
     float: right;
     width: 49%;
   }
+  .antistop{
+    width: 98%;
+    margin: 20px;
+    overflow-x: hidden;
+  }
+  .antistop1{
+    float: left;
+    /*width: 15px;*/
+    padding: 15px;
+    border: 1px solid black;
+  }
+  .antismid{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .antismid>p{
+    width: 100%;
+  }
+  .antismid>p>.span1{
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .antismid>p>.span2{
+    font-size: 12px;
+    color: gray;
+    margin-left: 15px;
+  }
+  .ipt{
+    margin-top: 5px;
+    overflow: hidden;
+  }
+  .left{
+    width: 13%;
+    float: left;
+  }
+  .right{
+    width: 78%;
+    float: left;
+  }
+  .btn{
+    float: left;
+    margin-left: 5px !important;
+    width: 6%;
+  }
+  .list{
+    margin: 5px 0;
+    /*overflow: hidden;*/
+  }
 </style>
 
 <template>
   <div class="drill">
     <Breadcrumb>
       <span slot="one">模型管理</span>
-      <span slot="two">语种模型管理</span>
+      <span slot="two">关键词</span>
     </Breadcrumb>
-    <div class="drillTop">
-      <el-form :inline="true" :model="form" class="demo-form-inline" size="mini">
-        <el-form-item label="任务名称">
-          <el-input v-model="form.name" placeholder="任务名称"></el-input>
-        </el-form-item>
-        <el-form-item label="执行状态" size="mini">
-          <el-select v-model="form.region" placeholder="执行状态">
-            <el-option label="正在执行" value="shanghai"></el-option>
-            <el-option label="执行完成" value="beijing"></el-option>
-            <el-option label="全部" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="操作人" size="mini">
-          <el-input v-model="form.operation" placeholder="操作人"></el-input>
-        </el-form-item>
-        <el-form-item size="mini">
-          <el-button type="primary" @click="onSubmit" icon="el-icon-search">查询</el-button>
-        </el-form-item>
-        <el-form-item size="mini">
-          <el-button type="primary">新建语种</el-button><!-- @click="newTask"-->
+<div class="drillTop">
+      <el-form :inline="true" class="demo-form-inline" size="mini">
+        <el-form-item label="搜索关键词">
+          <el-input v-model="filterText" placeholder="关键词" ref="type1"></el-input>
         </el-form-item>
       </el-form>
-      <!--新建语种-->
-      <div class="Nlanguage" v-show="nlguage">
-        <div class="NLG">
-          <h1 style="text-align: center;margin-bottom:10px;">新建语种</h1>
-          <div class="left">
-            <hr />
-<el-form ref="formData" :rules="rules" :model="formData" label-width="80px">
-  <el-form-item label="语种名称" prop="name" required>
-    <el-input v-model="formData.name"></el-input>
-  </el-form-item>
-  <el-form-item label="活动形式">
-    <el-input type="textarea" v-model="formData.desc"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">立即创建</el-button>
-    <el-button @click="onEsc">取消</el-button>
-  </el-form-item>
-</el-form>
-          </div>
-          <div class="right">
-                <div class="target_right">
-                  <h1>模型文件列表</h1>
-<el-upload 
-  class="upload-demo" 
-  ref="upload" 
-  action="http://192.168.1.118/sr/model/speech/add"
-  :on-preview="handlePreview" 
-  :on-remove="handleRemove" 
-  :on-success="handleSuccess"
-  :file-list="fileList" 
-  :data="UpData"
-  accept=".wav,.mp3,.flac,.ape"
-  multiple
-  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC,.APE文件</div>
-</el-upload>
-
-                  <!--<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>-->
-                  <el-button type="primary" :loading="xunlian" @click="drill">训练</el-button>
-  <template>
-    <el-table :data="speech" style="width: 100%">
-      <el-table-column label="文件名" width="180">
-      </el-table-column>
-      <el-table-column label="文件路径" width="180">
-      </el-table-column>
-      <el-table-column label="tsid">
-      </el-table-column>
-    </el-table>
-  </template>
-<div class="block">
-  <!--<span class="demonstration">大于 7 页时的效果</span>-->
-  <!--<el-pagination
-    small
-    page-size="5"
-    layout="prev, pager, next"
-    :total="1000">
-  </el-pagination>-->
-  
-</div> 
-</div>
-          </div>
-        </div>
+    </div>
+    <hr />
+    <div class="antistop" >
+      <div class="antistop1" v-for="i in datakeyword">
+        {{i.keyword}}
       </div>
-      <hr />
-      <div class="drillmid">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="name" label="名称" width="180">
-          </el-table-column>
-          <el-table-column prop="date" label="描述" width="180">
-          </el-table-column>
-          <el-table-column prop="name" label="训练状态" width="180">
-          </el-table-column>
-          <el-table-column prop="address" label="操作">
-          </el-table-column>
-        </el-table>
+      <div class="antistop1" v-show="xiao">
+        ... ...
+      </div>
+    </div>
+    <hr />
+    <div class="antismid">
+      <p><span class="span1">添加关键词</span><span class="span2">关键词使用 "," 逗号分割</span></p>
+      <div class="ipt">
+        <el-form>
+          <div class="left">
+            <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-edit el-input__icon" v-model="name" clearable required></el-input>
+          </div>
+          <span style="float: left;">&nbsp;:&nbsp;</span>
+          <div class="right">
+            <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-edit el-input__icon" v-model="antistop" clearable required></el-input>
+          </div>
+          <el-button class="btn" size="mini" @click="addAntistop">添加</el-button>
+        </el-form>
+      </div>
+      <div class="ipt list" v-for="i in list">
+        <div class="left">
+          {{i.name}}
+        </div>
+        <span style="float: left;">&nbsp;:&nbsp;</span>
+        <div class="right">
+          {{i.value}}
+        </div>
+        <el-button class="btn" size="mini" @click="del(i.id)">删除 </el-button><!---->
       </div>
     </div>
   </div>
@@ -151,63 +143,114 @@
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
+  import { antistop, search, groupadd, list, deletes } from '@/api/antistop'
   export default {
     data() {
       return {
-        nlguage:false,
-        formData: {
-          name: '',
-          desc: ''
-        },
-         rules: {
-          name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-          ]
-         },
-        form: {
-          name: '',
-          region: '',
-          operation: ''
-        },
-        tableData: [
-//      {
-//          date: '2016-05-02',
-//          name: '王小虎',
-//          address: '上海市普陀区金沙江路 1518 弄'
-//        }, {
-//          date: '2016-05-04',
-//          name: '王小虎',
-//          address: '上海市普陀区金沙江路 1517 弄'
-//        }, {
-//          date: '2016-05-01',
-//          name: '王小虎',
-//          address: '上海市普陀区金沙江路 1519 弄'
-//        }, {
-//          date: '2016-05-03',
-//          name: '王小虎',
-//          address: '上海市普陀区金沙江路 1516 弄'
-//        }
-          ]
+        colo:0,
+        list:[],
+        name:'',
+        antistop:'',
+        xiao:true,
+        filterText:'',
+        datakeyword:{}
       }
     },
+//  监听
+    watch: {
+      filterText:function(val){
+//      this.$message.success(val);
+        if(val != ""){
+          search(val).then((res)=>{
+            if(res.data.data.length > 60){
+              this.datakeyword = res.data.data.splice(0,60);
+              this.xiao = true;
+            }if(res.data.data.length < 120){
+              this.datakeyword = res.data.data;
+              this.xiao = false;
+            }
+          })
+        }else{
+          this.xiao = true;
+          antistop().then((res)=>{
+          console.log(res);
+          this.datakeyword = res.data.data.splice(0,60);
+        })
+        }
+      }
+    },
+    created(){
+      this.oInit();
+      this.lists();
+    },
     methods: {
-      onSubmit() {
-//      console.log('submit!');
+//    添加关键词
+      addAntistop(){
+        function changedouhao(str){ 
+          str=str.replace(/，/ig,','); 
+          return str; 
+        }
+        function unique(arr){
+          var res = [];
+          for(var i=0; i<arr.length; i++){
+            if(res.indexOf(arr[i]) == -1){
+             res.push(arr[i]);
+            }
+          }
+          return res;
+        }
+        let arr = changedouhao(this.antistop).split(',');
+        let ArrAy = unique(arr).join(',');
+        console.log(ArrAy);
+        if(this.name == '' && this.antistop == ''){
+          this.$message.error('请将关键词组和关键词填写完整')
+        }else{
+          groupadd(this.name,ArrAy).then((res)=>{
+            console.log(res);
+            if(res.data.ret == 200){
+              this.$message.success(res.data.msg);
+              this.name = "";
+              this.antistop = "";
+              this.lists();
+            }
+          })
+        }
       },
-      onEsc(){
-        this.nlguage = false
+//    显示关键词列表
+      lists(){
+        list().then((res)=>{
+          console.log(res);
+          this.list = res.data.data;
+        })
       },
-      newTask() {
-        console.log('submit!');
-        this.nlguage = true
+//    删除关键词组
+      del(id){
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          deletes(id).then((res)=>{ 
+            if(res.data.ret == 200){
+              this.$message.success("删除成功!");
+              this.lists();
+            }
+          })
+        }).catch(() => {
+          this.$message.info("取消删除!")         
+        });
+        
+      },
+//    初始化数据渲染
+      oInit(){
+        antistop().then((res)=>{
+          console.log(res);
+          this.datakeyword = res.data.data.splice(0,60);
+        })
       }
     },
     components: {
       Breadcrumb
-    },
-    computed: {
-
     }
   }
 </script>

@@ -13,9 +13,10 @@
 		border-top: none;
 		background-color: #f7f7f7;
 		color: rgb(0, 0, 0);
-		padding-left: 10px;
+		padding-left: 25px;
 		border: 1px solid #f1efef;
 		font-size: 13px;
+		text-align: left;
 	}
 	.el-button:hover {
 		background-color: #ababab;
@@ -70,6 +71,9 @@
  .el-collapse-item__content{
    padding-bottom: 0 !important;
  }
+ .el-collapse-item__header{
+   padding-left: 20px;
+ }
 </style>
 
 <template>
@@ -79,30 +83,35 @@
 		<el-container>
 			<el-aside width="230px">
 				<el-collapse v-model="activeName" accordion>
-					<el-collapse-item title="任务管理" name="ccc" style="text-align: center;" key="1">
+					<el-collapse-item title="任务管理" name="ccc" style="text-align: left;" key="1">
 						<router-link class="btn" to="/taskM" tag="el-button"><!---->
-							<i class="el-icon-document"></i> 任务管理
+							<i class="fa fa-tasks fa-lg"></i>&nbsp;&nbsp;&nbsp;任务管理
 						</router-link>
 					</el-collapse-item>
-					<el-collapse-item title="识别结果管理" name="aaa" style="text-align: center;" key="2">
+					<el-collapse-item title="识别结果管理" name="aaa" style="text-align: left;" key="2">
 						<router-link class="btn" to="/result" tag="el-button"><!---->
-							<!--<span class="el-icon-star-on"></span>-->识别任务管理
+							<i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;识别任务管理
 						</router-link>
 					</el-collapse-item>
-					<el-collapse-item title="模型管理" name="bbb" style="text-align: center;" key="3">
+					<el-collapse-item title="模型管理" name="bbb" style="text-align: left;" key="3">
 						<router-link class="btn" to="/home" tag="el-button"><!---->
-              <!--<span class="el-icon-star-on"></span>-->声纹模型
+              <i class="fa fa-volume-up fa-lg"></i>&nbsp;&nbsp;&nbsp;声纹模型
             </router-link>
 						<router-link class="btn" to="/drill" tag="el-button"><!---->
-              <!--<span class="el-icon-star-on"></span>-->语种模型
+              <i class="fa fa-language fa-lg"></i>&nbsp;&nbsp;&nbsp;语种模型
             </router-link>
 						<router-link class="btn" to="/disindex" tag="el-button"><!---->
-              <!--<span class="el-icon-star-on"></span>-->性别模型
+              <i class="fa fa-venus-mars fa-lg"></i>&nbsp;&nbsp;&nbsp;性别模型
             </router-link>
 						<router-link class="btn" to="/homeTwo" tag="el-button"><!---->
-              <!--<span class="el-icon-star-on"></span>-->关键词模型
-          </router-link>
+              <i class="fa fa-key fa-lg"></i>&nbsp;&nbsp;&nbsp;关键词模型
+            </router-link>
 					</el-collapse-item>
+					<!--<el-collapse-item title="语音索引" name="ddd" style="text-align: left;" key="4">
+            <router-link class="btn" to="/voice" tag="el-button">
+              <i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;语音索引
+            </router-link>
+          </el-collapse-item>-->
 				</el-collapse>
 			</el-aside>
 			<el-main>

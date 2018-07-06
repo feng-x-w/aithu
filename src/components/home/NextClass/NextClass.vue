@@ -28,7 +28,10 @@
   }
   .target_add {
     width: 40%;
-    margin: 8% auto 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     background-color: white;
     padding: 25px 50px;
     padding-left: 0;
@@ -64,7 +67,6 @@
     background-color: rgba(0, 0, 0, .5);
   }
   .addmans>.target_add {
-    margin-top: 20px;
     width: 80%;
     overflow: hidden;
   }
@@ -99,7 +101,7 @@
   .tasktable>tr>th {
     border: 1px solid #e3e3e3;
     color: #909399;
-    /*background-color: #f3f3f3;*/
+    background-color: #f3f3f3;
     font-size: 13px;
     font-weight: 600;
     padding: 10px;
@@ -107,6 +109,7 @@
   .tasktable>tr>td {
     border: 1px solid #e3e3e3;
     padding: 10px;
+    font-size: 13px;
   }
   .tasktable>tr>.addre{
     display: inline-block;
@@ -174,6 +177,46 @@
   }
   .el-main{
     padding-top: 0;/* !important*/
+  }
+  /*上传头像*/
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+  .Image{
+    width: 100%;
+    text-align: center;
+  }
+  .Image>.el-button{
+    margin: 3px 0;
+  }
+  .Image>p{
+    font-size: 12px;
+    text-align: center;
+    color: gray;
+  }
+  .Images{
+    width: 150px;
+    height: 150px;
   }
 </style>
 <style>
@@ -287,13 +330,13 @@
               </el-form>
             </div>
           </div>
-          <el-button type="primary"@click="addman" size="mini">添加目标人</el-button>
+          <el-button type="primary" @click="addman" size="mini">添加目标人</el-button>
           <!--<button @click="addman">添加目标人</button>-->
           <div class="target addmans" v-show="addMan">
             <div class="target_add">
               <h1>新建目标人</h1>
-              <el-form :model="addrulefm" :rules="add_rules_target" ref="addrulefm" label-width="100px" class="demo-ruleForm">
-                <div class="target_left">
+<el-form :model="addrulefm" :rules="add_rules_target" ref="addrulefm" label-width="100px" class="demo-ruleForm">
+                <div class="target_left"> 
                   <table border="0">
                     <tr><td>
                         <el-form-item label="姓名" prop="name">
@@ -301,7 +344,12 @@
                         </el-form-item>
                     </td><td rowspan="4">
                         <div class="Image">
-                          <img src="../../../assets/_20180622145804.png" />
+                          <!--<img src="../../../assets/_20180622145804.png"/>-->
+<img class="Images" v-show="Image" :src="ImgUrl" height="200" alt="image preview..."/><br />
+<input ref="file" type="file" @change="previewFile($event)" style="display: none;"/>
+<el-button @click="upimg" size="mini">上传头像</el-button>
+<p>头像不能超过500k</p>
+
                         </div>
                     </td></tr>
                     <tr><td>
@@ -360,7 +408,7 @@
                     </td></tr>
                     <tr><td colspan="2">
                         <el-form-item>
-                          <el-button type="primary" @click="addparson('rulefm')" :disabled="buer">创建</el-button>
+                          <el-button type="primary" @click="addparson($event)" :disabled="buer">创建</el-button>
                           <!--<el-button @click="resetForm()">重置</el-button>-->
                           <el-button @click="showtarget" type="danger" style="margin-left: 10px !important;" plain>关闭</el-button>
                         </el-form-item>
@@ -368,45 +416,48 @@
                   </table>
                 </div>
                 <div class="target_right">
-                   <!--创建目标人右侧信息-->
+                  <!--创建目标人右侧信息-->
 <h1>模型文件列表</h1>
 <el-upload 
   class="upload-demo" 
   ref="uploadone" 
-  action="http://192.168.1.118/sr/model/speech/add"
-  
-  
+  :action="http"
   :on-success="handleSuccessone"
   :on-error="handleErrorone"
   :file-list="fileListone" 
   :data="UpDataone"
-  accept=".wav,.mp3,.flac,.ape"
+  accept=".wav,.mp3,.flac"
   multiple
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUploadone">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC,.APE文件</div>
+  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
 </el-upload>
-                  <el-button type="primary" :loading="xunlianone" @click="drillone" :disabled="xulian">训练</el-button>
+<el-button style="margin: 3px 0;" type="primary" :loading="xunlianone" @click="drillone" :disabled="xulian">训练</el-button>
   <template>
-    <el-table :data="speechone" style="width: 100%">
-      <el-table-column label="文件名" width="180" prop="filename">
-      </el-table-column>
-      <!--<el-table-column label="文件路径" width="180" prop="filepath">
-      </el-table-column>-->
-      <el-table-column label="文件大小" prop="filesize">
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-<el-button size="mini" @click="play(scope)">
-  <i class="el-icon-caret-right"></i>
-</el-button>
-<el-button size="mini" type="danger" @click="speechDel(scope)">
-  <i class="el-icon-delete"></i>
-</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <table class="tasktable">
+      <tr>
+        <th>文件名</th>
+        <th>文件大小</th>
+        <th>操作</th>
+      </tr>
+      <tr v-for="i in speechone">
+        <td>
+          {{i.filename}}
+        </td>
+        <td>
+          {{i.filesize}}
+        </td>
+        <td>
+            <el-button type="text" @click="play(i.tsid)" title="播放">
+              <i class="el-icon-caret-right"></i><!--播放-->
+            </el-button>
+            <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
+              <i class="el-icon-delete"></i><!--删除-->
+            </el-button>
+        </td>
+      </tr>
+    </table>
   </template>
 <div class="block">
   <!--<span class="demonstration">大于 7 页时的效果</span>-->
@@ -414,7 +465,7 @@
     small
     page-size="5"
     layout="prev, pager, next"
-    :total="1000">
+    :total="10">
   </el-pagination>-->
   
 </div> 
@@ -464,7 +515,7 @@
             </td>
             <td> {{i.groupname}} </td>
             <td style="width: 37px;">
-              <span v-if="i.status == 0">不可用</span>
+              <span v-if="i.status == 0" style="white-space: nowrap;">不可用</span>
               <span v-if="i.status == 1">可用</span>
             </td>
             <td style="width: 38px;">
@@ -479,7 +530,8 @@
           </tr>
         </table>
         <div class="wei" v-show="kong">暂无数据</div>
-        <!--<el-pagination
+        <el-pagination
+          v-show="fenye"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           @prev-click="handlePrevChange"
@@ -488,7 +540,7 @@
           :page-sizes="[10, 20, 30, 40]"
           :page-size="pagesize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="totalCount">-->
+          :total="totalCount">
         </el-pagination>
         <!--目标人资料-->
         <div class="handle" v-show="targetdatas">
@@ -504,7 +556,13 @@
                         </el-form-item>
                     </td><td rowspan="4">
                         <div class="Image">
-                          <img src="../../../assets/_20180622145804.png" />
+                          <!-- {{this.detail.gid}}-->
+<!--<img width="180px" heigth="238px" style="margin: 10px;" :src='imageUrl'/>-->
+<img class="Images" :src="imageUrl" height="200" alt="image preview..."/><br />
+<input ref="filetwo" type="file" @change="previewFiletwo($event)" style="display: none;"/>
+<el-button @click="upimgtwo" size="mini">上传头像</el-button>
+<p>头像不能超过500k</p>
+<!--this.detail.speaker-->
                         </div>
                     </td></tr>
                     <tr><td>
@@ -529,13 +587,6 @@
                             <el-option label="未知" value="-1"></el-option>
                           </el-select>
                         </el-form-item>
-                        <!--<el-form-item label="性别">
-                          <el-radio-group v-model="detail.gender">
-                            <el-radio :label="0">男</el-radio>
-                            <el-radio :label="1">女</el-radio>
-                            <el-radio :label="">全部</el-radio>
-                          </el-radio-group>
-                        </el-form-item>-->
                     </td></tr>
                     <tr><td>
                         <el-form-item label="民族">
@@ -568,7 +619,7 @@
                     </td></tr>
                     <tr><td colspan="2">
                         <el-form-item>
-                          <el-button type="primary" @click="amend">修改</el-button>
+                          <el-button type="primary" @click="amend($event)">修改</el-button>
                           <!--<el-button @click="resetForm()">重置</el-button>-->
                           <el-button @click="showtarget" type="danger" plain style="margin-left: 10px !important;">关闭</el-button>
                         </el-form-item>
@@ -580,42 +631,47 @@
 <el-upload 
   class="upload-demo" 
   ref="upload" 
-  action="http://192.168.1.118/sr/model/speech/add"
+  :action="http"
   :on-preview="handlePreview" 
   :on-remove="handleRemove" 
   :on-success="handleSuccess"
   :on-error="handleError"
   :file-list="fileList" 
   :data="UpData"
-  accept=".wav,.mp3,.flac,.ape"
+  accept=".wav,.mp3,.flac"
   multiple
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC,.APE文件</div>
+  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
 </el-upload>
 
                   <!--<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>-->
                   <el-button type="primary" :loading="xunlian" @click="drill">训练</el-button>
   <template>
-    <el-table :data="speech" style="width: 100%">
-      <el-table-column label="文件名" width="180" prop="filename">
-      </el-table-column>
-      <!--<el-table-column label="文件路径" width="180" prop="filepath">
-      </el-table-column>-->
-      <el-table-column label="文件大小" prop="filesize">
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-<el-button size="mini" @click="play(scope)">
-  <i class="el-icon-caret-right"></i>
-</el-button>
-<el-button size="mini" type="danger" @click="speechDel(scope)">
-  <i class="el-icon-delete"></i>
-</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <table class="tasktable">
+      <tr>
+        <th>文件名</th>
+        <th>文件大小</th>
+        <th>操作</th>
+      </tr>
+      <tr v-for="i in speech">
+        <td>
+          {{i.filename}}
+        </td>
+        <td>
+          {{i.filesize}}
+        </td>
+        <td>
+            <el-button type="text" @click="play(i.tsid)" title="播放">
+              <i class="el-icon-caret-right"></i><!--播放-->
+            </el-button>
+            <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
+              <i class="el-icon-delete"></i><!--删除-->
+            </el-button>
+        </td>
+      </tr>
+    </table>
   </template>
 <div class="block">
   <!--<span class="demonstration">大于 7 页时的效果</span>-->
@@ -644,7 +700,7 @@
 <script>
   import $axios from 'axios';
 //这样就可以通过$axios发起请求了
-  import { target, cuan, addTargetParson, detail, newVideo, drillModel, dele, Alter, modelDele, updateModel, gname, inquire, speechDel} from '@/api/target'
+  import { group, target, cuan, addTargetParson, detail, newVideo, drillModel, dele, Alter, modelDele, updateModel, gname, inquire, speechDel} from '@/api/target'
   import { datas } from '@/assets/js/common'
   let id = 1000;
   export default {
@@ -677,38 +733,98 @@
         return {
           mid: this.newfilemid
         }
+      },
+      FileReader(){
+        
       }
     },
 //  方法属性
     methods: {
+//    fileinfo(){
+//      
+//    },
+      upimg(){
+        this.$refs.file.click();
+        this.reader = new FileReader();
+      },
+      previewFile(ev){
+        this.file = ev.target.files[0];
+        let urls = ev.target.files;
+        this.reader.readAsDataURL(urls[0]);
+        this.reader.onload = () =>{
+          this.ImgUrl = this.reader.result;
+          console.log(this.file);
+          if(this.file != ""){
+            this.Image = true;
+          }
+        }
+      },
+      upimgtwo(){
+        this.$refs.filetwo.click();
+        this.readertwo = new FileReader();
+      },
+      previewFiletwo(ev){
+        this.filetwo = ev.target.files[0];
+        let urls = ev.target.files;
+        this.readertwo.readAsDataURL(urls[0]);
+        this.readertwo.onload = () =>{
+          this.imageUrl = this.readertwo.result;
+          console.log(this.filetwo);
+//        this.file = this.detail.avatar;
+        }
+      },
+//    上传头像
+        great(){
+          document.getElementById('saveImage').onchange = function () {
+            var imgFile = this.files[0];
+            var fr = new FileReader();
+            fr.onload = function () {
+              document.getElementById('portrait').src = fr.result;
+            };
+            fr.readAsDataURL(imgFile);
+          }
+        },
 //    查询
       inquired(){
+        this.currentPage = 1;
         this.selectItem = -1;
-//      if(this.formInline.birth != null){
-//        if(this.formInline.birth != ""){
-//          let birthTime = this.formInline.birth;
-//          let y = birthTime.getFullYear().toString(),//年份
-//          m = ("0" + (birthTime.getMonth() + 1)).slice(-2).toString(),//月份
-//          d = birthTime.getDate().toString();//日
-//          var bt = y+'-'+m+'-'+d;
-//        }else{
-//          this.formInline.birth = "";
-//          var bt = this.formInline.birth;
-//        }
-//      }else{
-//        this.formInline.birth = "";
-//        var bt = this.formInline.birth;
-//      }
-        let bt;
+//      let bt;
         if(this.formInline.birth){
-          bt = this.formInline.birth.toLocaleDateString();
+          this.bt = this.formInline.birth.toLocaleDateString();
           console.log(bt);
         }else{
-          bt = this.formInline.birth = "";
+          this.bt = this.formInline.birth = "";
         }
-        inquire(this.formInline.speaker,this.formInline.idcard,bt,this.formInline.gender,this.formInline.nation,this.formInline.room,this.formInline.address,this.formInline.gid).then((res)=>{
+        this.find(this.currentPage,this.pagesize);
+//      inquire(this.formInline.speaker,this.formInline.idcard,bt,this.formInline.gender,this.formInline.nation,this.formInline.room,this.formInline.address,this.formInline.gid).then((res)=>{
+//        console.log(res);
+//        this.crew = res.data.data;
+//        if(this.crew.length != 0){
+//          this.kong = false;
+//        }else{
+//          this.kong = true;
+//        }
+//        
+//      })
+      },
+//    查询按钮获取数据封装函数
+      find(page,pagesize){
+        this.thisi = 1;
+        inquire(this.formInline.speaker,this.formInline.idcard,this.bt,this.formInline.gender,this.formInline.nation,this.formInline.room,this.formInline.address,this.formInline.gid,page,pagesize).then((res)=>{
           console.log(res);
-          this.crew = res.data.data;
+          if(res.data.ret == 200){
+            this.crew = res.data.data;
+            this.totalCount = res.data.totalcount;
+            if(this.crew.length != 0){
+              this.kong = false;
+              this.fenye = true;
+            }else{
+              this.kong = true;
+              this.fenye = false;
+            }
+          }else{
+            this.totalCount = res.data.totalcount;
+          }
         })
       },
 //    点击打开目标组修改alert
@@ -842,31 +958,59 @@
       },
 //    点击任意目标组
       show(i,index) {
+        this.thisi = 0;
+        this.currentPage = 1;
         console.log(i,index);
         this.selectItem = i.gid;
-        cuan(i.gid).then((res) => {
-          this.iGid = i.gid;
-          console.log(i.gid);
+//      cuan(i.gid).then((res) => {
+//        this.iGid = i.gid;
+//        console.log(i.gid);
+//        if(res.data.ret == 200){
+//          this.crew = res.data.data;
+////          console.log(this.crew);
+//          this.kong=false;
+//          this.totalCount = res.data.data.length;
+////          console.log(this.totalCount);
+//        }
+//        if(res.data.ret == 404){
+//        this.$message.error("该目标组未创建模型");
+//        this.kong=true;
+//        this.crew = "";
+//        }
+//      })
+        this.getdatatarget(i.gid, this.currentPage, this.pagesize);
+      },
+//    点击任意组获取数据封装函数
+      getdatatarget(gid, page, pagesize){
+        cuan(gid, page, pagesize).then((res) => {
+          this.iGid = gid;
+          console.log(gid);
           if(res.data.ret == 200){
             this.crew = res.data.data;
-//          console.log(this.crew);
+            console.log(res);
             this.kong=false;
-            this.totalCount = res.data.data.length;
+            this.fenye = true;
+            this.totalCount = res.data.totalcount;
 //          console.log(this.totalCount);
           }
           if(res.data.ret == 404){
-          this.$message.error("该目标组未创建模型");
-          this.kong=true;
-          this.crew = "";
+//          this.$message.error("该目标组未创建模型");
+            this.totalCount = res.data.totalcount;
+            this.kong=true;
+            this.fenye = false;
+            this.crew = "";
           }
         })
       },
 //    页面初始化渲染
       getData() {
-        $axios.get('http://192.168.1.118/sr/model/group').then(res => {
+        group().then((res)=>{
           this.data2 = res.data.data;
           console.log(res);
-        }).catch(error => console.log(error));
+        })
+//      $axios.get('http://192.168.1.118/sr/model/group').then(res => {
+//        
+//      }).catch(error => console.log(error));
       },
 //    点击显示添加目标组蒙板
       addTarget() {
@@ -874,6 +1018,9 @@
       },
 //    点击取消隐藏蒙板
       showtarget() {
+        this.ImgUrl = "";
+        this.imageUrl = "";
+        this.xunlianone = false;
         this.alter=false;
         this.target = false;
         this.targetdatas = false;
@@ -893,17 +1040,19 @@ this.addrulefm.room=""; this.addrulefm.address=""; this.addrulefm.tel=""; this.a
         this.filemid = mid;
 //      console.log(this.filemid);
         this.mId = mid
+        
         this.xl();
       },
 //    详情页面上传语音成功后获取数据刷新
       xl(){
         detail(this.mId).then((res)=>{
-          console.log(res.data.data.gender);
-          console.log(typeof(res.data.data.gender));
           this.detail = res.data.data;
           this.speech = res.data.data.speech;
-          console.log(this.detail.gender);
-          console.log(typeof(this.detail.gender));
+          if(this.detail.avatar == ""){
+            this.imageUrl = "/static/img/_20180622145804.png";
+          }else{
+            this.imageUrl = this.detail.avatar;
+          }
           if(this.detail.gender == -1){
             this.detail.gender = "未知";
           }
@@ -936,19 +1085,31 @@ this.addrulefm.room=""; this.addrulefm.address=""; this.addrulefm.tel=""; this.a
             if(res.data.ret == 200){
               this.$message.success("删除成功");
 //            this.show(this.iGid);
-                cuan(this.iGid).then((res) => {
-                  if(res.data.ret == 200){
-                    this.crew = res.data.data;
-                    this.kong=false;
-                    this.totalCount = res.data.data.length;
-                    console.log(this.totalCount);
-                  }
-                  if(res.data.ret == 404){
-                  this.$message.error("该目标组已清空");
-                  this.crew = "";
-                  this.kong=true;
-                  }
-                })
+    if(this.thisi == 0){
+      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+    }else{
+      this.find(this.currentPage,this.pagesize);
+    }
+//  if(this.totalCount === 0){
+//    this.fenye = false;
+//  }else{
+//    this.fenye = true;
+//  }
+//            this.getdatatarget(this.iGid, this.currentPage, this.pagesize)
+//            this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+//              cuan(this.iGid).then((res) => {
+//                if(res.data.ret == 200){
+//                  this.crew = res.data.data;
+//                  this.kong=false;
+//                  this.totalCount = res.data.data.length;
+//                  console.log(this.totalCount);
+//                }
+//                if(res.data.ret == 404){
+//                this.$message.error("该目标组已清空");
+//                this.crew = "";
+//                this.kong=true;
+//                }
+//              })
             }
             console.log(res);
           })
@@ -967,34 +1128,40 @@ this.addrulefm.room=""; this.addrulefm.address=""; this.addrulefm.tel=""; this.a
 //      this.tableData.splice(index, 1);
 //    },
 //每页显示数据量变更
-//handleSizeChange: function(val) {
-//  this.pagesize = val;//this.criteria,搜索条件
-//  this.loadData( this.currentPage, this.pagesize);
-//},
+handleSizeChange: function(val) {
+    this.pagesize = val;//this.criteria,搜索条件
+    if(this.thisi == 0){
+      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+    }else{
+      this.find(this.currentPage,this.pagesize);
+    }
+},
 
 //页码变更
-//handleCurrentChange: function(val) {
-//  this.currentPage = val;//this.criteria,搜索条件
-//  this.loadData(this.currentPage, this.pagesize);
-//},  
+handleCurrentChange: function(val) {
+    this.currentPage = val;//this.criteria,搜索条件
+    if(this.thisi == 0){
+      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+    }else{
+      this.find(this.currentPage,this.pagesize);
+    }
+},  
 //上一页
-//handlePrevChange:function(){
-//
-//  this.loadData(this.currentPage, this.pagesize);
-//},
+handlePrevChange:function(){
+    if(this.thisi == 0){
+      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+    }else{
+      this.find(this.currentPage,this.pagesize);
+    }
+},
 //下一页
-//handleNextChange:function(){
-//
-//  this.loadData(this.currentPage, this.pagesize);
-//},//criteria, 
-//loadData(pageNum, pageSize){
-//this.$http.get(this.url,{parameter:criteria, pageNum:pageNum, pageSize:pageSize}).then(function(res){
-//    this.tableData = res.data.pagestudentdata;
-//
-//},function(){
-//    console.log('failed');
-//});
-//},
+handleNextChange:function(){
+    if(this.thisi == 0){
+      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+    }else{
+      this.find(this.currentPage,this.pagesize);
+    }
+},//criteria, 
 //    新建目标组
       submitForm(formName) {
         this.$refs.formName.validate((valid) => {
@@ -1019,52 +1186,90 @@ this.addrulefm.room=""; this.addrulefm.address=""; this.addrulefm.tel=""; this.a
         });
       },
 //    新建目标人
-      addparson(addrulefm) {
-//      console.log(typeof(this.addrulefm.gid));
-//      console.log(this.addrulefm.gid);
-//      if(typeof(this.addrulefm.gid) === "string"){
-//        this.iGid = 56;
-//      }
-//      if(this.addrulefm.gid === ""){
-//        this.iGid = 56;
-//      }
-        let addrulefmBirth;
-      if(typeof(this.addrulefm.birth) != "string"){//
-          addrulefmBirth = this.addrulefm.birth.toLocaleDateString();
-        }else{
-          addrulefmBirth = this.addrulefm.birth;
+      addparson(ev) {
+        console.log(this.file);
+        console.log(typeof(this.file));
+        ev.preventDefault();
+        let formData = new FormData();
+        formData.append('speaker', this.addrulefm.name);
+        formData.append('gid', this.addrulefm.gid);
+        formData.append('idcard', this.addrulefm.idcard);
+        formData.append('birth', this.addrulefm.birth);
+        formData.append('gender', this.addrulefm.gender);
+        formData.append('nation', this.addrulefm.nation);
+        formData.append('room', this.addrulefm.room);
+        formData.append('tel', this.addrulefm.tel);
+        formData.append('address', this.addrulefm.address);
+        formData.append('gid', this.addrulefm.gid);
+        formData.append('desc', this.addrulefm.desc);
+        formData.append('file', this.file);
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         }
-        this.$refs.addrulefm.validate((valid) => {
-          if(valid) {
-            addTargetParson(this.addrulefm.name, this.addrulefm.gid, this.addrulefm.idcard, addrulefmBirth, this.addrulefm.gender, this.addrulefm.nation, this.addrulefm.room, this.addrulefm.address, this.addrulefm.tel, this.addrulefm.desc).then((res) => {
-//            console.log(addrulefmBirth);
-              if(res.data.ret == 200) {
-                
-                this.newfilemid = res.data.data.mid;
-                this.$message.success("创建成功");
-                this.$refs.upload.submit();
-                this.buer = true;
-                this.iGid = this.addrulefm.gid
-                this.selectItem = this.iGid;
-
-cuan(this.iGid).then((res) => {
-if(res.data.ret == 200){
-    this.crew = res.data.data;
-    this.kong=false;
-}
-})
-              }if(res.data.ret == 405){
-                this.$message.error("目标人已存在");
-              }
-            })
-          } else {
-            this.$message.error("失败");
+//      Object.assign(formData,this.addrulefm);
+        let _this = this;
+        this.$axios.post(this.http+'/sr/model/add', formData, config).then(function (res) {
+          if (res.data.ret === 200) {
+//          alert("创建成功");
+            /*这里做处理*/
+           _this.newfilemid = res.data.data.mid;
+           _this.$message.success("创建成功");
+           _this.buer = true;
+           _this.iGid = _this.addrulefm.gid;
+           _this.getdatatarget(_this.selectItem, _this.currentPage, _this.pagesize);
+          }if(res.data.ret == 405){
+            _this.$message.error("目标人已存在");
+//          alert("用户名重复");
           }
         })
+
+//      addTargetParson(formData, config).then((res)=>{
+//        if(res.data.ret == 200){
+//          console.log(res);
+//        }
+//      })
+        
+        
+        
+//      this.$refs.upload.submit();
+//      let addrulefmBirth;
+//    if(typeof(this.addrulefm.birth) != "string"){//
+//        addrulefmBirth = this.addrulefm.birth.toLocaleDateString();
+//      }else{
+//        addrulefmBirth = this.addrulefm.birth;
+//      }
+//      this.$refs.addrulefm.validate((valid) => {
+//        if(valid) {
+//          addTargetParson(this.addrulefm.name, this.addrulefm.gid, this.addrulefm.idcard, addrulefmBirth, this.addrulefm.gender, this.addrulefm.nation, this.addrulefm.room, this.addrulefm.address, this.addrulefm.tel, this.addrulefm.desc, this.addrulefm.pic).then((res) => {
+////            console.log(addrulefmBirth);
+//            if(res.data.ret == 200) {
+//              
+//              this.newfilemid = res.data.data.mid;
+//              this.$message.success("创建成功");
+//              this.$refs.upload.submit();
+//              this.buer = true;
+//              this.iGid = this.addrulefm.gid
+//              this.selectItem = this.iGid;
+//this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+////cuan(this.iGid).then((res) => {
+////if(res.data.ret == 200){
+////  this.crew = res.data.data;
+////  this.kong=false;
+////}
+////})
+//            }if(res.data.ret == 405){
+//              this.$message.error("目标人已存在");
+//            }
+//          })
+//        } else {
+//          this.$message.error("失败");
+//        }
+//      })
       },
 //    修改目标人
-//
-      amend(){
+      amend(ev){
         
         if(this.detail.birth == null){
           this.detail.birth = "";
@@ -1075,30 +1280,57 @@ if(res.data.ret == 200){
         }else{
           detailBirth = this.detail.birth;
         }
+        if(this.detail.pic == 1){
+          this.detail.pic = "";
+        }
           this.iGid = this.detail.gid;
-          updateModel(this.detail.speaker,this.detail.idcard,detailBirth,this.detail.gender,this.detail.nation,this.detail.room,this.detail.address,this.detail.tel,this.detail.gid,this.detail.mid,this.detail.desc).then((res)=>{
-            if(res.data.ret == 200){
-              this.$message.success("修改成功");
-              console.log(detailBirth);
-  //          this.targetdatas=false;
-  cuan(this.iGid).then((res) => {
-    if(res.data.ret == 200){
-      this.crew = res.data.data;
-      console.log(this.detail.mid);
-      console.log(detailBirth);//.toLocaleDateString()
-      this.kong=false;
-      this.totalCount = res.data.data.length;
-      this.selectItem = this.iGid;
-    }
-//  if(res.data.ret == 404){
-//  this.$message.error("该目标组已清空");
-//  this.kong=true;
-//  }
-  })
-            }else{
-              this.$message.error("修改失败");
-            }
-          })
+          
+        ev.preventDefault();
+        let formData = new FormData();
+//      speaker,idcard,birth,gender,nation,room,address,tel,gid,mid,desc,file
+        formData.append('speaker', this.detail.speaker);
+        formData.append('mid', this.detail.mid);
+        formData.append('idcard', this.detail.idcard);
+        formData.append('birth', detailBirth);
+        formData.append('gender', this.detail.gender);
+        formData.append('nation', this.detail.nation);
+        formData.append('room', this.detail.room);
+        formData.append('tel', this.detail.tel);
+        formData.append('address', this.detail.address);
+        formData.append('gid', this.detail.gid);
+        formData.append('desc', this.detail.desc);
+        formData.append('file', this.filetwo);
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        let _this = this;
+        this.$axios.post(this.http+'/sr/model/update', formData, config).then(function (res) {
+          if (res.data.ret === 200) {
+//          alert("修改成功");
+            /*通过获取的mid刷新到修改后的目标组内*/
+//          _this.newfilemid = res.data.data.mid;
+            _this.$message.success("创建成功");
+//          _this.buer = true;
+//          _this.iGid = _this.addrulefm.gid;
+            _this.getdatatarget(_this.detail.gid, _this.currentPage, _this.pagesize);
+          }if(res.data.ret == 405){
+            _this.$message.error("修改失败");
+//          alert("用户名重复")
+          }
+        })
+          
+//        updateModel(this.detail.speaker,this.detail.idcard,detailBirth,this.detail.gender,this.detail.nation,this.detail.room,this.detail.address,this.detail.tel,this.detail.gid,this.detail.mid,this.detail.desc,this.detail.pic).then((res)=>{
+//          if(res.data.ret == 200){
+//            this.$message.success("修改成功");
+//            console.log(detailBirth);
+////          this.targetdatas=false;
+//this.getdatatarget(this.detail.gid, this.currentPage, this.pagesize);
+//          }else{
+//            this.$message.error("修改失败");
+//          }
+//        })
         
       },
 //    重置输入框
@@ -1136,7 +1368,7 @@ if(res.data.ret == 200){
       handleError(){
         this.i = 0;
       },
-//    上传成功时的钩子函数
+//    创建目标人时上传成功时的钩子函数
       handleSuccessone(response, file, fileList){
         console.log(fileList);
         this.i+=1;
@@ -1148,7 +1380,7 @@ if(res.data.ret == 200){
           this.i = 0;
         }
       },
-//    上传文件失败时的钩子函数
+//    创建目标人时上传文件失败时的钩子函数
       handleErrorone(){
         this.i = 0;
       },
@@ -1157,9 +1389,9 @@ if(res.data.ret == 200){
         console.log(scope);
       },
 //    详情语音列表删除按钮
-      speechDel(scope){
-        console.log(scope.row.tsid);
-        speechDel(scope.row.tsid).then((res)=>{
+      speechDel(tsid){
+        console.log(tsid);
+        speechDel(tsid).then((res)=>{
           console.log(res);
           if(res.data.ret == 200){
             this.$message.success("删除成功");
@@ -1175,6 +1407,26 @@ if(res.data.ret == 200){
       //点击文件列表中已上传的文件时的钩子
       handlePreview(file) {
         console.log(file);
+      },
+//    上传头像
+      fundata(){
+        var formData = new FormData();
+      },
+      handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+//    判断上传的头像大小
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
       }
     },
     data() {
@@ -1189,7 +1441,14 @@ if(res.data.ret == 200){
         label: '一级 3'
       }];
       return {
-        
+        Image:false,
+        http:"http://192.168.1.118/sr/model/speech/add",
+        fenye: false,
+        thisi:0,
+//      imgshi:'/static/img/'+ this.imageUrl +'.jpg',
+//      上传头像
+//      thisi:1,
+        imageUrl: '',
 //      xiug:true,
         //当前页码
         currentPage: 1,
@@ -1199,9 +1458,11 @@ if(res.data.ret == 200){
         totalCount: 0,
         //页码数据
         i:0,
+        bt:'',
         name: '',
         age: '',
         file: '',
+        filetwo: '',
         filemid:'',
         fileList: [],
         fileListone: [],
@@ -1253,8 +1514,12 @@ if(res.data.ret == 200){
           room: '',
           tel: '',
           address: '',
-          desc:''
+          desc:'',
+          pic:''
         },
+        ImgUrl:'',
+        reader:'',
+        readertwo:'',
         add_rules_target: {
           name: [{
               required: true,
@@ -1310,7 +1575,8 @@ if(res.data.ret == 200){
 //      新建模型上传语音需要的mid，点击关闭清空
         newfilemid:"",
 //      模型组展示
-        data2: []
+        data2: [],
+        http:'http://192.168.1.118'
       }
     }
   }

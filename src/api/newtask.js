@@ -1,7 +1,7 @@
 //任务管理
 import request from '@/utils/request'
 //创建新任务
-export function newtaskadd(taskname, tasknum, enhance, cleaning, sr, ks, li, gi) {
+export function newtaskadd(taskname, tasknum, enhance, cleaning, sr, ks, li, gi, kgid, keyword, pnum, idx) {
     return request.get('/task/add',{
       params:{
         taskname:taskname,
@@ -11,7 +11,11 @@ export function newtaskadd(taskname, tasknum, enhance, cleaning, sr, ks, li, gi)
         sr:sr,
         ks:ks,
         li:li,
-        gi:gi
+        gi:gi,
+        kgid:kgid,
+        keyword:keyword,
+        pnum: pnum,
+        idx: idx
       }
     })
 }
@@ -32,23 +36,27 @@ export function tasklist() {
     })
 }
 //查看按钮传参
-export function result(taskid) {
+export function result(taskid, page, pagesize) {
     return request.get('/task/result',{
       params:{
-        taskid:taskid
+        taskid:taskid,
+        page:page,
+        pagesize:pagesize
       }
     })
 }
 //识别任务管理获取所有任务
-export function AllTasks(taskid) {
+export function AllTasks(taskid, page, pagesize) {
     return request.get('/task/result',{
       params:{
-        taskid:taskid
+        taskid:taskid,
+        page:page,
+        pagesize:pagesize
       }
     })
 }
 //识别任务管理查询任务
-export function QueryTasks(speaker, taskid, keyword, gender, language, starttime, endtime, taskname, address, handletime) {
+export function QueryTasks(speaker, taskid, keyword, gender, language, starttime, endtime, taskname, address, handletime, page, pagesize) {
     return request.get('/task/result/search',{
       params:{
         speaker: speaker,
@@ -60,7 +68,9 @@ export function QueryTasks(speaker, taskid, keyword, gender, language, starttime
         endtime: endtime,
         taskname: taskname,
         address: address,
-        handletime: handletime
+        handletime: handletime,
+        page:page,
+        pagesize:pagesize
       }
     })
 }

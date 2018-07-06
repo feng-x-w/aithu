@@ -1,5 +1,15 @@
 //模型管理声纹模型
 import request from '@/utils/request'
+//初始化渲染页面
+export function group() {
+    return request.get('/sr/model/group',{
+//    params:{
+//      pid:pid,
+//      groupname: groupname,
+//      remark: remark
+//    }
+    })
+}
 //新建组
 export function target(pid,groupname,remark) {
     return request.post('/sr/model/group/add',{
@@ -11,30 +21,39 @@ export function target(pid,groupname,remark) {
     })
 }
 //点击获取
-export function cuan(gid) {
+export function cuan(gid, page, pagesize) {
     return request.get('/sr/model',{
       params:{
-        gid:gid
-      }
-    })
-}
-//模型添加接口
-export function addTargetParson(speaker,gid,idcard,birth,gender,nation,room,address,tel,desc) {
-    return request.get('/sr/model/add',{
-      params:{
-        speaker:speaker,
         gid:gid,
-        idcard:idcard,
-        birth:birth,
-        gender:gender,
-        nation:nation,
-        room:room,
-        address:address,
-        tel:tel,
-        desc:desc
+        page:page,
+        pagesize:pagesize
       }
     })
 }
+/*
+//模型添加接口speaker,gid,idcard,birth,gender,nation,room,address,tel,desc,pic  data,config
+export function addTargetParson() {
+    return request.post('/sr/model/add',params,{
+      formData:formData,
+      header:{
+        'Content-Type': 'multipart/form-data'
+      }
+//    params:{
+//      speaker:speaker,
+//      gid:gid,
+//      idcard:idcard,
+//      birth:birth,
+//      gender:gender,
+//      nation:nation,
+//      room:room,
+//      address:address,
+//      tel:tel,
+//      desc:desc,
+//      pic:pic
+//    }
+    }
+}
+*/
 //模型详情接口
 export function detail(mid) {
     return request.get('/sr/model/detail',{
@@ -87,8 +106,9 @@ export function modelDele(mid) {
     })
 }
 //模型修改接口
-export function updateModel(speaker,idcard,birth,gender,nation,room,address,tel,gid,mid,desc) {
-    return request.get('/sr/model/update',{
+/*
+export function updateModel(speaker,idcard,birth,gender,nation,room,address,tel,gid,mid,desc,pic) {
+    return request.post('/sr/model/update',{
       params:{
         speaker:speaker,
         idcard:idcard,
@@ -100,10 +120,12 @@ export function updateModel(speaker,idcard,birth,gender,nation,room,address,tel,
         tel:tel,
         gid:gid,
         mid:mid,
-        desc:desc
+        desc:desc,
+        pic:pic
       }
     })
 }
+*/
 //模型组监听模糊查询接口
 export function gname(groupname) {
     return request.get('/sr/model/group/search',{
@@ -113,7 +135,7 @@ export function gname(groupname) {
     })
 }
 //模型组监听模糊查询接口
-export function inquire(speaker,idcard,birth,gender,nation,room,address,gid) {
+export function inquire(speaker,idcard,birth,gender,nation,room,address,gid,page,pagesize) {
     return request.get('/sr/model/search',{
       params:{
         speaker:speaker,
@@ -123,7 +145,9 @@ export function inquire(speaker,idcard,birth,gender,nation,room,address,gid) {
         nation:nation,
         room:room,
         address:address,
-        gid:gid
+        gid:gid,
+        page:page,
+        pagesize:pagesize
       }
     })
 }
