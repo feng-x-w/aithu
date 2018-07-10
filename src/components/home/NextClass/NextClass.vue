@@ -34,7 +34,7 @@
     transform: translate(-50%,-50%);
     background-color: white;
     padding: 25px 50px;
-    padding-left: 0;
+    padding-left: 15px;
     border-radius: 9px;
   }
   .target_add>h1 {
@@ -98,6 +98,9 @@
   .tasktable>tr {
     border: 1px solid #e3e3e3;
   }
+  .tasktable>tr:hover {
+    background-color: #ebebeb;
+  }
   .tasktable>tr>th {
     border: 1px solid #e3e3e3;
     color: #909399;
@@ -158,8 +161,6 @@
     /*background-color: rgba(0, 0, 0, .5);*/
     top: 50%;
     left: 50%;
-    margin-left: -20%;
-    margin-top: -7%;
     width: 39%;
     z-index: 120;
   }
@@ -167,10 +168,11 @@
     margin: 8px 0;
   }*/
   .TargetGroup{
-    background: -webkit-linear-gradient(right, #fff, #e7e7e7); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(right, #fff, #e7e7e7); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(right, #fff, #e7e7e7); /* Firefox 3.6 - 15 */
-    background: linear-gradient(right, #fff, #e7e7e7); /* 标准的语法 */
+    /*background: -webkit-linear-gradient(right, #fff, #e7e7e7);  Safari 5.1 - 6.0*/ 
+    /*background: -o-linear-gradient(right, #fff, #e7e7e7);  Opera 11.1 - 12.0*/ 
+    /*background: -moz-linear-gradient(right, #fff, #e7e7e7);  Firefox 3.6 - 15*/ 
+    /*background: linear-gradient(right, #fff, #e7e7e7);  标准的语法*/ 
+   background: -webkit-gradient(linear, right top, left top, from(#fbfbfb), to(#e7e7e7));
     margin: -8px 0 10px -11px;
     font-size: 14px;
     padding: 10px;
@@ -421,7 +423,7 @@
 <el-upload 
   class="upload-demo" 
   ref="uploadone" 
-  :action="http"
+  :action="https"
   :on-success="handleSuccessone"
   :on-error="handleErrorone"
   :file-list="fileListone" 
@@ -435,29 +437,29 @@
 </el-upload>
 <el-button style="margin: 3px 0;" type="primary" :loading="xunlianone" @click="drillone" :disabled="xulian">训练</el-button>
   <template>
-    <table class="tasktable">
-      <tr>
-        <th>文件名</th>
-        <th>文件大小</th>
-        <th>操作</th>
-      </tr>
-      <tr v-for="i in speechone">
-        <td>
-          {{i.filename}}
-        </td>
-        <td>
-          {{i.filesize}}
-        </td>
-        <td>
-            <el-button type="text" @click="play(i.tsid)" title="播放">
-              <i class="el-icon-caret-right"></i><!--播放-->
-            </el-button>
-            <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
-              <i class="el-icon-delete"></i><!--删除-->
-            </el-button>
-        </td>
-      </tr>
-    </table>
+      <table class="tasktable"><!---->
+        <tr>
+          <th>文件名</th>
+          <th>文件大小</th>
+          <th>操作</th>
+        </tr>
+        <tr v-for="i in speechone">
+          <td>
+            {{i.filename}}
+          </td>
+          <td>
+            {{i.filesize}}
+          </td>
+          <td>
+              <el-button type="text" @click="play(i.tsid)" title="播放">
+                <i class="el-icon-caret-right" style="font-size: 20px;"></i><!--播放-->
+              </el-button>
+              <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
+                <i class="el-icon-delete"></i><!--删除-->
+              </el-button>
+          </td>
+        </tr>
+      </table>
   </template>
 <div class="block">
   <!--<span class="demonstration">大于 7 页时的效果</span>-->
@@ -488,31 +490,18 @@
             <th>操作</th>
           </tr>
           <tr v-for="i in crew">
+            <td> {{i.speaker}} </td>
+            <td> {{i.idcard}} </td>
+            <td> {{i.birth}} </td>
             <td>
-              {{i.speaker}}
-            </td>
-            <td>
-              {{i.idcard}}<!-- | datas-->
-            </td>
-            <td>
-              {{i.birth}}
-            </td>
-            <td>
-              <!--{{i.gender}}-->
               <span v-if="i.gender==0">男</span>
               <span v-if="i.gender==1">女</span>
             </td>
+            <td> {{i.nation}} </td>
             <td>
-              {{i.nation}}
+              <div class="addre1"> {{i.room}} </div>
             </td>
-            <td>
-              <div class="addre1">
-                {{i.room}}
-              </div>
-            </td>
-            <td class="addre" width="100px">
-              {{i.address}} 
-            </td>
+            <td class="addre" width="100px"> {{i.address}} </td>
             <td> {{i.groupname}} </td>
             <td style="width: 37px;">
               <span v-if="i.status == 0" style="white-space: nowrap;">不可用</span>
@@ -631,7 +620,7 @@
 <el-upload 
   class="upload-demo" 
   ref="upload" 
-  :action="http"
+  :action="https"
   :on-preview="handlePreview" 
   :on-remove="handleRemove" 
   :on-success="handleSuccess"
@@ -664,7 +653,7 @@
         </td>
         <td>
             <el-button type="text" @click="play(i.tsid)" title="播放">
-              <i class="el-icon-caret-right"></i><!--播放-->
+              <i class="el-icon-caret-right" style="font-size: 20px;"></i><!--播放-->
             </el-button>
             <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
               <i class="el-icon-delete"></i><!--删除-->
@@ -1442,7 +1431,7 @@ handleNextChange:function(){
       }];
       return {
         Image:false,
-        http:"http://192.168.1.118/sr/model/speech/add",
+        https:"http://192.168.1.118/sr/model/speech/add",
         fenye: false,
         thisi:0,
 //      imgshi:'/static/img/'+ this.imageUrl +'.jpg',

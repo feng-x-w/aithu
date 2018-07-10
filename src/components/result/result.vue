@@ -28,7 +28,7 @@
   .el-popover__reference{
     margin: 5px 0;
   }
-  .taskmid>table{
+  /*.taskmid>table{
     width: 100%;
     margin: 0 auto;
     text-align: left;
@@ -49,14 +49,17 @@
     padding: 0px 10px;
     font-size: 13px;
   }
+  .taskmid>table>tr:hover {
+    background-color: #ebebeb;
+  }*/
   .sps{
     border: 1px solid rgba(64,158,255,.2);
-    background-color: rgba(64,158,255,.1);
+    background-color: rgb(30, 159, 255);
     color: #409EFF;
     border-radius: 3px;
-    padding: 5px;
+    padding: 2px;
     display: inline-block;
-    margin: 3px 0;
+    margin: 7px 0;
   }
   .wei{
     width: 99.8%;
@@ -109,6 +112,8 @@
     border: 1px solid #000;
     padding: 10px;
     border-radius: 5px;
+    max-height: 400px;
+    overflow: auto;
   }
   .tasktable {
     width: 100%;
@@ -160,85 +165,111 @@
 	.el-table td{
     padding: 0 !important;
   }
+  .taskmid>table{
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .taskmid>table>tr {
+    border: 1px solid #e3e3e3;
+  }
+  .taskmid>table>tr>th {
+    border: 1px solid #e3e3e3;
+    color: #909399;
+    background-color: #f3f3f3;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+  }
+  .taskmid>table>tr>td {
+    border: 1px solid #e3e3e3;
+    padding: 0px 10px;
+    font-size: 13px;
+  }
+  .taskmid>table>tr:hover {
+    background-color: #ebebeb;
+  }
 </style>
 <template>
   <div class="task">
     <Breadcrumb>
-      <span slot="one">识别结果管理</span>
-      <span slot="two">识别任务管理</span>
+      <span slot="one">{{$t('resultManager.identResultManager')}}</span>
+      <span slot="two">{{$t('resultManager.identTaskManager')}}</span>
     </Breadcrumb>
     <div class="tasktop">
       <el-form :inline="true" :model="formInline" class="demo-form-inline" size="mini">
-        <el-form-item label="目标姓名">
-          <el-input v-model="formInline.speaker" placeholder="目标姓名"></el-input>
+        <el-form-item :label="$t('resultManager.targetName')">
+          <el-input v-model="formInline.speaker" :placeholder="$t('resultManager.targetName')"></el-input>
         </el-form-item>
-        <el-form-item label="关键词">
-          <el-input v-model="formInline.keyword" placeholder="关键词"></el-input>
+        <el-form-item :label="$t('resultManager.keyword')">
+          <el-input v-model="formInline.keyword" :placeholder="$t('resultManager.keyword')"></el-input>
         </el-form-item>
-        <el-form-item label="性别">
-          <el-select v-model="formInline.gender" placeholder="性别">
-            <el-option label="男" value="0"></el-option>
-            <el-option label="女" value="1"></el-option>
-            <el-option label="全部" value=""></el-option>
+        <el-form-item :label="$t('resultManager.gender')">
+          <el-select v-model="formInline.gender" :placeholder="$t('resultManager.gender')">
+            <el-option :label="$t('resultManager.gender1')" value="0"></el-option>
+            <el-option :label="$t('resultManager.gender2')" value="1"></el-option>
+            <el-option :label="$t('resultManager.gender3')" value=""></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="语种">
-          <el-input v-model="formInline.language" placeholder="语种"></el-input>
+        <el-form-item :label="$t('resultManager.languageType')">
+          <el-input v-model="formInline.language" :placeholder="$t('resultManager.languageType')"></el-input>
         </el-form-item>
         <!--<el-form-item label="操作人">
           <el-input v-model="formInline.user" placeholder="操作人"></el-input>
         </el-form-item>-->
-        <el-form-item label="目标时间">
+        <el-form-item :label="$t('resultManager.targetTime')">
           <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="formInline.starttime" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" :placeholder="$t('resultManager.chooseTime')" v-model="formInline.starttime" style="width: 100%;"></el-date-picker>
           </el-col>
           <el-col class="line" :span="2" style="text-align: center;">-</el-col>
           <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="formInline.endtime" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" :placeholder="$t('resultManager.chooseTime')" v-model="formInline.endtime" style="width: 100%;"></el-date-picker>
           </el-col>
           <!--<el-col :span="11">
             <el-time-picker type="fixed-time" placeholder="选择时间" v-model="formInline.endtime" style="width: 100%;"></el-time-picker>
           </el-col>-->
+          <!--</el-col>-->
         </el-form-item>
-        <el-form-item label="任务名称">
-          <el-input v-model="formInline.taskname" placeholder="任务名称"></el-input>
+        <el-form-item :label="$t('resultManager.taskName')">
+          <el-input v-model="formInline.taskname" :placeholder="$t('resultManager.taskName')"></el-input>
         </el-form-item>
-        <el-form-item label="地点">
-          <el-input v-model="formInline.address" placeholder="地点"></el-input>
+        <el-form-item :label="$t('resultManager.lacation')">
+          <el-input v-model="formInline.address" :placeholder="$t('resultManager.lacation')"></el-input>
         </el-form-item>
-        <el-form-item label="操作时间">
+        <el-form-item :label="$t('resultManager.operationTime')">
           <el-col>
-            <el-date-picker type="date" placeholder="选择日期" v-model="formInline.handletime" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" :placeholder="$t('resultManager.chooseTime')" v-model="formInline.handletime" style="width: 100%;"></el-date-picker>
           </el-col>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" icon="el-icon-search" @click="onSubmit">查询</el-button>
-        </el-form-item><!-- icon="el-icon-search"-->
+          <el-button type="primary" icon="el-icon-search" @click="onSubmit">{{$t('resultManager.search')}}</el-button>
+        </el-form-item>
       </el-form>
     </div>
     <div class="taskmid">
       <table border="1">
       	<tr>
-      	  <th>任务名称</th>
-      	  <th>文件</th>
-      	  <th>目标姓名</th>
-      	  <th>性别</th>
-      	  <th>语种</th>
-      	  <th>语言脚本</th>
-      	  <th>关键字</th>
-      	  <th>增强文件</th>
-      	  <th>清洗文件</th>
-      	  <th>索引文件</th>
-      	  <th>有效时长</th>
-      	  <th>总时长</th>
-      	  <th>操作时间</th>
-      	  <th>状态</th>
+
+      	  <th>{{$t('resultManager.taskName')}}</th>
+      	  <th>{{$t('resultManager.file')}}</th>
+      	  <th>{{$t('resultManager.targetName')}}</th>
+      	  <th>{{$t('resultManager.gender')}}</th>
+      	  <th>{{$t('resultManager.languageType')}}</th>
+          <th>{{$t('resultManager.languageScirpting')}}</th>
+          <th>{{$t('resultManager.keyCharacter')}}</th>
+      	  <th>{{$t('resultManager.enhancedFile')}}</th>
+      	  <th>{{$t('resultManager.filterFile')}}</th>
+      	  <th>{{$t('resultManager.voice')}}</th>
+      	  <th>{{$t('resultManager.effectiveTime')}}</th>
+      	  <th>{{$t('resultManager.totleTime')}}</th>
+      	  <th>{{$t('resultManager.operationTime')}}</th>
+      	  <th>{{$t('resultManager.state')}}</th>
       	</tr>
       	<tr v-for="(i,key) in tableData">
       	  <td>{{i.taskname}}
       	    <!--<span v-if="i.taskname == string">{{ResponseStatus}}</span>-->
       	  </td>
-      	  <td><span class="sps" :title="i.speechname">WAV</span></td>
+      	  <td><span class="sps" :title="i.speechname"><img width="35" src="../../assets/wav.png"/></span></td>
       	  <td>{{i.speaker}}
       	    <!--<span v-if="i.speaker == string">{{ResponseStatus}}</span>-->
       	  </td>
@@ -248,54 +279,56 @@
       	  <td>{{i.language}}
       	    <!--<span v-if="i.language == string">{{ResponseStatus}}</span>-->
       	  </td>
-      	  <td><i class="fa fa-key fa-lg details" @click="antistop(i.dictationtext)">详情</i><!--{{i.dictationtext}}-->
-      	    <a title="点击下载" class="atiao" target="_blank" :href="'http://192.168.1.118/task/download?filepath='+i.dictationpath">下载</a>
+      	  <td><i class="fa fa-key fa-lg details" v-if="i.have_dictationtext != 0" @click="antistop(i.dictationtext)">{{$t('resultManager.details')}}</i><!--{{i.dictationtext}}-->
+
       	     <!--<span v-if="i.date == string">{{ResponseStatus}}</span>-->
       	  </td>
-      	  <td><i class="fa fa-key fa-lg details" v-if="i.keyword != ''" @click="details(i)">详情</i><!--{{i.dictationtext}}-->
+      	  <td><i class="fa fa-key fa-lg details" v-if="i.have_keyword != 0" @click="details(i)">{{$t('resultManager.details')}}</i><!--{{i.dictationtext}}-->
       	     <!--<span v-if="i.date == string">{{ResponseStatus}}</span>-->
       	  </td>
       	  <td>
-      	    <a title="点击下载" class="atiao" target="_blank" :href="'http://192.168.1.118/task/download?filepath='+i.enhance">
+      	    <a :title="$t('resultManager.download')" class="atiao" target="_blank" :href="https+'/task/download?filepath='+i.enhance">
       	      {{i.enhance_name}}
       	    </a>
       	    <!--<span v-if="i.enhance_name == string">{{ResponseStatus}}</span>-->
       	  </td>
       	  <td>
-      	    <a title="点击下载" class="atiao" target="_blank" :href="'http://192.168.1.118/task/download?filepath='+i.textfird_path">{{i.textfird_path_name}}</a>
+      	    <a :title="$t('resultManager.download')" class="atiao" target="_blank" :href="https+'/task/download?filepath='+i.textfird_path">{{i.textfird_path_name}}</a>
       	    <!--<span class="atiao non" v-if="i.trs_path_name !=string"> |</span>-->
       	    <!--<span class="atiao non" v-if="i.trs_path_name ==string">{{ResponseStatus}}</span>-->
-            <a title="点击下载" class="atiao" target="_blank" :href="'http://192.168.1.118/task/download?filepath='+i.trs_path">{{i.trs_path_name}}</a>
+            <a :title="$t('resultManager.download')" class="atiao" target="_blank" :href="https+'/task/download?filepath='+i.trs_path">{{i.trs_path_name}}</a>
       	  </td>
       	  <td>
-            <a title="点击下载" class="atiao" target="_blank" :href="'http://192.168.1.118/task/download?filepath='+i.trs_indexing">{{i.trs_indexing_name}}</a><!---->
-      	  </td>
+            <a :title="$t('resultManager.download')" class="atiao" target="_blank" :href="https+'/task/download?filepath='+i.trs_indexing">{{i.trs_indexing_name}}</a><!---->
+          </td>
       	  <td>{{i.valid_duration}}
       	    <!--<span v-if="i.valid_duration == string">{{ResponseStatus}}</span>-->
       	  </td>
       	  <td>{{i.autdio_duration}}
       	    <!--<span v-if="i.autdio_duration == string">{{ResponseStatus}}</span>-->
       	  </td>
-      	  <td>{{i.finishtime}}
+      	  <td>
+      	    {{i.finishtime}}
       	    <!--<span v-if="i.finishtime == string">{{ResponseStatus}}</span>-->
       	  </td>
       	  <td><!--{{i.status}}-->
-      	      <span v-if="i.status==0">等待中</span>
-              <span v-if="i.status==1">已开始</span>
-              <span v-if="i.status==2">预处理</span>
-              <span v-if="i.status==3">处理中</span>
-              <span v-if="i.status==4">已完成</span>
+      	      <span v-if="i.status==0">{{$t('resultManager.waiting')}}</span>
+              <span v-if="i.status==1">{{$t('resultManager.begun')}}</span>
+              <span v-if="i.status==2">{{$t('resultManager.preprocessing')}}</span>
+              <span v-if="i.status==3">{{$t('resultManager.processing')}}</span>
+              <span v-if="i.status==4">{{$t('resultManager.finished')}}</span>
       	  </td>
-      	  
+
       	</tr>
       </table>
       <!--听写弹框-->
       <div class="mrsk" v-show="mas" @click="show">
         <div class="box1" @click.stop>
-        	<h2>我是听写弹窗<span @click="show" class="boxs">x</span></h2>
+        	<h2>{{$t('resultManager.languageScirpting')}}<span @click="show" class="boxs">x</span></h2>
         	<div>
         	  {{textall}}
         	</div>
+        	<a :title="$t('resultManager.download')" style="float: right;margin: 10px;" class="atiao" target="_blank" :href="https+'/task/download?filepath='+i.dictationpath">{{$t('resultManager.download')}}</a>
         </div>
       </div>
       <!--关键词弹框   语言脚本-->
@@ -303,7 +336,7 @@
         <div class="box">
         	<h2>{{keywordname}}<span @click="show" class="boxs">x</span></h2>
         	<table border="1" class="tasktable">
-        		<tr><th style="width: 100px;">关键词</th><th>出现时间段(s)</th></tr>
+        		<tr><th style="width: 100px;">{{$t('resultManager.keyword')}}</th><th>{{$t('resultManager.times')}}(s)</th></tr>
         		<tr v-for="i in keyword">
         		  <td style="width: 100px;">{{i.keyword}}</td>
         		  <td>{{i.offtime}}</td>
@@ -311,7 +344,7 @@
         	</table>
         </div>
       </div>
-      <div class="wei" v-show="kong">暂无数据</div>
+      <div class="wei" v-show="kong">{{$t('resultManager.noDate')}}</div>
       <el-pagination
           v-show="fenye"
           @current-change="handleCurrentChange"
@@ -323,7 +356,7 @@
           :page-size="pagesize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="totalCount">
-        </el-pagination><!-- 每页显示数据量变更 -->
+        </el-pagination>
     </div>
   </div>
 </template>
@@ -367,7 +400,6 @@ handleSizeChange: function(val) {
     this.chaxun(this.currentPage,this.pagesize);
   }
 },
-
 //页码变更
 handleCurrentChange: function(val) {
   this.currentPage = val;
@@ -376,7 +408,7 @@ handleCurrentChange: function(val) {
   }else{
     this.chaxun(this.currentPage,this.pagesize);
   }
-},  
+},
 //上一页
 handlePrevChange:function(){
   if(this.i == 0){
@@ -392,13 +424,13 @@ handleNextChange:function(){
   }else{
     this.chaxun(this.currentPage,this.pagesize);
   }
-    
+
 },
 //    页面初始化
       initialize(){
         this.i = 0;
         this.fund();
-        
+
       },
 //    初始化页面
       fund(){
@@ -511,12 +543,13 @@ inded[i].trs_indexing_name = inded[i].trs_indexing_name .substring(index + 1, in
             this.kong = true;
             this.totalCount = res.data.totalcount;
           }
-            
+
         })
       }
     },
     data() {
       return {
+        https:"process.env.BASE_API",
         keyword:[],
         keywordname:'',
         mas:false,
@@ -549,6 +582,6 @@ inded[i].trs_indexing_name = inded[i].trs_indexing_name .substring(index + 1, in
         tableData: []
       }
     }
-    
+
   }
 </script>

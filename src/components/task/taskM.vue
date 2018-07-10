@@ -2,7 +2,7 @@
   .tasktop {
     padding: 10px;
   }
-  
+
   .taskmid {
     padding: 10px;
     /*border: 1px solid red;*/
@@ -149,10 +149,38 @@
   }
 </style>
 <style>
-  
   .el-form-item__content{
     margin: 0;
   }
+  /*
+  .taskmid {
+    padding: 10px;
+  }
+  .taskmid>table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .taskmid>table>tr {
+    border: 1px solid #e3e3e3;
+  }
+  .taskmid>table>tr:hover{
+    background-color: #ededed;
+  }
+  .taskmid>table>tr>th {
+    border: 1px solid #e3e3e3;
+    color: #909399;
+    background-color: #f3f3f3;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+  }
+  .taskmid>table>tr>td {
+    border: 1px solid #e3e3e3;
+    padding: 0px 10px;
+    font-size: 13px;
+  }
+  */
 </style>
 <style>
   .el-upload-list {
@@ -166,108 +194,112 @@
 <template>
   <div class="task">
     <Breadcrumb>
-      <span slot="one">任务管理</span>
-      <span slot="two">任务状态管理</span>
+      <span slot="one">{{$t('taskM.taskManager')}}</span><!--任务管理-->
+      <span slot="two">{{$t('taskM.taskStateManager')}}</span><!--任务状态管理-->
     </Breadcrumb>
     <div class="tasktop">
       <el-form :inline="true" :model="tasksearch" class="demo-form-inline" size="mini">
-        <el-form-item label="任务名称">
-          <el-input v-model="tasksearch.taskname" placeholder="任务名称"></el-input>
+        <el-form-item :label="$t('taskM.taskName')"><!--//任务名称-->
+          <el-input v-model="tasksearch.taskname" :placeholder="$t('taskM.taskName')"></el-input><!--//任务名称-->
         </el-form-item>
         <!--<el-form-item label="任务编号">
           <el-input v-model="tasksearch.tasknum" placeholder="任务编号"></el-input>
         </el-form-item>-->
-        <el-form-item label="任务类别">
-          <el-select v-model="tasksearch.tasktype" placeholder="任务类别">
-            <el-option label="声纹" value="1"></el-option>
-            <el-option label="语种" value="2"></el-option>
-            <el-option label="性别" value="3"></el-option>
-            <el-option label="关键词" value="4"></el-option>
-            <el-option label="增强" value="5"></el-option>
-            <el-option label="清洗" value="6"></el-option>
-            <el-option label="语音索引" value="7"></el-option>
-            <el-option label="全部" value=""></el-option>
+        <el-form-item :label="$t('taskM.taskType')"><!--//任务类别-->
+          <el-select v-model="tasksearch.tasktype" :placeholder="$t('taskM.taskType')"><!--//任务类别-->
+            <el-option :label="$t('taskM.task_type1')" value="1"></el-option><!--//声纹-->
+            <el-option :label="$t('taskM.task_type2')" value="2"></el-option><!--//语种-->
+            <el-option :label="$t('taskM.task_type3')" value="3"></el-option><!--//性别-->
+            <el-option :label="$t('taskM.task_type4')" value="4"></el-option><!--//关键词-->
+            <el-option :label="$t('taskM.task_type5')" value="5"></el-option><!--//增强-->
+            <el-option :label="$t('taskM.task_type6')" value="6"></el-option><!--//清洗-->
+            <el-option :label="$t('taskM.task_type7')" value="7"></el-option><!--//语音索引-->
+            <el-option :label="$t('taskM.all')" value=""></el-option><!--//全部-->
           </el-select>
         </el-form-item>
-        <el-form-item label="执行状态">
-          <el-select v-model="tasksearch.taskstatus" placeholder="执行状态">
-            <el-option label="处理中" value="1"></el-option>
-            <el-option label="已完成" value="2"></el-option>
-            <el-option label="全部" value=""></el-option>
+        <el-form-item :label="$t('taskM.taskManager')"><!--//执行状态-->
+          <el-select v-model="tasksearch.taskstatus" :placeholder="$t('taskM.state')"><!--//执行状态-->
+            <el-option :label="$t('taskM.state1')" value="1"></el-option><!--//处理中-->
+            <el-option :label="$t('taskM.state2')" value="2"></el-option><!--//已完成-->
+            <el-option :label="$t('taskM.all')" value=""></el-option><!--//全部-->
           </el-select>
         </el-form-item>
         <!--<el-form-item label="操作人">
           <el-input v-model="tasksearch.handler" placeholder="操作人"></el-input>
         </el-form-item>-->
-        <el-form-item label="操作时间">
+        <el-form-item :label="$t('taskM.time')"><!--//操作时间-->
           <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="tasksearch.starttime" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" :placeholder="$t('taskM.chooseTime')" v-model="tasksearch.starttime" style="width: 100%;"></el-date-picker><!--//选择日期-->
           </el-col>
           <el-col class="line" :span="2" style="text-align: center;">-</el-col>
           <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="tasksearch.endtime" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" :placeholder="$t('taskM.chooseTime')" v-model="tasksearch.endtime" style="width: 100%;"></el-date-picker><!--//选择日期-->
           </el-col>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="seek" icon="el-icon-search">查询</el-button>
+          <el-button type="primary" @click="seek" icon="el-icon-search">{{$t('taskM.search')}}</el-button><!--查询-->
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="newTask">新建任务</el-button>
+          <el-button type="primary" @click="newTask">{{$t('taskM.creatTask')}}</el-button><!--新建任务-->
         </el-form-item>
       </el-form>
     </div>
     <div class="mask" v-show="show_task">
       <div class="mask_new_task" v-show="show_task_childen">
         <div class="task_left">
-          <h1>新建任务</h1>
+          <h1>{{$t('taskM.creatTask')}}</h1><!--新建任务-->
           <el-form ref="form" :model="form" label-width="80px">
-  <el-form-item label="任务名称">
+  <el-form-item :label="$t('taskM.taskName')">
     <el-input v-model="form.name"></el-input>
   </el-form-item>
   <!--<el-form-item label="任务编号">
     <el-input v-model="form.tasknum" disabled></el-input>
   </el-form-item>-->
-  <el-form-item class="qwe" label="组名" v-show="targetantistop">
-    
-    <el-select v-model="form.typeId" @change="change" placeholder="请选择组名">
-      <el-option label=" " value="0"></el-option>
-      <el-option v-for="item in targetname" :label="item.name" :value="item.id"></el-option>
-    </el-select>
-    <span class="show" @click="show">X</span>
-  </el-form-item>
-  <el-form-item label="关键词" v-show="targetantistop">
-    <el-input v-model="form.antistop" :placeholder="formaaa.pla" @change="keyup"></el-input>
-  </el-form-item>
-  <el-form-item label="人数" v-show="voice">
-    <el-input v-model="form.pnum" placeholder="请输入语音索引人数"></el-input><!-- @change="keyup"-->
-  </el-form-item>
-  <el-form-item label="任务类别">
+  <div style="border: 1px solid #e3e3e3;padding: 5px;" v-show="targetantistop">
+    <el-form-item class="qwe" :label="$t('taskM.groupName')">
+      <el-select v-model="form.typeId" @change="change" :placeholder="$t('taskM.chooseGroupName')">
+        <el-option label=" " value="0"></el-option>
+        <el-option v-for="item in targetname" :label="item.name" :value="item.id"></el-option>
+      </el-select>
+      <span class="show" @click="show">X</span>
+    </el-form-item>
+    <el-form-item :label="$t('taskM.keyword')" v-show="targetantistop">
+      <el-input v-model="form.antistop" :placeholder="formaaa.pla" @change="keyup"></el-input>
+    </el-form-item>
+  </div>
+  <div style="border: 1px solid #e3e3e3;padding: 5px;margin-top: 2px;" v-show="voice">
+    <el-form-item :label="$t('taskM.number')">
+      <el-input v-model="form.pnum" :placeholder="$t('taskM.numofVoiceIndex')"></el-input><!-- @change="keyup"-->
+    </el-form-item>
+  </div>
+
+  <el-form-item :label="$t('taskM.taskType')">
     <template>
-      <el-checkbox label="语音增强" v-model="form.enhance" true-label="1" false-label="0"></el-checkbox>
-      <el-checkbox label="语音清洗" v-model="form.cleaning" true-label="1" false-label="0"></el-checkbox>
-      <el-checkbox label="声纹识别" v-model="form.sr" true-label="1" false-label="0"></el-checkbox>
-      <el-checkbox label="关键词识别" v-model="form.ks" true-label="1" false-label="0" @change="guan"></el-checkbox>
-      <el-checkbox label="语种识别" v-model="form.li" true-label="1" false-label="0"></el-checkbox>
-      <el-checkbox label="性别识别" v-model="form.gi" true-label="1" false-label="0"></el-checkbox>
-      <el-checkbox label="语音索引" v-model="form.idx" true-label="1" false-label="0" @change="idex"></el-checkbox>
+      <el-checkbox :label="$t('taskM.voice_enhance')" v-model="form.enhance" true-label="1" false-label="0"></el-checkbox><!--//语音增强-->
+      <el-checkbox :label="$t('taskM.voice_filter')" v-model="form.cleaning" true-label="1" false-label="0"></el-checkbox><!--//语音清洗-->
+      <el-checkbox :label="$t('taskM.voice_ident')" v-model="form.sr" true-label="1" false-label="0"></el-checkbox><!--//声纹识别-->
+      <el-checkbox :label="$t('taskM.keyword_ident')" v-model="form.ks" true-label="1" false-label="0" @change="guan"></el-checkbox><!--//关键词识别-->
+      <el-checkbox :label="$t('taskM.language_ident')" v-model="form.li" true-label="1" false-label="0"></el-checkbox><!--//语种识别-->
+      <el-checkbox :label="$t('taskM.gender_ident')" v-model="form.gi" true-label="1" false-label="0"></el-checkbox><!--//性别识别-->
+      <el-checkbox :label="$t('taskM.task_type7')" v-model="form.idx" true-label="1" false-label="0" @change="idex"></el-checkbox><!--//语音索引-->
     </template>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit">创建</el-button>
-    <el-button @click="conceal" style="margin-left: 10px !important;">取消</el-button>
+    <el-button type="primary" @click="onSubmit">{{$t('taskM.creat')}}</el-button><!--创建-->
+    <el-button @click="conceal" style="margin-left: 10px !important;">{{$t('taskM.cancel')}}</el-button><!--取消-->
   </el-form-item>
 </el-form>
         </div>
       </div>
       <div class="show_taskadd" v-show="show_task_add">
         <div class="shangL" v-show="xiaoshi1">
-<el-upload 
-class="upload-demo" 
-ref="upload" 
+<el-upload
+class="upload-demo"
+ref="upload"
 :action="http"
-:on-preview="handlePreview" 
-:on-remove="handleRemove" 
-:file-list="fileList" 
+:on-preview="handlePreview"
+:on-remove="handleRemove"
+:file-list="fileList"
 :on-change="addfile"
 :on-success="handleSuccess"
 :on-error="handleError"
@@ -275,14 +307,14 @@ ref="upload"
 accept=".wav,.mp3,.flac,.ape"
 multiple
 :auto-upload="false">
-<el-button slot="trigger" size="small" type="primary" @click="dianjia">选取文件</el-button>
-<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-<el-button size="small" type="primary" @click="Remote" v-show="dianji1">远端上传</el-button>
-<div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC,.APE文件</div>
+<el-button slot="trigger" size="small" type="primary" @click="dianjia">{{$t('taskM.chooseFile')}}</el-button><!--选取文件-->
+<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">{{$t('taskM.upolad')}}</el-button><!--上传到服务器-->
+<el-button size="small" type="primary" @click="Remote" v-show="dianji1">{{$t('taskM.remoteLoad')}}</el-button><!--远端上传-->
+<div slot="tip" class="el-upload__tip">{{$t('taskM.uploadReq')}}</div><!--只能上传.WAV,.MP3,.FLAC,.APE文件-->
 </el-upload>
         </div>
         <div class="shangR" v-show="xiaoshi">
-          <h2>请选择文件夹</h2>
+          <h2>{{$t('taskM.chooseFolder')}}</h2><!--请选择文件夹-->
           <!--<form>--><!-- action="" method="post"  for="i.type"-->
             <ul>
               <div class="asdd" v-for="(i,key) in addfiles" @click="cName(key)">
@@ -291,9 +323,9 @@ multiple
               	  <br />
               	</li>
               </div>
-            	
+
             	<div style="text-align: right;padding-top: 5px;">
-<el-button type="submit" size="small" @click="ftotfiles()">确认上传</el-button>
+<el-button type="submit" size="small" @click="ftotfiles()">{{$t('taskM.confirmUpload')}}</el-button><!--确认上传-->
             	</div>
             </ul>
           	<!--<input type="submit" value=""/>-->
@@ -303,47 +335,55 @@ multiple
     </div>
     <div class="taskmid">
         <table class="tasktable">
-        	<tr><th>任务名称</th><th>任务类别</th><th>执行状态</th><!--<th>操作人</th>--><th>操作时间</th><th>操作</th></tr>
+        	<tr>
+        	  <th>{{$t('taskM.taskName')}}</th>
+        	  <th>{{$t('taskM.taskType')}}</th>
+        	  <th>{{$t('taskM.state')}}</th>
+        	  <!--<th>操作人</th>-->
+        	  <th>{{$t('taskM.time')}}</th>
+        	  <th>{{$t('taskM.operation')}}</th>
+        	</tr>
         	<tr v-for="i in tableData">
           	<td>
           	  {{i.taskname}}
           	</td>
           	<td>
-          	  <span v-if="i.enhance==1">语音增强</span>
-          	  <span v-if="i.cleaning==1">语音清洗</span>
-          	  <span v-if="i.sr==1">声纹识别</span>
-          	  <span v-if="i.ks==1">关键词识别</span>
-          	  <span v-if="i.li==1">语种识别</span>
-          	  <span v-if="i.gi==1">性别识别</span>
-          	  <span v-if="i.idx==1">语音索引</span>
+          	  <span v-if="i.enhance==1">{{$t('taskM.voice_enhance')}}</span><!--语音增强-->
+          	  <span v-if="i.cleaning==1">{{$t('taskM.voice_filter')}}</span><!--语音清洗-->
+          	  <span v-if="i.sr==1">{{$t('taskM.voice_ident')}}</span><!--声纹识别-->
+          	  <span v-if="i.ks==1">{{$t('taskM.keyword_ident')}}</span><!--关键词识别-->
+          	  <span v-if="i.li==1">{{$t('taskM.language_ident')}}</span><!--语种识别-->
+          	  <span v-if="i.gi==1">{{$t('taskM.gender_ident')}}</span><!--性别识别-->
+          	  <span v-if="i.idx==1">{{$t('taskM.task_type7')}}</span><!--语音索引-->
           	</td>
           	<td>
-          	  <span v-if="i.status==0">处理中</span>
-          	  <span v-if="i.status==1">已完成</span>
+          	  <span v-if="i.status==0">{{$t('taskM.state1')}}</span><!--处理中-->
+          	  <span v-if="i.status==1">{{$t('taskM.state2')}}</span><!--已完成-->
           	</td>
           	<!--<td> {{i.taskname}} </td>-->
           	<td> {{i.handletime}} </td>
           	<td>
           	  <router-link :to="'/result/'+i.taskid">
-                <el-button type="text" title="查看">
+                <el-button type="text" :title="$t('taskM.check')"><!--//查看-->
                   <i class="el-icon-view"></i>
                 </el-button>
               </router-link>
           	</td>
         	</tr>
         </table>
-       <div class="wei" v-show="kong">暂无数据</div>
-       <!--<el-pagination
-          @size-change="handleSizeChange"
+       <div class="wei" v-show="kong">{{$t('taskM.noData')}}</div><!--暂无数据-->
+       <el-pagination
+          v-show="fenye"
           @current-change="handleCurrentChange"
           @prev-click="handlePrevChange"
           @next-click="handleNextChange"
+          @size-change="handleSizeChange"
           :current-page="currentPage"
           :page-sizes="[10, 20, 30, 40]"
           :page-size="pagesize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="totalCount">
-        </el-pagination>-->
+        </el-pagination>
     </div>
   </div>
 </template>
@@ -374,38 +414,101 @@ multiple
 //  },
     created(){
 //    页面所有的任务数据
-      this.loading();
+      this.loading(this.currentPage,this.pagesize);
       console.log("          ◥◤~~~~◥◤\n            ┃ 　　   ┃\n             ≡━ ﹏ ━≡\n            ┗━━┳∞┳━━┛\n    _..,------┏┫　┣┓------,.._\n   ;'-.,------------------,.-';\n   |                          |\n   、                         ;\n    |\                        /\n  .-' `,._________________.,' '-.\n(       '----------------'       )\n `-=..________________________..-\n\n快到碗里来！简历请投放 m17600534443@163.com");
     },
     methods: {
+//每页显示数据量变更
+handleSizeChange: function(val) {
+  this.pagesize = val;
+  if(this.indx == 0){
+//  this.fund();
+    this.loading(this.currentPage,this.pagesize);
+  }else{
+//  this.chaxun(this.currentPage,this.pagesize);
+    this.seeker(this.stt,this.edt,this.currentPage,this.pagesize);
+  }
+},
+//页码变更
+handleCurrentChange: function(val) {
+  this.currentPage = val;
+  if(this.indx == 0){
+//  this.fund();
+    this.loading(this.currentPage,this.pagesize);
+  }else{
+//  this.chaxun(this.currentPage,this.pagesize);
+    this.seeker(this.stt,this.edt,this.currentPage,this.pagesize);
+  }
+},
+//上一页
+handlePrevChange:function(){
+  if(this.indx == 0){
+//  this.fund();
+    this.loading(this.currentPage,this.pagesize);
+  }else{
+//  this.chaxun(this.currentPage,this.pagesize);
+    this.seeker(this.stt,this.edt,this.currentPage,this.pagesize);
+  }
+},
+//下一页
+handleNextChange:function(){
+  if(this.indx == 0){
+//  this.fund();
+    this.loading(this.currentPage,this.pagesize);
+  }else{
+//  this.chaxun(this.currentPage,this.pagesize);
+    this.seeker(this.stt,this.edt,this.currentPage,this.pagesize);
+  }
+
+},
+//    查询
       seek(){
-        let stt;
-        let edt
+        this.indx = 1;
         if(this.tasksearch.starttime){
-          stt = this.tasksearch.starttime.toLocaleDateString();
+          this.stt = this.tasksearch.starttime.toLocaleDateString();
         }else{
-          stt = this.tasksearch.starttime = "";
+          this.stt = this.tasksearch.starttime = "";
         }
         if(this.tasksearch.endtime){
-          edt = this.tasksearch.endtime.toLocaleDateString();
+          this.edt = this.tasksearch.endtime.toLocaleDateString();
         }else{
-          edt = this.tasksearch.endtime = "";
+          this.edt = this.tasksearch.endtime = "";
         }
+        this.seeker(this.stt,this.edt,this.currentPage,this.pagesize);
 //console.log(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt);
-        search(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt).then((res)=>{
+//      search(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt).then((res)=>{
+////        console.log(res);
+//        this.tableData = res.data.data;
+//      })
+      },
+      seeker(stt,edt,page,pagesize){
+        search(this.tasksearch.taskname,this.tasksearch.tasknum,this.tasksearch.tasktype,this.tasksearch.taskstatus,this.tasksearch.handler,stt,edt,page,pagesize).then((res)=>{
 //        console.log(res);
-          this.tableData = res.data.data;
+          if(res.data.ret == 200){
+            this.tableData = res.data.data;
+            this.totalCount = res.data.totalcount;
+            this.kong=false;
+            this.fenye=true;
+          }else{
+            this.totalCount = res.data.totalcount;
+            this.kong=true;
+            this.fenye=false;
+          }
         })
       },
 //    获取页面所有的任务数据
-      loading(){
-        tasklist().then((res)=>{
-//        console.log(res.data);
+      loading(page,pagesize){
+        tasklist(page,pagesize).then((res)=>{
+          console.log(res.data);
           this.tableData = res.data.data;
           if(res.data.data==''){
             this.kong=true;
+            this.fenye=false;
+            this.totalCount = res.data.totalcount;
           }else{
             this.kong=false;
+            this.fenye=true;
+            this.totalCount = res.data.totalcount;
           }
         })
         list().then((res)=>{
@@ -427,7 +530,7 @@ multiple
             this.initall();
           }
         })
-        
+
       },
       cName(index){
         this.inde = index+1;
@@ -449,7 +552,7 @@ multiple
           this.$message.success("正在上传文件");
           ftot(this.addfiles[this.inde-1].name,this.taskid).then((res)=>{
             console.log(res);
-            
+
             if(res.data.ret == 200){
 //            this.$message.success("上传成功");
               taskStart(this.taskid).then((res)=>{
@@ -460,13 +563,13 @@ multiple
             }
           })
         }
-          
+
       },
 //    点击创建任务
       onSubmit() {
-        function changedouhao(str){ 
-          str=str.replace(/，/ig,','); 
-          return str; 
+        function changedouhao(str){
+          str=str.replace(/，/ig,',');
+          return str;
         }
         function unique(arr){
           var res = [];
@@ -498,9 +601,9 @@ multiple
         }
       },
 keyup(val){
-  function changedouhao(str){ 
-  str=str.replace(/，/ig,','); 
-  return str; 
+  function changedouhao(str){
+  str=str.replace(/，/ig,',');
+  return str;
 }
 function unique(arr){
   var res = [];
@@ -541,7 +644,7 @@ if(res.data.ret == 200){
   this.$message.error(res.data.msg);
 }
 }).catch((error)=>{
-  
+
     console.log(error);
   });
 },
@@ -554,7 +657,7 @@ if(res.data.ret == 200){
       },
 //    点击显示创建新任务蒙板
       newTask(){
-        this.show_task = true; 
+        this.show_task = true;
         this.show_task_childen = true;
         var myDate = new Date();
         var y = myDate.getFullYear().toString(),//年份
@@ -579,7 +682,7 @@ if(res.data.ret == 200){
         this.form.pnum = '';
         this.voice = !this.voice;
       },
-      
+
       show(){
         this.targetantistop = false;
         this.voice = false;
@@ -629,7 +732,7 @@ if(res.data.ret == 200){
           })
           this.initall();
         }
-        
+
       },
 //    初始化所有
 initall(){
@@ -640,7 +743,7 @@ initall(){
   this.form.name = '';this.form.tasknum = '';this.form.gi = 0;this.form.antistop = ''
 },
 //    文件上传失败时的回调函数
-      handleError(err, file, fileList){ 
+      handleError(err, file, fileList){
 //      console.log(this.type);
         this.i = 0;
       },
@@ -659,6 +762,13 @@ initall(){
     },
     data() {
       return {
+        stt:'',
+        edt:'',
+        indx:0,
+        currentPage:1,
+        totalCount: 0,
+        pagesize: 10,
+        fenye:false,
         formaaa:{
           typeId:'',
           pla:'使用","逗号分割，不支持全角字符'
@@ -698,17 +808,17 @@ initall(){
           tasknum: '',
           antistop: '',
           pnum:'',
-          enhance:0, 
-          cleaning:0, 
-          sr:0, 
-          ks:0, 
-          li:0, 
+          enhance:0,
+          cleaning:0,
+          sr:0,
+          ks:0,
+          li:0,
           gi:0,
           idx:0
         },
         http:"http://192.168.1.118/task/upload"
       }
     }
-    
+
   }
 </script>

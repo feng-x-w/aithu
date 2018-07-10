@@ -69,3 +69,12 @@ export function modelsearch(gender,status) {
       }
     })
 }
+//查询
+export function resetInit() {
+    return request.get('/gre/model/reset',{
+//    params:{
+//      gender:gender,
+//      status:status
+//    }
+    })
+}

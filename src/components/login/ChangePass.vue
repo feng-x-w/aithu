@@ -6,11 +6,11 @@
     position: relative;
     overflow: hidden;
   }
-  
+
   .avatar-uploader .el-upload:hover {
     border-color: #409EFF;
   }
-  
+
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -21,13 +21,13 @@
     border: 1px dashed #00A0FF;
     border-radius: 5px;
   }
-  
+
   .avatar {
     width: 178px;
     height: 178px;
     display: block;
   }
-  
+
   .user_main {
     padding: 10px;
   }
@@ -42,7 +42,7 @@
 <template>
   <div class="userdata">
     <Breadcrumb>
-      <span slot="one">修改密码</span>
+      <span slot="one">{{$t('changePass.changePass')}}</span><!--修改密码-->
     </Breadcrumb>
     <el-container>
       <el-aside width="200px" class="user_main">
@@ -58,7 +58,7 @@
             <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
-                <el-form-item label="旧密码" prop="formerpass" required>
+                <el-form-item :label="$t('changePass.oldPass')" prop="formerpass" required><!--//旧密码-->
               <el-input type="password" v-model="ruleForm.formerpass" @blur="formtext" auto-complete="off"></el-input>
             </el-form-item>
               </div>
@@ -67,7 +67,7 @@
             <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
-                 <el-form-item label="密码" prop="pass">
+                 <el-form-item :label="$t('changePass.pass')" prop="pass"><!--//密码-->
               <el-input type="password" v-model="ruleForm.pass" :disabled="mima" auto-complete="off"></el-input>
             </el-form-item>
               </div>
@@ -76,19 +76,18 @@
             <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
-                <el-form-item label="确认密码" prop="checkPass">
+                <el-form-item :label="$t('changePass.confirmPass')" prop="checkPass"><!--//确认密码-->
               <el-input type="password" v-model="ruleForm.checkPass" :disabled="mima" auto-complete="off"></el-input>
             </el-form-item>
               </div>
             </el-col>
           </el-row>
-          </el-row>
             <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
                 <el-form-item style="text-align: center;margin-left: 0;">
-              <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
-              <el-button style="margin-left: 10px !important;" @click="resetForm('ruleForm')">重置</el-button>
+              <el-button type="primary" @click="submitForm('ruleForm')">{{$t('changePass.modification')}}</el-button><!--修改-->
+              <el-button style="margin-left: 10px !important;" @click="resetForm('ruleForm')">{{$t('changePass.reset')}}</el-button><!--重置-->
             </el-form-item>
               </div>
             </el-col>
@@ -109,7 +108,7 @@
       Breadcrumb
     },
     created() {
-      
+
     },
     data() {
       var validatePass = (rule, value, callback) => {

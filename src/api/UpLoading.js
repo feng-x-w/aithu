@@ -6,17 +6,18 @@ export function UpLoading(files) {
       }
     })
 }
-export function useredit(idnumber, tel, email, address, signature) {
-    return request.get('/user/info/edit',{
-      params:{
-		    idnumber:idnumber,
-		    tel:tel,
-		    email:email,
-		    address:address,
-		    signature:signature
-      }
-    })
-}
+//export function useredit(idnumber, tel, email, address, signature, file) {
+//  return request.get('/user/info/edit',{
+//    params:{
+//		    idnumber:idnumber,
+//		    tel:tel,
+//		    email:email,
+//		    address:address,
+//		    signature:signature,
+//		    file:file
+//    }
+//  })
+//}
 export function userinfo() {
     return request.get('/user/info',{
 //    params:{

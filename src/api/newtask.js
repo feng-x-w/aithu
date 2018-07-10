@@ -28,11 +28,12 @@ export function taskStart(taskid) {
     })
 }
 //页面所有任务数据
-export function tasklist() {
+export function tasklist(page, pagesize) {
     return request.get('/task/list',{
-//    params:{
-//      taskid:taskid
-//    }
+      params:{
+        page:page,
+        pagesize:pagesize
+      }
     })
 }
 //查看按钮传参
@@ -56,7 +57,7 @@ export function AllTasks(taskid, page, pagesize) {
     })
 }
 //识别任务管理查询任务
-export function QueryTasks(speaker, taskid, keyword, gender, language, starttime, endtime, taskname, address, handletime, page, pagesize) {
+export function QueryTasks(speaker, taskid, keyword, gender, language, taskname, address, handletime, starttime, endtime, page, pagesize) {
     return request.get('/task/result/search',{
       params:{
         speaker: speaker,
@@ -64,11 +65,11 @@ export function QueryTasks(speaker, taskid, keyword, gender, language, starttime
         keyword: keyword,
         gender: gender,
         language: language,
-        starttime: starttime,
-        endtime: endtime,
         taskname: taskname,
         address: address,
         handletime: handletime,
+        starttime: starttime,
+        endtime: endtime,
         page:page,
         pagesize:pagesize
       }
@@ -92,7 +93,7 @@ export function ftot(dirname,taskid) {
     })
 }
 //上传远程文件夹
-export function search(taskname,tasknum,tasktype,taskstatus,handler,starttime,endtime) {
+export function search(taskname,tasknum,tasktype,taskstatus,handler,starttime,endtime, page,pagesize) {
     return request.get('/task/search',{
       params:{
         taskname:taskname,
@@ -101,7 +102,9 @@ export function search(taskname,tasknum,tasktype,taskstatus,handler,starttime,en
         taskstatus:taskstatus,
         handler:handler,
         starttime:starttime,
-        endtime:endtime
+        endtime:endtime,
+        page:page,
+        pagesize:pagesize
       }
     })
 }

@@ -19,7 +19,7 @@
 		text-align: left;
 	}
 	.el-button:hover {
-		background-color: #ababab;
+		background-color: #cacaca;
 	}
 
 	.el-button:first-child {
@@ -28,7 +28,12 @@
 	.el-main{
 		padding: 0 ;
 		border-left: 1px solid #8aa0ab;
-		height: 100%;
+		/*height: 100%;*/
+		position: absolute;
+    top: 88px;
+    left: 231px;
+    bottom: 0;
+    right: 0;
 	}
 	.el-aside{
 		overflow: visible;
@@ -65,15 +70,44 @@
   .btn{
     margin-left: 0 !important;
   }
- .el-button+.el-button{
-   margin-left: 0 !important;
- }
- .el-collapse-item__content{
-   padding-bottom: 0 !important;
- }
- .el-collapse-item__header{
-   padding-left: 20px;
- }
+  .el-button+.el-button{
+    margin-left: 0 !important;
+  }
+  .el-collapse-item__content{
+    padding-bottom: 0 !important;
+  }
+  .el-collapse-item__header{
+    padding-left: 20px;
+  }
+  .taskmid {
+    padding: 10px;
+    /*border: 1px solid red;*/
+  }
+  .taskmid>table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+    /*border: 1px solid red;*/
+  }
+  .taskmid>table>tr {
+    border: 1px solid #e3e3e3;
+  }
+  .taskmid>table>tr:hover{
+    background-color: #ededed;
+  }
+  .taskmid>table>tr>th {
+    border: 1px solid #e3e3e3;
+    color: #909399;
+    background-color: #f3f3f3;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px;
+  }
+  .taskmid>table>tr>td {
+    border: 1px solid #e3e3e3;
+    padding: 0px 10px;
+    font-size: 13px;
+  }
 </style>
 
 <template>
@@ -83,28 +117,28 @@
 		<el-container>
 			<el-aside width="230px">
 				<el-collapse v-model="activeName" accordion>
-					<el-collapse-item title="任务管理" name="ccc" style="text-align: left;" key="1">
+					<el-collapse-item :title="$t('voiceIndex.taskManager')" name="ccc" style="text-align: left;" key="1"><!--//任务管理-->
 						<router-link class="btn" to="/taskM" tag="el-button"><!---->
-							<i class="fa fa-tasks fa-lg"></i>&nbsp;&nbsp;&nbsp;任务管理
+							<i class="fa fa-tasks fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.taskManager')}}
 						</router-link>
 					</el-collapse-item>
-					<el-collapse-item title="识别结果管理" name="aaa" style="text-align: left;" key="2">
+					<el-collapse-item :title="$t('voiceIndex.identResultManager')" name="aaa" style="text-align: left;" key="2"><!--//识别结果管理-->
 						<router-link class="btn" to="/result" tag="el-button"><!---->
-							<i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;识别任务管理
+							<i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.identResultManager')}}
 						</router-link>
 					</el-collapse-item>
-					<el-collapse-item title="模型管理" name="bbb" style="text-align: left;" key="3">
+					<el-collapse-item :title="$t('voiceIndex.modelManager')" name="bbb" style="text-align: left;" key="3"><!--//模型管理-->
 						<router-link class="btn" to="/home" tag="el-button"><!---->
-              <i class="fa fa-volume-up fa-lg"></i>&nbsp;&nbsp;&nbsp;声纹模型
+              <i class="fa fa-volume-up fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.modelManager')}}<!--声纹模型-->
             </router-link>
 						<router-link class="btn" to="/drill" tag="el-button"><!---->
-              <i class="fa fa-language fa-lg"></i>&nbsp;&nbsp;&nbsp;语种模型
+              <i class="fa fa-language fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.languageModle')}}<!--语种模型-->
             </router-link>
 						<router-link class="btn" to="/disindex" tag="el-button"><!---->
-              <i class="fa fa-venus-mars fa-lg"></i>&nbsp;&nbsp;&nbsp;性别模型
+              <i class="fa fa-venus-mars fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.genderModle')}}<!--性别模型-->
             </router-link>
 						<router-link class="btn" to="/homeTwo" tag="el-button"><!---->
-              <i class="fa fa-key fa-lg"></i>&nbsp;&nbsp;&nbsp;关键词模型
+              <i class="fa fa-key fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.keywordModle')}}<!--关键词模型-->
             </router-link>
 					</el-collapse-item>
 					<!--<el-collapse-item title="语音索引" name="ddd" style="text-align: left;" key="4">

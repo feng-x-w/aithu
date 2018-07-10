@@ -1,10 +1,10 @@
 <style scoped>
   .drill {}
-  
+
   .drillTop {
     margin: 10px;
   }
-  
+
   .Nlanguage {
     position: fixed;
     width: 100%;
@@ -101,27 +101,6 @@
   .shangR>ul>.asdd:hover{
     background-color: #e3e3e3;
   }
-  .tasktable {
-    width: 100%;
-    margin: 0 auto;
-    text-align: left;
-  }
-  .tasktable>tr {
-    border: 1px solid #e3e3e3;
-  }
-  .tasktable>tr>th {
-    border: 1px solid #e3e3e3;
-    padding: 10px;
-    background-color: #f3f3f3;
-    font-size: 13px;
-    font-weight: 600;
-    color: #909399;
-  }
-  .tasktable>tr>td {
-    border: 1px solid #e3e3e3;
-    padding: 0 10px;
-    font-size: 13px;
-  }
   .el-select{
     float: left;
   }
@@ -130,184 +109,130 @@
 <template>
   <div class="drill">
     <Breadcrumb>
-      <span slot="one">模型管理</span>
-      <span slot="two">语种模型管理</span>
+      <span slot="one">{{$t('index.modelManager')}}</span><!--模型管理-->
+      <span slot="two">{{$t('index.languageModleManager')}}</span><!--//语种模型管理-->
     </Breadcrumb>
     <div class="drillTop">
       <el-form :inline="true" :model="form" class="demo-form-inline" size="mini">
         <!--<el-form-item label="语种名称">
           <el-input v-model="form.mlanguage" placeholder="语种名称"></el-input>
         </el-form-item>-->
-         <el-form-item label="性别" size="mini">
-          <el-select v-model="form.mlanguage" placeholder="性别">
-            <el-option label="男" value="0"></el-option>
-            <el-option label="女" value="1"></el-option>
+        <el-form-item :label="$t('index.gender')" size="mini"><!--//训练状态-->
+          <el-select v-model="form.mlanguage" :placeholder="$t('index.gender')" size="mini"><!--//性别-->
+            <el-option :label="$t('index.gender1')" value="0"></el-option><!--//男-->
+            <el-option :label="$t('index.gender2')" value="1"></el-option><!--//女-->
             <!--<el-option label="未知" value="1"></el-option>-->
-            <el-option label="全部" value=""></el-option>
+            <el-option :label="$t('index.all')" value=""></el-option><!--//全部-->
           </el-select>
         </el-form-item>
-        <el-form-item label="训练状态" size="mini">
-          <el-select v-model="form.status" placeholder="训练状态">
-            <el-option label="正在训练" value="1"></el-option>
-            <el-option label="训练完成" value="2"></el-option>
-            <el-option label="全部" value=""></el-option>
+        <el-form-item :label="$t('index.trainingState')" size="mini"><!--//训练状态-->
+          <el-select v-model="form.status" :placeholder="$t('index.trainingState')"><!--//训练状态-->
+            <el-option :label="$t('index.trainingState1')" value="1"></el-option><!--//正在训练-->
+            <el-option :label="$t('index.trainingState2')" value="2"></el-option><!--//训练完成-->
+            <el-option :label="$t('index.all')" value=""></el-option><!--//全部-->
           </el-select>
         </el-form-item>
         <!--<el-form-item label="操作人" size="mini">
           <el-input v-model="form.operation" placeholder="操作人"></el-input>
         </el-form-item>-->
         <el-form-item size="mini">
-          <el-button type="primary" @click="modelS" icon="el-icon-search">查询</el-button><!---->
+          <el-button type="primary" @click="modelS" icon="el-icon-search">{{$t('index.search')}}</el-button><!--查询-->
         </el-form-item>
-        <el-form-item size="mini">
-          <el-button type="primary" @click="newlan">新建性别</el-button>
+        <el-form-item size="mini"><!-- plain style="margin-left: 10px !important;"-->
+          <el-button type="primary" @click="initialize">{{$t('drill.init')}}</el-button><!--初始化-->
         </el-form-item>
+        <!--<el-form-item size="mini">
+          <el-button type="primary" @click="newlan">{{$t('index.createGender')}}</el-button>新建性别
+        </el-form-item>-->
       </el-form>
       <div class="target" v-show="target">
         <div class="target_add">
-          <h1>新建性别</h1>
+          <h1>{{$t('index.createGender')}}</h1><!--新建性别-->
           <el-form :model="languagesList" ref="languagesList" label-width="100px" class="demo-ruleForm">
             <!--<el-form-item label="名称" prop="language">
               <el-input v-model="languagesList.language"></el-input>
             </el-form-item>-->
-            <el-form-item label="性别" required>
-              <el-select v-model="languagesList.language" name="language" placeholder="性别">
-                <el-option label="男" value="0"></el-option>
-                <el-option label="女" value="1"></el-option>
+            <el-form-item :label="$t('index.gender')" required><!--//性别-->
+              <el-select v-model="languagesList.language" name="language" :placeholder="$t('index.gender')"><!--//性别-->
+                <el-option :label="$t('index.gender1')" value="0"></el-option><!--//男-->
+                <el-option :label="$t('index.gender2')" value="1"></el-option><!--//女-->
               </el-select>
             </el-form-item>
-            <el-form-item label="描述">
+            <el-form-item :label="$t('index.description')"><!--//描述-->
               <el-input type="textarea" v-model="languagesList.desc"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="newla">创建</el-button>
-              <!--<el-button @click="resetForm()">重置</el-button>-->
-              <el-button @click="onEsc" type="danger" plain style="margin-left: 10px !important;">关闭</el-button>
+              <el-button type="primary" @click="newla">{{$t('index.creat')}}</el-button><!--创建-->
+              <!--<el-button @click="resetForm()">{{$t('index.reset')}}</el-button>--><!--重置-->
+              <el-button @click="onEsc" type="danger" plain style="margin-left: 10px !important;">{{$t('index.close')}}</el-button><!--关闭-->
             </el-form-item>
           </el-form>
         </div>
       </div>
-      <!--新建语种模型上传语音-->
-      <!--<div class="show_taskadd" v-show="show_newg_lan">
-        <div class="shangL" v-show="xiaoshi1">
-<el-upload 
-class="upload-demo" 
-ref="upload" 
- action="http://192.168.1.118/task/upload"
-:on-preview="handlePreview" 
-:on-remove="handleRemove" 
-:file-list="fileList" 
-:on-change="addfile"
-:on-success="handleSuccess"
-:on-error="handleError"
-:data="UpData"
-accept=".wav,.mp3,.flac"
-multiple
-:auto-upload="false">
-<el-button slot="trigger" size="small" type="primary" @click="dianjia">选取文件</el-button>
-<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-<el-button size="small" type="primary" @click="Remote" v-show="dianji1">远端上传</el-button>
-<div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
-</el-upload>
-        </div>
-        <div class="shangR" v-show="xiaoshi">
-          <h2>请选择文件夹</h2>
-            <ul>
-              <div class="asdd" v-for="(i,key) in addfiles" @click="cName(key)">
-                <li>
-                  <input type="radio" name="fils" :id="key" /> <label :for="key">{{i.name}}</label>
-                  <br />
-                </li>
-              </div>
-              
-              <div style="text-align: right;padding-top: 5px;">
-<el-button type="submit" size="small" @click="ftotfiles()">确认上传</el-button>
-              </div>
-            </ul>
-        </div>
-      </div>-->
       <!--新建语种-->
       <div class="Nlanguage" v-show="nlguage">
         <div class="NLG">
-          <h1 style="text-align: center;margin-bottom:10px;">性别详情</h1>
+          <h1 style="text-align: center;margin-bottom:10px;">{{$t('index.genderInfo')}}</h1><!--性别详情-->
           <div class="left">
 <el-form ref="amendLanguagesList" :model="amendLanguagesList" label-width="80px">
   <!--<el-form-item label="语种名称" prop="language">
     <el-input v-model="amendLanguagesList.language"></el-input>
   </el-form-item>-->
-  <el-form-item label="性别"><!-- size="mini"-->
-    <el-select v-model="amendLanguagesList.gender" prop="gender" name="gender" placeholder="性别">
-      <el-option label="男" value="0"></el-option>
-      <el-option label="女" value="1"></el-option>
+  <el-form-item :label="$t('index.gender')"><!-- size="mini"--><!--//性别-->
+    <el-select v-model="amendLanguagesList.gender" prop="gender" name="gender" :placeholder="$t('index.gender')"><!--//性别-->
+      <el-option :label="$t('index.gender1')" value="0"></el-option><!--//男-->
+      <el-option :label="$t('index.gender2')" value="1"></el-option><!--//女-->
     </el-select>
   </el-form-item>
-  <el-form-item label="描述">
+  <el-form-item :label="$t('index.description')"><!--//描述-->
     <el-input type="textarea" prop="desc" v-model="amendLanguagesList.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="addlangu">修改</el-button>
-    <el-button type="danger" @click="onEsc" style="margin-left: 10px !important;">关闭</el-button>
+    <el-button type="primary" @click="addlangu">{{$t('index.modification')}}</el-button><!--修改-->
+    <el-button type="danger" @click="onEsc" style="margin-left: 10px !important;">{{$t('index.close')}}</el-button><!--关闭-->
   </el-form-item>
 </el-form>
           </div>
           <div class="right">
                 <div class="target_right">
-                  <h3>模型文件列表</h3>
-<el-upload 
-  class="upload-demo" 
-  ref="upload" 
+                  <h3>{{$t('index.modleFileTable')}}</h3><!--模型文件列表-->
+<el-upload
+  class="upload-demo"
+  ref="upload"
   action="http://192.168.1.118/gre/model/speech/add"
   :on-success="handleS"
-  :file-list="fileList" 
+  :file-list="fileList"
   :data="UpData"
   accept=".wav,.mp3,.flac"
   multiple
   :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
+  <el-button slot="trigger" size="small" type="primary">{{$t('index.chooseFile')}}</el-button><!--选取文件-->
+  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">{{$t('index.upolad')}}</el-button><!--上传到服务器-->
+  <div slot="tip" class="el-upload__tip">{{$t('index.uploadReq')}}</div><!--只能上传.WAV,.MP3,.FLAC文件-->
 </el-upload>
-    <el-button style="margin: 3px 0;" type="primary" @click="Train" :loading="xunlian" :disabled="xli">训练</el-button><!---->
+    <el-button style="margin: 3px 0;" type="primary" @click="Train" :loading="xunlian" :disabled="xli">{{$t('index.training')}}</el-button><!--训练-->
   <template>
-    <table class="tasktable">
-      <tr>
-        <th>文件名</th>
-        <th>文件大小</th>
-        <th>操作</th>
-      </tr>
-      <tr v-for="i in speechi">
-        <td>
-          {{i.filename}}
-        </td>
-        <td>
-          {{i.filesize}}
-        </td>
-        <td>
-            <el-button type="text" @click="newTask(i.id)" title="详情">
-              <i class="el-icon-caret-right"></i><!--播放-->
-            </el-button>
-            <el-button type="text" @click="modelDelete(i.id)" style="color: red;" title="删除">
-              <i class="el-icon-delete"></i><!--删除-->
-            </el-button>
-        </td>
-      </tr>
-    </table>
-    <!--<el-table :data="speechi" style="width: 100%">
-      <el-table-column label="文件名" prop="filename">
-      </el-table-column>
-      <el-table-column label="文件大小" prop="filesize">
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-<el-button size="mini" @click="plays(scope)">
-  <i class="el-icon-caret-right"></i>
-</el-button>
-<el-button size="mini" type="danger" @click="speechDele(scope)">
-  <i class="el-icon-delete"></i>
-</el-button>
-        </template>
-      </el-table-column>
-    </el-table>-->
+    <div class="taskmid">
+      <table>
+        <tr>
+          <th> {{$t('index.fileName')}} </th>
+          <th> {{$t('index.fileSize')}} </th>
+          <th> {{$t('index.operation')}} </th>
+        </tr>
+        <tr v-for="i in speechi">
+          <td> {{i.filename}} </td>
+          <td> {{i.filesize}} </td>
+          <td>
+              <el-button type="text" @click="newTask(i.id)" :title="$t('index.details')">
+                <i class="el-icon-caret-right" style="font-size: 20px;"></i><!--播放-->
+              </el-button>
+              <el-button type="text" @click="modelDelete(i.id)" style="color: red;" :title="$t('index.delete')">
+                <i class="el-icon-delete"></i><!--删除-->
+              </el-button>
+          </td>
+        </tr>
+      </table>
+    </div>
     <!--<el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -321,40 +246,40 @@ multiple
         </el-pagination>-->
   </template>
 <div class="block">
-</div> 
+</div>
 </div>
           </div>
         </div>
       </div>
       <hr />
-        <table class="tasktable">
+      <div class="taskmid">
+        <table>
           <tr>
-            <th>性别</th>
-            <th>描述</th>
-            <th>训练状态</th>
-            <th>操作</th>
+            <th>{{$t('index.gender')}}</th><!--性别-->
+            <th>{{$t('index.description')}}</th><!--描述-->
+            <th>{{$t('index.trainingState')}}</th><!--训练状态-->
+            <th>{{$t('index.operation')}}</th><!--操作-->
           </tr>
           <tr v-for="i in tableData">
-            <td>
-              {{i.gender}}
+            <td> {{i.gender}}
+            </td>
+            <td> {{i.desc}}
             </td>
             <td>
-              {{i.desc}}
+              <span v-if="i.status==1">{{$t('index.usable')}}</span><!--可用-->
+              <span v-if="i.status==0">{{$t('index.unusable')}}</span><!--不可用-->
             </td>
             <td>
-              <span v-if="i.status==1">可用</span>
-              <span v-if="i.status==0">不可用</span>
-            </td>
-            <td>
-                <el-button type="text" @click="newTask(i.id)" title="详情">
+                <el-button type="text" @click="newTask(i.id)" :title="$t('index.details')"><!--//详情-->
                   <i class="el-icon-info"></i>
                 </el-button><!--详情-->
-                <el-button type="text" @click="modelDelete(i.id)" style="color: red;" title="删除">
+                <el-button type="text" @click="modelDelete(i.id)" style="color: red;" :title="$t('index.delete')"><!--//删除-->
                   <i class="el-icon-delete"></i>
                 </el-button><!--删除-->
             </td>
           </tr>
         </table>
+      </div>
         <!--<el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -372,7 +297,7 @@ multiple
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
-  import { addlanguage, languageModel, ModelDetail, modelUpdate, ModelDel, ModelTrain, speechdele, modelsearch } from '@/api/newsex'
+  import { addlanguage, languageModel, ModelDetail, modelUpdate, ModelDel, ModelTrain, speechdele, modelsearch, resetInit } from '@/api/newsex'
   export default {
 //  页面初始化
     created(){
@@ -380,6 +305,13 @@ multiple
     },
 //  方法属性
     methods: {
+      initialize(){
+        resetInit().then((res)=>{
+          if(res.data.ret == 200){
+            this.LModel();
+          }
+        })
+      },
 //    初始化
       LModel(){
         languageModel().then((res)=>{
@@ -479,12 +411,12 @@ console.log(this.amendLanguagesList.gender,this.amendLanguagesList.desc,this.ame
         console.log(this.speechi);
 //        ModelTrain(this.Mid).then((res)=>{
             if(this.speechi.length != 0){
-            
+
             this.xunlian = true;
             this.$alert('正在训练，点击取消关闭本窗口，稍后可查看训练结果。',{
               confirmButtonText: '确定'
             });
-            
+
     //      console.log(this.filemid);
             ModelTrain(this.Mid).then((res)=>{
               console.log(res);
@@ -494,7 +426,7 @@ console.log(this.amendLanguagesList.gender,this.amendLanguagesList.desc,this.ame
               }
             })
           }else{
-            
+
             this.$message.error("没有语音文件");
           }
 //      })
@@ -514,7 +446,7 @@ console.log(this.amendLanguagesList.gender,this.amendLanguagesList.desc,this.ame
 //    Remote(){
 //      this.xiaoshi = true;
 //      this.xiaoshi1 = false;
-//      
+//
 //    },
 //    详情弹框
       newTask(id) {
@@ -538,19 +470,19 @@ console.log(this.amendLanguagesList.gender,this.amendLanguagesList.desc,this.ame
                 this.LModel();
               }
             })
-            
+
         }).catch(() => {
           this.$message.info('已取消删除');
         });
-        
+
       },
-      
+
 //    上传到服务器
       submitUpload(){
         this.$refs.upload.submit();
       },
       handleSuccess(){
-        
+
       }
     },
     data() {

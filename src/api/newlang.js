@@ -69,3 +69,12 @@ export function modelsearch(language,status) {
       }
     })
 }
+//查询
+export function resetInit() {
+    return request.get('/lre/model/reset',{
+//    params:{
+//      language:language,
+//      status:status
+//    }
+    })
+}

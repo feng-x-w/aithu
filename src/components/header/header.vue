@@ -1,14 +1,22 @@
 <style scoped>
+  .head{
+    width: 100%;
+    height: 88px;
+  }
 	.header{
 		width: 100%;
 		height: 88px;
 		line-height: 88px;
 		padding: 0 35px;
-		/*background-color: #409EFF;*/
-		background: -webkit-linear-gradient(#2c3e50, #2c3e50); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(#2c3e50, #2c3e50); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(#2c3e50, #2c3e50); /* Firefox 3.6 - 15 */
-		background: linear-gradient(#2c3e50, #2c3e50); /* 标准的语法 */
+		background-color: #2c3e50;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		/*background: -webkit-linear-gradient(#2c3e50, #2c3e50); /* Safari 5.1 - 6.0 */
+		/*background: -o-linear-gradient(#2c3e50, #2c3e50); /* Opera 11.1 - 12.0 */
+		/*background: -moz-linear-gradient(#2c3e50, #2c3e50); /* Firefox 3.6 - 15 */
+		/*background: linear-gradient(#2c3e50, #2c3e50); /* 标准的语法 */
 		overflow: hidden;
 		box-sizing: border-box;
 	}
@@ -100,66 +108,86 @@
 </style>
 
 <template>
-	<div class="header">
-		<div class="LeftLogo">
-			<img src="../../assets/logo2.png"/>&nbsp;
-			<span>
-			  {{$t('logo.title')}}
-			</span>
-		</div>
-		<!--<div @click="switchLanguage">{{language == 'zh' ? 'English' : '中文'}}</div>-->
-		<!--<el-button @click="switchLanguage" size="mini" round>{{language == 'zh' ? 'English' : '中文'}}</el-button>-->
-		<div class="LoginUser" type="text" @click="OpenThe">
-			<img src="../../assets/_20180622145804.png"/>
-			<span>{{$t('header_deng.UserName')}}</span>
-			<div class="deng" v-show="isShow">
-				<ul>
-					<router-link tag="li" to="/userdata" @click="user">{{$t('header_deng.user')}}</router-link>
-					<router-link tag="li" to="/changepass" @click="changepass">{{$t('header_deng.changepass')}}</router-link>
-					<router-link tag="li" to="/login" @click="login">{{$t('header_deng.LogOut')}}</router-link>
-				</ul>
-			</div>
-		</div>
-		<el-button @click="switchLanguage" size="mini" round v-model="langg">{{langg}}</el-button><!--{{language == 'en' ? '切换中文' : 'lang english'}}-->
+	<div><!-- class="header"-->
+	  <div class="head">
+	    
+	  </div>
+	  <div class="header">
+	    <div class="LeftLogo">
+  			<img src="../../assets/logo2.png"/>&nbsp;
+  			<span>
+  			  {{$t('logo.title')}}
+  			</span>
+  		</div>
+  		<!--<div @click="switchLanguage">{{language == 'zh' ? 'English' : '中文'}}</div>-->
+  		<!--<el-button @click="switchLanguage" size="mini" round>{{language == 'zh' ? 'English' : '中文'}}</el-button>-->
+  		<div class="LoginUser" type="text" @click="OpenThe">
+  			<img src="../../assets/_20180622145804.png"/>
+  			<span>{{$t('header_deng.UserName')}}</span>
+  			<div class="deng" v-show="isShow">
+  				<ul>
+  					<router-link tag="li" to="/userdata">{{$t('header_deng.user')}}</router-link><!-- @click="user"-->
+  					<router-link tag="li" to="/changepass">{{$t('header_deng.changepass')}}</router-link><!-- @click="changepass"-->
+  					<router-link tag="li" to="/login">{{$t('header_deng.LogOut')}}</router-link><!-- @click="login"-->
+  				</ul>
+  			</div>
+  		</div>
+  		<el-button @click="switchLanguage" size="mini" round v-model="langg">{{langg}}</el-button><!--{{language == 'en' ? '切换中文' : 'lang english'}}-->
+	  </div>
+  		
 		
 	</div>
 </template>
 
 <script>
 	import Cookies from 'js-cookie'
-	
+	import { language, getlanguage } from "@/api/language"
 	export default{
-		component:{
-			
-		},
 		data(){
 			return{
+			  num:1,
 				language: Cookies.get('language'),
 				isShow:false,
 				langg:"Lang English"
 			}
 		},
+		created(){
+		  this.initiation();
+		},
 		methods:{
-			
 			switchLanguage() {
-				let locale = this.$i18n.locale;
-	            locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh';
-	            locale === 'zh' ? this.langg = "切换中文" : this.langg = "Lang English";
+			  if(this.num == 1){
+			    this.num = 0
+			    this.init(this.num);
+			  }else{
+			    this.num = 1;
+			    this.init(this.num);
+			  }
+			  let locale = this.$i18n.locale;
+        locale === 'zh' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'zh';
+        locale === 'zh' ? this.langg = "切换中文" : this.langg = "Lang English";
 			},
-
+			init(num){
+			  language(num).then((res)=>{
+		      console.log(res.data.ret);
+		    })
+			},
+			initiation(){
+			  getlanguage().then((res)=>{
+			    console.log(res.data.data);
+			    this.num = res.data.data;
+			    if( this.num == 0 ){
+			      this.$i18n.locale = 'en';
+			      this.langg = "切换中文";
+			    }else{
+			      this.$i18n.locale = 'zh';
+			      this.langg = "Lang English";
+			    }
+			  })
+			},
 			OpenThe() {
-        		this.isShow = !this.isShow;
-//      		alert(666)
-      	   },
-			user() {
-        		console.log("用户资料")
-      	   },
-			login() {
-        		console.log("退出登录")
-      	  },
-			changepass() {
-        		console.log("退出登录")
-      	    }
+    		this.isShow = !this.isShow;
+  	   }
 		}
 	}
 </script>

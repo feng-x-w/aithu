@@ -9,14 +9,14 @@ import zhLocale from './zh'
 Vue.use(VueI18n)
 
 const messages = {
-en: {
-    ...enLocale,
-    ...elementEnLocale
-},
-zh: {
-    ...zhLocale,
-    ...elementZhLocale
-}
+  en: {
+      ...enLocale,
+      ...elementEnLocale
+  },
+  zh: {
+      ...zhLocale,
+      ...elementZhLocale
+  }
 }
 
 const i18n = new VueI18n({

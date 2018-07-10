@@ -9,6 +9,7 @@ export default {
     ulli3:"数据格式：* .mp3，*.flac，*.wav",
     ulli4:"说话人识别数据准备：目标人的语音应是超过300秒的有效语音（不包括沉默，鼻音等）。"
   },
+
   logo: {
     title: '智能语音处理系统'
   },
@@ -32,6 +33,8 @@ export default {
     genderident:"性别识别",
     keywordident:"关键词识别"
   },
+
+
   //NextClass
   iptss:{
     target:"目标人",
@@ -55,10 +58,6 @@ export default {
     operation:"操作",
     nodata:"暂无数据"
   },
-  // 导航栏
-  arr1: {
-
-  },
   home_slot:{
     slotOne:"模型管理",
     slotTwo:"声纹模型管理"
@@ -67,43 +66,11 @@ export default {
     h2:"目标组",
     placeholder:"输入关键字进行过滤"
   },
-  NextClass: [{
-    id: 1,
-    label: '一级 1',
-//		children: [{
-//			id: 4,
-//			label: '二级 1-1',
-//			children: [{
-//				id: 9,
-//				label: '三级 1-1-1'
-//			}, {
-//				id: 10,
-//				label: '三级 1-1-2'
-//			}]
-//		}]
-  }, {
-    id: 2,
-    label: '一级 2',
-//		children: [{
-//			id: 5,
-//			label: '二级 2-1'
-//		}, {
-//			id: 6,
-//			label: '二级 2-2'
-//		}]
-  }, {
-    id: 3,
-    label: '一级 3',
-//		children: [{
-//			id: 7,
-//			label: '二级 3-1'
-//		}, {
-//			id: 8,
-//			label: '二级 3-2'
-//		}]
-  }],
   tianfu: {
-    eng: '欢迎来到智能语音处理系统'
+    eng: '欢迎来到智能语音处理系统',
+    userlogin:'用户登陆',
+    username:'请输入用户名',
+    password:'请输入密码'
   },
   UserLog:{
     login:"用户登录",
@@ -113,5 +80,242 @@ export default {
     res:"重置",
     gs:"公司简介",
 
-  }
+  },
+
+  //add
+  taskManager:{
+    task_name:"任务名称",
+    task_type:"任务类别",
+    task_type1:"声纹",
+    task_type2:"语种",
+    task_type3:"性别",
+    task_type4:"关键词",
+    task_type5:"增强",
+    task_type6:"清洗",
+    task_type7:"全部",
+    state:"执行状态",
+    state1:"处理中",
+    state2:"已完成",
+    state3:"全部",
+    time:"操作时间",
+    search:"查询",
+    newtask:"新建任务",
+    operation:"操作",
+    keyword_ident:"关键词识别",
+    voice_enhance:"语音增强",
+    voice_filter:"语音清洗",
+    voice_ident:"声纹识别",
+    language_ident:"语种识别",
+    gender_ident:"性别识别"
+  },
+
+  resultManager:{
+    identResultManager:"识别结果管理",
+    identTaskManager:"识别任务管理",
+    targetName:"目标姓名",
+    keyword:"关键词",
+    times:"出现时间段",
+    gender:"性别",
+    gender1:"男",
+    gender2:"女",
+    gender3:"全部",
+    languageType:"语种",
+    languageScirpting:"语言脚本",
+    voice:"索引文件",
+    targetTime:"目标时间",
+    chooseTime:"选择日期",
+    taskName:"任务名称",
+    lacation:"地点",
+    operationTime:"操作时间",
+    search:"查询",
+    details:"详情",
+    file:"文件",
+    keyCharacter:"关键字",
+    enhancedFile:"增强文件",
+    filterFile:"清洗文件",
+    effectiveTime:"有效时长",
+    totleTime:"总时长",
+    state:"状态",
+    goto:"前往",
+    page:"页",
+    item:"条/页",
+    count:"共",
+    piece:"条",
+    download:"点击下载",
+    waiting:"等待中",
+    begun:"已开始",
+    preprocessing:"预处理",
+    processing:"处理中",
+    finished:"已完成",
+    noDate:"暂无数据"
+  },
+
+  modleManager:{
+    modelManager:"模型管理",
+    voiceModle:"声纹模型",
+    voiceModleManager:"声纹模型管理",
+    languageModle:"语种模型",
+    languageModleManager:"语种模型管理",
+    genderModle:"性别模型",
+    genderModleManager:"性别模型管理",
+    keywordModle:"关键词模型",
+    keywordModleManager:"关键词"
+    },
+
+  index:{
+    modelManager:"模型管理",
+    languageModleManager:"语种模型管理",
+    gender:"性别",
+    gender1:"男",
+    gender2:"女",
+    all:"全部",
+    trainingState:"训练状态",
+    trainingState1:"正在训练",
+    trainingState2:"训练完成",
+    search:"查询",
+    createGender:"新建性别",
+    description:"描述",
+    creat:"创建",
+    close:"关闭",
+    reset:"重置",
+    genderInfo:"性别详情",
+    modification:"修改",
+    modleFileTable:"模型文件列表",
+    chooseFile:"选取文件",
+    upolad:"上传到服务器",
+    uploadReq:"只能上传.WAV,.MP3,.FLAC文件",
+    training:"训练",
+    fileName:"文件名",
+    fileSize:"文件大小",
+    operation:"操作",
+    details:"详情",
+    delete:"删除",
+    usable:"可用",
+    unusable:"不可用"
+  },
+
+  homeTwo:{
+    modelManager:"模型管理",
+    keyword:"关键词",
+    searchKeyword:"搜索关键词",
+    addKeyword:"添加关键词",
+    splitKeyword:"关键词使用 \",\" 逗号分割",
+    inputContent:"请输入内容",
+    add:"添加",
+    delete:"删除"
+  },
+
+  drill:{
+    modelManager:"模型管理",
+    languageModleManager:"语种模型管理",
+    languageName:"语种名称",
+    all:"全部",
+    trainingState:"训练状态",
+    trainingState1:"正在训练",
+    trainingState2:"训练完成",
+    search:"查询",
+    creatLanguage:"新建语种",
+    name:"名称",
+    description:"描述",
+    creat:"创建",
+    close:"关闭",
+    init:"初始化",
+    languageInfo:"语种详情",
+    modification:"修改",
+    modleFileTable:"模型文件列表",
+    chooseFile:"选取文件",
+    upolad:"上传到服务器",
+    uploadReq:"只能上传.WAV,.MP3,.FLAC文件",
+    training:"训练",
+    fileName:"文件名",
+    fileSize:"文件大小",
+    operation:"操作",
+    details:"详情",
+    delete:"删除",
+    usable:"可用",
+    unusable:"不可用",
+    state:"状态"
+  },
+
+  changePass:{
+    changePass:"修改密码",
+    oldPass:"旧密码",
+    pass:"密码",
+    confirmPass:"确认密码",
+    modification:"修改",
+    reset:"重置"
+  },
+
+  userdata:{
+    userInfo:"用户资料",
+    userName:"用户名",
+    ID:"证件号",
+    phone:"手机号",
+    contactAdd:"联系地址",
+    idiograph:"个人签名",
+    modifyInfo:"修改资料",
+    changePass:"修改密码",
+    confirm:"确定",
+    cancle:"取消"
+  },
+
+  UserLogin:{
+    inputID:"请输入用户名/手机号",
+    inputPass:"请输入密码",
+    log:"登录",
+  },
+
+  taskM:{
+    taskManager:"任务管理",
+    taskStateManager:"任务状态管理",
+    taskName:"任务名称",
+    taskType:"任务类别",
+    task_type1:"声纹",
+    task_type2:"语种",
+    task_type3:"性别",
+    task_type4:"关键词",
+    task_type5:"增强",
+    task_type6:"清洗",
+    task_type7:"语音索引",
+    keyword_ident:"关键词识别",
+    voice_enhance:"语音增强",
+    voice_filter:"语音清洗",
+    voice_ident:"声纹识别",
+    language_ident:"语种识别",
+    gender_ident:"性别识别",
+    all:"全部",
+    state:"执行状态",
+    state1:"处理中",
+    state2:"已完成",
+    time:"操作时间",
+    search:"查询",
+    creatTask:"新建任务",
+    chooseTime:"选择日期",
+    groupName:"组名",
+    chooseGroupName:"请选择组名",
+    keyword:"关键词",
+    number:"人数",
+    numofVoiceIndex:"请输入语音索引人数",
+    creat:"创建",
+    cancel:"取消",
+    chooseFile:"选取文件",
+    upolad:"上传到服务器",
+    uploadReq:"只能上传.WAV,.MP3,.FLAC文件",
+    remoteLoad:"远端上传",
+    chooseFolder:"请选择文件夹",
+    confirmUpload:"确认上传",
+    operation:"操作",
+    check:"查看",
+    noData:"暂无数据"
+  },
+
+  voiceIndex:{
+    taskManager:"任务管理",
+    identResultManager:"识别结果管理",
+    modelManager:"模型管理",
+    voiceModle:"声纹模型",
+    languageModle:"语种模型",
+    genderModle:"性别模型",
+    keywordModle:"关键词模型"
+  },
 }

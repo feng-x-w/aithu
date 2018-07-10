@@ -2,11 +2,11 @@
   .drill {
     box-sizing: border-box;
   }
-  
+
   .drillTop {
     margin: 10px;
   }
-  
+
   .Nlanguage {
     position: fixed;
     width: 100%;
@@ -40,15 +40,18 @@
     width: 49%;
   }
   .antistop{
-    width: 98%;
+    width: 97%;
     margin: 20px;
     overflow-x: hidden;
   }
   .antistop1{
     float: left;
     /*width: 15px;*/
-    padding: 15px;
+    padding: 10px 15px;
     border: 1px solid black;
+  }
+  .antistop1:hover{
+    background-color: gainsboro;
   }
   .antismid{
     width: 100%;
@@ -92,14 +95,14 @@
 
 <template>
   <div class="drill">
-    <Breadcrumb>
-      <span slot="one">模型管理</span>
-      <span slot="two">关键词</span>
+    <Breadcrumb class="dingw">
+      <span slot="one">{{$t('homeTwo.modelManager')}}</span>
+      <span slot="two">{{$t('homeTwo.keyword')}}</span>
     </Breadcrumb>
 <div class="drillTop">
       <el-form :inline="true" class="demo-form-inline" size="mini">
-        <el-form-item label="搜索关键词">
-          <el-input v-model="filterText" placeholder="关键词" ref="type1"></el-input>
+        <el-form-item :label="$t('homeTwo.searchKeyword')"><!--//搜索关键词-->
+          <el-input v-model="filterText" :placeholder="$t('homeTwo.keyword')" ref="type1"></el-input><!--//关键词-->
         </el-form-item>
       </el-form>
     </div>
@@ -114,17 +117,17 @@
     </div>
     <hr />
     <div class="antismid">
-      <p><span class="span1">添加关键词</span><span class="span2">关键词使用 "," 逗号分割</span></p>
+      <p><span class="span1">{{$t('homeTwo.addKeyword')}}</span><!--添加关键词--><span class="span2">{{$t('homeTwo.splitKeyword')}}</span></p><!--关键词使用 "," 逗号分割-->
       <div class="ipt">
         <el-form>
           <div class="left">
-            <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-edit el-input__icon" v-model="name" clearable required></el-input>
+            <el-input size="mini" :placeholder="$t('homeTwo.inputContent')" suffix-icon="el-icon-edit el-input__icon" v-model="name" clearable required></el-input><!--//请输入内容-->
           </div>
           <span style="float: left;">&nbsp;:&nbsp;</span>
           <div class="right">
-            <el-input size="mini" placeholder="请输入内容" suffix-icon="el-icon-edit el-input__icon" v-model="antistop" clearable required></el-input>
+            <el-input size="mini" :placeholder="$t('homeTwo.inputContent')" suffix-icon="el-icon-edit el-input__icon" v-model="antistop" clearable required></el-input><!--//请输入内容-->
           </div>
-          <el-button class="btn" size="mini" @click="addAntistop">添加</el-button>
+          <el-button class="btn" size="mini" @click="addAntistop">{{$t('homeTwo.add')}}</el-button><!--添加-->
         </el-form>
       </div>
       <div class="ipt list" v-for="i in list">
@@ -135,7 +138,7 @@
         <div class="right">
           {{i.value}}
         </div>
-        <el-button class="btn" size="mini" @click="del(i.id)">删除 </el-button><!---->
+        <el-button type="danger" plain class="btn" size="mini" @click="del(i.id)">{{$t('homeTwo.delete')}} </el-button><!--删除-->
       </div>
     </div>
   </div>
@@ -162,8 +165,8 @@
 //      this.$message.success(val);
         if(val != ""){
           search(val).then((res)=>{
-            if(res.data.data.length > 60){
-              this.datakeyword = res.data.data.splice(0,60);
+            if(res.data.data.length > 57){
+              this.datakeyword = res.data.data.splice(0,57);
               this.xiao = true;
             }if(res.data.data.length < 120){
               this.datakeyword = res.data.data;
@@ -174,7 +177,7 @@
           this.xiao = true;
           antistop().then((res)=>{
           console.log(res);
-          this.datakeyword = res.data.data.splice(0,60);
+          this.datakeyword = res.data.data.splice(0,57);
         })
         }
       }
@@ -186,9 +189,9 @@
     methods: {
 //    添加关键词
       addAntistop(){
-        function changedouhao(str){ 
-          str=str.replace(/，/ig,','); 
-          return str; 
+        function changedouhao(str){
+          str=str.replace(/，/ig,',');
+          return str;
         }
         function unique(arr){
           var res = [];
@@ -212,6 +215,8 @@
               this.name = "";
               this.antistop = "";
               this.lists();
+            }if(res.data.ret == 406){
+              this.$message.error(res.data.msg);
             }
           })
         }
@@ -230,16 +235,16 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          deletes(id).then((res)=>{ 
+          deletes(id).then((res)=>{
             if(res.data.ret == 200){
               this.$message.success("删除成功!");
               this.lists();
             }
           })
         }).catch(() => {
-          this.$message.info("取消删除!")         
+          this.$message.info("取消删除!")
         });
-        
+
       },
 //    初始化数据渲染
       oInit(){

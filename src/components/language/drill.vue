@@ -1,10 +1,10 @@
 <style scoped>
   .drill {}
-  
+
   .drillTop {
     margin: 10px;
   }
-  
+
   .Nlanguage {
     position: fixed;
     width: 100%;
@@ -57,12 +57,21 @@
     transform: translate(-50%,-50%);
     background-color: white;
     padding: 25px 50px;
-    padding-left: 0;
+    padding-left: 15px;
     border-radius: 9px;
   }
   .target_add>h1 {
     font-family: "微软雅黑";
     margin-bottom: 10px;
+  }
+  .target_add>p {
+    font-family: "微软雅黑";
+    margin-bottom: 10px;
+    font-size: 12px;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    color: #ababab;
   }
   .show_taskadd{
     width: 40%;
@@ -127,164 +136,111 @@
 <template>
   <div class="drill">
     <Breadcrumb>
-      <span slot="one">模型管理</span>
-      <span slot="two">语种模型管理</span>
+      <span slot="one">{{$t('drill.modelManager')}}</span><!--模型管理-->
+      <span slot="two">{{$t('drill.languageModleManager')}}</span><!--语种模型管理-->
     </Breadcrumb>
     <div class="drillTop">
       <el-form :inline="true" :model="form" class="demo-form-inline" size="mini">
-        <el-form-item label="语种名称">
-          <el-input v-model="form.mlanguage" placeholder="语种名称"></el-input>
+        <el-form-item :label="$t('drill.languageName')"><!--//语种名称-->
+          <el-input v-model="form.mlanguage" :placeholder="$t('drill.languageName')"></el-input><!--//语种名称-->
         </el-form-item>
-        <el-form-item label="训练状态" size="mini">
-          <el-select v-model="form.status" placeholder="训练状态">
-            <el-option label="正在训练" value="1"></el-option>
-            <el-option label="训练完成" value="2"></el-option>
-            <el-option label="全部" value=""></el-option>
+        <el-form-item :label="$t('drill.trainingState')" size="mini"><!--//训练状态-->
+          <el-select v-model="form.status" :placeholder="$t('drill.trainingState')"><!--//训练状态-->
+            <el-option :label="$t('drill.trainingState1')" value="1"></el-option><!--//正在训练-->
+            <el-option :label="$t('drill.trainingState2')" value="2"></el-option><!--//训练完成-->
+            <el-option :label="$t('drill.all')" value=""></el-option><!--//全部-->
           </el-select>
         </el-form-item>
         <!--<el-form-item label="操作人" size="mini">
           <el-input v-model="form.operation" placeholder="操作人"></el-input>
         </el-form-item>-->
         <el-form-item size="mini">
-          <el-button type="primary" @click="modelS" icon="el-icon-search">查询</el-button><!---->
+          <el-button type="primary" @click="modelS" icon="el-icon-search">{{$t('drill.search')}}</el-button><!--查询-->
         </el-form-item>
         <el-form-item size="mini">
-          <el-button type="primary" @click="newlan">新建语种</el-button>
+          <el-button type="primary" @click="newlan">{{$t('drill.creatLanguage')}}</el-button><!--新建语种-->
+        </el-form-item>
+        <el-form-item size="mini"><!-- plain style="margin-left: 10px !important;"-->
+        <el-button type="primary" @click="initialize">{{$t('drill.init')}}</el-button><!--初始化-->
         </el-form-item>
       </el-form>
       <div class="target" v-show="target">
         <div class="target_add">
-          <h1>新建语种</h1>
+          <h1>{{$t('drill.creatLanguage')}}</h1><!--新建语种-->
+          <p>语种模型通常由专业人员创建，新建或修改可能造成语种识别结果不准确，您确认要新建语种模型吗？</p>
           <el-form :model="languagesList" :rules="rules_target" ref="languagesList" label-width="100px" class="demo-ruleForm">
-            <el-form-item label="名称" prop="language" required>
+            <el-form-item :label="$t('drill.name')" prop="language" required><!--//名称-->
               <el-input v-model="languagesList.language" name="language"></el-input>
             </el-form-item>
-            <el-form-item label="描述">
+            <el-form-item :label="$t('drill.description')"><!--//描述-->
               <el-input type="textarea" v-model="languagesList.desc"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="newla">创建</el-button>
+              <el-button type="primary" @click="newla">{{$t('drill.creat')}}</el-button><!--创建-->
               <!--<el-button @click="resetForm()">重置</el-button>-->
-              <el-button @click="onEsc" type="danger" plain style="margin-left: 10px !important;">关闭</el-button>
+              <el-button @click="onEsc" type="danger" plain style="margin-left: 10px !important;">{{$t('drill.close')}}</el-button><!--关闭-->
             </el-form-item>
           </el-form>
         </div>
       </div>
-      <!--新建语种模型上传语音-->
-      <!--<div class="show_taskadd" v-show="show_newg_lan">
-        <div class="shangL" v-show="xiaoshi1">
-<el-upload 
-class="upload-demo" 
-ref="upload" 
- action="http://192.168.1.118/task/upload"
-:on-preview="handlePreview" 
-:on-remove="handleRemove" 
-:file-list="fileList" 
-:on-change="addfile"
-:on-success="handleSuccess"
-:on-error="handleError"
-:data="UpData"
-accept=".wav,.mp3,.flac"
-multiple
-:auto-upload="false">
-<el-button slot="trigger" size="small" type="primary" @click="dianjia">选取文件</el-button>
-<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-<el-button size="small" type="primary" @click="Remote" v-show="dianji1">远端上传</el-button>
-<div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
-</el-upload>
-        </div>
-        <div class="shangR" v-show="xiaoshi">
-          <h2>请选择文件夹</h2>
-            <ul>
-              <div class="asdd" v-for="(i,key) in addfiles" @click="cName(key)">
-                <li>
-                  <input type="radio" name="fils" :id="key" /> <label :for="key">{{i.name}}</label>
-                  <br />
-                </li>
-              </div>
-              
-              <div style="text-align: right;padding-top: 5px;">
-<el-button type="submit" size="small" @click="ftotfiles()">确认上传</el-button>
-              </div>
-            </ul>
-        </div>
-      </div>-->
       <!--新建语种-->
       <div class="Nlanguage" v-show="nlguage">
         <div class="NLG">
-          <h1 style="text-align: center;margin-bottom:10px;">语种详情</h1>
+          <h1 style="text-align: center;margin-bottom:10px;">{{$t('drill.languageInfo')}}</h1><!--语种详情-->
         	<div class="left">
 <el-form ref="amendLanguagesList" :model="amendLanguagesList" label-width="80px">
-  <el-form-item label="语种名称" prop="language">
+  <el-form-item :label="$t('drill.languageName')" prop="language"><!--//语种名称-->
     <el-input v-model="amendLanguagesList.language"></el-input>
   </el-form-item>
-  <el-form-item label="描述">
+  <el-form-item :label="$t('drill.description')"><!--//描述-->
     <el-input type="textarea" prop="desc" v-model="amendLanguagesList.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="addlangu">修改</el-button>
-    <el-button type="danger" @click="onEsc" style="margin-left: 10px !important;">关闭</el-button>
+    <el-button type="primary" @click="addlangu">{{$t('drill.modification')}}</el-button><!--修改-->
+    <el-button type="danger" @click="onEsc" style="margin-left: 10px !important;">{{$t('drill.close')}}</el-button><!--关闭-->
   </el-form-item>
 </el-form>
         	</div>
         	<div class="right">
 <div class="target_right">
-  <h3>模型文件列表</h3>
-<el-upload 
-  class="upload-demo" 
-  ref="upload" 
+  <h3>{{$t('drill.modleFileTable')}}</h3><!--模型文件列表-->
+<el-upload
+  class="upload-demo"
+  ref="upload"
   action="http://192.168.1.118/lre/model/speech/add"
   :on-success="handleS"
-  :file-list="fileList" 
+  :file-list="fileList"
   :data="UpData"
   accept=".wav,.mp3,.flac"
   multiple
   :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
+  <el-button slot="trigger" size="small" type="primary">{{$t('drill.chooseFile')}}</el-button><!--选取文件-->
+  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">{{$t('drill.upolad')}}</el-button><!--上传到服务器-->
+  <div slot="tip" class="el-upload__tip">{{$t('drill.uploadReq')}}</div><!--只能上传.WAV,.MP3,.FLAC文件-->
 </el-upload>
-    <el-button style="margin: 3px 0;" type="primary" @click="Train" :disabled="xli" :loading="xunlian">训练</el-button><!---->
+    <el-button style="margin: 3px 0;" type="primary" @click="Train" :disabled="xli" :loading="xunlian">{{$t('drill.training')}}</el-button><!--训练-->
   <template>
-    <table class="tasktable">
-      <tr>
-        <th>文件名</th>
-        <th>文件大小</th>
-        <th>操作</th>
-      </tr>
-      <tr v-for="i in speechi">
-        <td>
-          {{i.filename}}
-        </td>
-        <td>
-          {{i.filesize}}
-        </td>
-        <td>
-            <el-button type="text" @click="newTask(i.id)" title="详情">
-              <i class="el-icon-caret-right"></i><!--播放-->
-            </el-button>
-            <el-button type="text" @click="modelDelete(i.id)" style="color: red;" title="删除">
-              <i class="el-icon-delete"></i><!--删除-->
-            </el-button>
-        </td>
-      </tr>
-    </table>
-    <!--<el-table :data="speechi" style="width: 100%">
-      <el-table-column label="文件名" prop="filename">
-      </el-table-column>
-      <el-table-column label="文件大小" prop="filesize">
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-<el-button size="mini" @click="plays(scope)">
-  <i class="el-icon-caret-right"></i>
-</el-button>
-<el-button size="mini" type="danger" @click="speechDele(scope)">
-  <i class="el-icon-delete"></i>
-</el-button>
-        </template>
-      </el-table-column>
-    </el-table>-->
+    <div class="taskmid">
+      <table><!-- class="tasktable"-->
+        <tr>
+          <th> {{$t('drill.fileName')}} </th>
+          <th> {{$t('drill.fileSize')}} </th>
+          <th> {{$t('drill.operation')}} </th>
+        </tr>
+        <tr v-for="i in speechi">
+          <td> {{i.filename}} </td>
+          <td> {{i.filesize}} </td>
+          <td>
+              <el-button type="text" @click="newTask(i.id)" :title="$t('drill.details')">
+                <i class="el-icon-caret-right" style="font-size: 20px;"></i><!--播放-->
+              </el-button>
+              <el-button type="text" @click="modelDelete(i.id)" style="color: red;" :title="$t('drill.delete')">
+                <i class="el-icon-delete"></i><!--删除-->
+              </el-button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </template>
 <div class="block"><!--分页-->
   <!--<el-pagination
@@ -298,40 +254,38 @@ multiple
           layout="total, sizes, prev, pager, next, jumper"
           :total="totalCount">
         </el-pagination>-->
-</div> 
+</div>
 </div>
         	</div>
         </div>
       </div>
       <hr />
-        <table class="tasktable">
+      <div class="taskmid">
+        <table><!-- class="tasktable"-->
           <tr>
-            <th>名称</th>
-            <th>描述</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th>{{$t('drill.name')}}</th><!--名称-->
+            <th>{{$t('drill.description')}}</th><!--描述-->
+            <th>{{$t('drill.state')}}</th>
+            <th>{{$t('drill.operation')}}</th><!--操作-->
           </tr>
           <tr v-for="i in tableData">
+            <td> {{i.language}} </td>
+            <td> {{i.desc}} </td>
             <td>
-              {{i.language}}
+              <span v-if="i.status==1">{{$t('drill.usable')}}</span><!--可用-->
+              <span v-if="i.status==0">{{$t('drill.unusable')}}</span><!--不可用-->
             </td>
             <td>
-              {{i.desc}}
-            </td>
-            <td>
-              <span v-if="i.status==1">可用</span>
-              <span v-if="i.status==0">不可用</span>
-            </td>
-            <td>
-                <el-button type="text" @click="newTask(i.id)" title="详情">
+                <el-button type="text" @click="newTask(i.id)" :title="$t('drill.details')"><!--//详情-->
                   <i class="el-icon-info"></i>
                 </el-button>
-                <el-button type="text" @click="modelDelete(i.id)" style="color: red;" title="删除">
+                <el-button type="text" @click="modelDelete(i.id)" style="color: red;" :title="$t('drill.delete')"><!--//删除-->
                   <i class="el-icon-delete"></i>
                 </el-button><!---->
             </td>
           </tr>
         </table>
+      </div>
         <!--<el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -349,7 +303,7 @@ multiple
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
-  import { addlanguage, languageModel, ModelDetail, modelUpdate, ModelDel, ModelTrain, speechdele, modelsearch } from '@/api/newlang'
+  import { addlanguage, languageModel, ModelDetail, modelUpdate, ModelDel, ModelTrain, speechdele, modelsearch, resetInit } from '@/api/newlang'
   export default {
 //  页面初始化
     created(){
@@ -382,13 +336,24 @@ console.log(this.amendLanguagesList.language,this.amendLanguagesList.desc,this.a
       onEsc(){
         this.nlguage = false;
         this.target = false;
-        this.languagesList.language = '',
-        this.languagesList.desc = ''
+        this.languagesList.language = '';
+        this.languagesList.desc = '';
+      },
+//    初始化页面内容，将用户添加的删掉
+      initialize(){
+        this.$message.success("初始化成功");
+        resetInit().then((res)=>{
+          if(res.data.ret == 200){
+            this.LModel();
+          }
+        })
+        
       },
 //    新建语种模型
       newlan(){
         this.target = true;
       },
+//    点击创建语种
       newla(){
         addlanguage(this.languagesList.language,this.languagesList.desc).then((res)=>{
           console.log(res);
@@ -396,7 +361,6 @@ console.log(this.amendLanguagesList.language,this.amendLanguagesList.desc,this.a
             this.$message.success("创建成功")
             this.target = false;
             this.LModel();
-//          this.show_newg_lan = true;
           }if(res.data.ret == 400){
             this.$message.error("语种名称重复")
           }
@@ -451,12 +415,12 @@ console.log(this.amendLanguagesList.language,this.amendLanguagesList.desc,this.a
         console.log(this.speechi);
 //        ModelTrain(this.Mid).then((res)=>{
             if(this.speechi.length != 0){
-            
+
             this.xunlian = true;
             this.$alert('正在训练，点击取消关闭本窗口，稍后可查看训练结果。',{
               confirmButtonText: '确定'
             });
-            
+
     //      console.log(this.filemid);
             ModelTrain(this.Mid).then((res)=>{
               console.log(res);
@@ -483,7 +447,7 @@ console.log(this.amendLanguagesList.language,this.amendLanguagesList.desc,this.a
 //    Remote(){
 //      this.xiaoshi = true;
 //      this.xiaoshi1 = false;
-//      
+//
 //    },
 //    详情弹框
       newTask(id) {
@@ -507,19 +471,19 @@ console.log(this.amendLanguagesList.language,this.amendLanguagesList.desc,this.a
                 this.LModel();
               }
             })
-            
+
         }).catch(() => {
           this.$message.info('已取消删除');
         });
-        
+
       },
-      
+
 //    上传到服务器
       submitUpload(){
         this.$refs.upload.submit();
       },
       handleSuccess(){
-        
+
       }
     },
     data() {
@@ -531,7 +495,6 @@ console.log(this.amendLanguagesList.language,this.amendLanguagesList.desc,this.a
         target:false,
         nlguage:false,
         xiaoshi:false,
-        show_newg_lan:false,
         xiaoshi1:true,
         dianji1:true,
         xunlian:false,
