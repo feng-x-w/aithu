@@ -114,16 +114,17 @@
 	  </div>
 	  <div class="header">
 	    <div class="LeftLogo">
-  			<img src="../../assets/logo2.png"/>&nbsp;
+  			<img src="../../assets/文件/logo2.png" />&nbsp;
   			<span>
   			  {{$t('logo.title')}}
   			</span>
   		</div>
+  		<!---->
   		<!--<div @click="switchLanguage">{{language == 'zh' ? 'English' : '中文'}}</div>-->
   		<!--<el-button @click="switchLanguage" size="mini" round>{{language == 'zh' ? 'English' : '中文'}}</el-button>-->
   		<div class="LoginUser" type="text" @click="OpenThe">
-  			<img src="../../assets/_20180622145804.png"/>
-  			<span>{{$t('header_deng.UserName')}}</span>
+  			<img :src="$store.state.countImg"/>
+  			<span>{{$store.state.countName}}</span><!--$t('header_deng.UserName')-->
   			<div class="deng" v-show="isShow">
   				<ul>
   					<router-link tag="li" to="/userdata">{{$t('header_deng.user')}}</router-link><!-- @click="user"-->
@@ -142,9 +143,11 @@
 <script>
 	import Cookies from 'js-cookie'
 	import { language, getlanguage } from "@/api/language"
+	import { userinfo } from '@/api/UpLoading'
 	export default{
 		data(){
 			return{
+			  img:"./static/img/_20180622145804.png",
 			  num:1,
 				language: Cookies.get('language'),
 				isShow:false,
@@ -153,6 +156,8 @@
 		},
 		created(){
 		  this.initiation();
+		  this.userInFo();
+		  console.log(this.$store.state.count+"我是vuex变量");
 		},
 		methods:{
 			switchLanguage() {
@@ -184,10 +189,29 @@
 			      this.langg = "Lang English";
 			    }
 			  })
+//			  userinfo().then((res)=>{
+//			    this.img = process.env.BASE_API + res.data.data.avatar;
+//			  })
 			},
 			OpenThe() {
     		this.isShow = !this.isShow;
-  	   }
+  	  },
+  	  userInFo() {
+        userinfo().then((res) => {
+          this.$store.state.countName = res.data.data.username;
+          if(res.data.data.avatar != "null"){
+//          console.log(avatar);
+            this.$store.state.countImg = process.env.BASE_API + res.data.data.avatar;
+          }else{
+            this.$store.state.countImg = process.env.BASE_API + "/static/img/_20180622145804.png";
+//          this.$store.state.countImg = this.ImgUrl;
+          }
+//        console.log(this.ImgUrl+"我是图片地址");
+//        if(res.data.data.avatar != ""){
+//          this.Image = true;
+//        }
+        })
+      }
 		}
 	}
 </script>

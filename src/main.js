@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+//import Vuex from 'vuex';
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
@@ -9,7 +10,7 @@ import i18n from './lang'
 import axios from 'axios'
 import Vuelidate from 'vuelidate'
 import $ from 'jquery'
-
+import store from './stores/store'
 
 Vue.use(Vuelidate)
 Vue.prototype.$axios = axios;
@@ -26,6 +27,7 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  store,//使用store
   components: { App },
   template: '<App/>'
 })

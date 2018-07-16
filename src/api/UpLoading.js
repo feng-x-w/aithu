@@ -1,9 +1,9 @@
 import request from '@/utils/request'
 export function UpLoading(files) {
-    return request.get('/sr/model/speech/add?mid=1',{
-      params:{
+    return request.post('/sr/model/speech/add?mid=1',{
+//    params:{
 		    files
-      }
+//    }
     })
 }
 //export function useredit(idnumber, tel, email, address, signature, file) {
@@ -19,7 +19,7 @@ export function UpLoading(files) {
 //  })
 //}
 export function userinfo() {
-    return request.get('/user/info',{
+    return request.post('/user/info',{
 //    params:{
 //		    username:username,
 //		    password:password,
@@ -30,17 +30,17 @@ export function userinfo() {
     })
 }
 export function userchecked(passwd) {
-    return request.get('/user/passwd/check',{
-      params:{
+    return request.post('/user/passwd/check',{
+//    params:{
 		    passwd:passwd
-      }
+//    }
     })
 }
 export function userpasswdedit(newpasswd, confirm) {
-    return request.get('/user/passwd/edit',{
-      params:{
+    return request.post('/user/passwd/edit',{
+//    params:{
 		    newpasswd:newpasswd,
         confirm:confirm
-      }
+//    }
     })
 }

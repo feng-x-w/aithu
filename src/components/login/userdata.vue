@@ -31,7 +31,30 @@
   .el-aside{
     overflow: initial;
   }
-
+  .ding{
+    position: relative;
+    width: 199px;
+    height: 199px;
+  }
+  .Images{
+    width: 199px;
+    height: 199px;
+  }
+  .load{
+    position: absolute;
+    border: 1px solid gainsboro;
+    width: 199px;
+    height: 199px;
+  }
+  .text{
+    position: absolute;
+    left: 48px;
+    bottom: -20px;
+  }
+  .loadmeng{
+    z-index: 199;
+    cursor:not-allowed;
+  }
 </style>
 
 <template>
@@ -41,10 +64,14 @@
     </Breadcrumb>
     <el-container>
       <el-aside width="200px" class="user_main">
+        <div class="ding">
+          <div class="load" @click="upimg"></div>
+          <div class="load loadmeng" v-show="disab"></div>
 <img class="Images" v-show="Image" :src="ImgUrl" height="200" width="200" alt="image preview..."/><br />
 <input ref="file" type="file" @change="previewFile($event)" style="display: none;"/>
-<el-button @click="upimg" size="mini" style="margin: 5px 0;" :disabled="disab">上传头像</el-button>
-<p style="font-size: 12px;color: gray;">头像不能超过500k</p>
+<p class="text" style="font-size: 12px;color: gray;">头像不能超过500k</p>
+        </div>
+          
       </el-aside>
       <el-main class="Udatas">
         <div class="UserData" v-show="former">
@@ -79,7 +106,7 @@
           <el-row>
             <el-col :span="12">
               <div class="grid-content bg-purple">
-                <el-form-item label="Email" status-icon prop="email" :required="req">
+                <el-form-item label="Email" prop="email"><!--邮箱 :required="req"-->
                   <el-input v-model="ruleFormOne.email" :disabled="disab"></el-input>
                 </el-form-item>
               </div>
@@ -108,7 +135,7 @@
               <div class="grid-content bg-purple">
                 <el-button type="primary" @click="amend" v-show="cang">{{$t('userdata.modifyInfo')}}</el-button><!--修改资料-->
                 <router-link to="/changepass" tag="el-button" type="primary" v-show="cang" style="margin-left: 10px !important;">{{$t('userdata.changePass')}}</router-link><!--修改密码-->
-                <el-button type="primary" @click="confirm($event)" v-show="cang1">{{$t('userdata.confirm')}}</el-button><!--确定-->
+                <el-button type="primary" @click="confirm($event, 'ruleFormOne')" v-show="cang1">{{$t('userdata.confirm')}}</el-button><!--确定-->
                 <el-button type="primary" @click="cancel" v-show="cang1" style="margin-left: 10px !important;">{{$t('userdata.cancle')}}</el-button><!--取消-->
               </div>
             </el-col>
@@ -124,6 +151,7 @@
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
   import { useredit, userinfo } from '@/api/UpLoading'
+  import { mapState } from 'vuex'
   export default {
     components: {
       Breadcrumb
@@ -139,38 +167,11 @@
         file:'',
         fileList:[],
         disab:true,
-        req:false,
         cang:true,
         cang1:false,
         former:true,
-        ruleFormOne: {},
-        rulesed: {
-          email: [{
-              required: true,
-              message: '请输入邮箱地址',
-              trigger: 'blur'
-            },
-            {
-              type: 'email',
-              message: '请输入正确的邮箱地址',
-              trigger: ['blur']
-            } //'change'
-          ]
-        },
-
+        ruleFormOne: {}
       };
-    },
-//  计算属性
-    computed:{
-//    UpData() {
-//      return {
-//        idnumber:this.ruleFormOne.idnumber,
-//        tel:this.ruleFormOne.tel,
-//        email:this.ruleFormOne.email,
-//        address:this.ruleFormOne.address,
-//        signature:this.ruleFormOne.signature
-//      }
-//    }
     },
     methods: {
 //    上传头像
@@ -193,71 +194,128 @@
 //    点击修改用户资料
       amend(){
         this.disab = false;
-        this.req = true;
         this.cang = false;
         this.cang1 = true;
       },
 //    确定
       confirm(ev){
-        console.log(this.file);
-        console.log(typeof(this.file));
-        ev.preventDefault();
-        let formData = new FormData();
-        formData.append('idnumber',this.ruleFormOne.idnumber);
-        formData.append('tel', this.ruleFormOne.tel);
-        formData.append('email', this.ruleFormOne.email);
-        formData.append('address', this.ruleFormOne.address);
-        formData.append('signature', this.ruleFormOne.signature);
-        formData.append('file', this.file);
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
+          ev.preventDefault();
+          let formData = new FormData();
+          formData.append('idnumber',this.ruleFormOne.idnumber);
+          formData.append('tel', this.ruleFormOne.tel);
+          formData.append('email', this.ruleFormOne.email);
+          formData.append('address', this.ruleFormOne.address);
+          formData.append('signature', this.ruleFormOne.signature);
+          formData.append('file', this.file);
+          let config = {
+            headers: { 'Content-Type': 'multipart/form-data' }
           }
-        }
+          let src = '/user/info/edit';
+          if(this.file){
+            const filet = this.file.type;
+            const isJPEG = filet === 'image/jpeg';
+            const isJPG = filet === 'image/jpg';
+            const isPNG = filet === 'image/png';
+            const isLt500k = this.file.size / 1024 / 1024 < 0.5; 
+            if(isJPEG || isJPG || isPNG){
+              if(isLt500k){
+                this.ModifiedData(src, formData, config);
+              }else{this.$message.error("上传头像大小不能超过500k");
+              }
+            }else{this.$message.error("上传头像必须是.jpeg、.jpg、.png格式");
+            }
+          }else{this.ModifiedData(src, formData, config);
+          }
+      },
+      ModifiedData(src, formData, config){
         let _this = this;
-        this.$axios.post(process.env.BASE_API+'/user/info/edit', formData, config).then(function (res) {
-          if (res.data.ret === 200) {
-//          alert("创建成功");
-            /*这里做处理*/
-            _this.$message.success("修改成功");
-            _this.disab = true;
-            _this.req = false;
-            _this.cang = true;
-            _this.cang1 = false;
-            _this.userInFo();
-          }
-//        if(res.data.ret == 405){
-//          _this.$message.error("目标人已存在");
-////          alert("用户名重复");
-//        }
-        })
-//      this.$refs.upload.submit();
-//      useredit(this.ruleFormOne.idnumber,this.ruleFormOne.tel,this.ruleFormOne.email,this.ruleFormOne.address,this.ruleFormOne.signature,).then((res)=>{
-//        console.log();
-//        if(res.data.ret == 200){
-//          this.$message.success("修改成功");
-//          this.disab = true;
-//          this.req = false;
-//          this.cang = true;
-//          this.cang1 = false;
-//          this.userInFo();
-//        }
-//      })
+        var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+        if(this.ruleFormOne.email == ""){
+          this.$axios.post(process.env.BASE_API + src, formData, config).then(function (res) {
+            if (res.data.ret === 200) {
+              /*这里做处理*/
+              _this.$message.success(_this.$t('script.AmendSuccess'));//修改成功
+              _this.disab = true;
+              _this.cang = true;
+              _this.cang1 = false;
+              _this.userInFo();
+            }if(res.data.ret == 407){
+              _this.$message.error("邮箱格式错误");
+            }
+          })
+        }else{
+          if(!reg.test(this.ruleFormOne.email)){ //正则验证不通过，格式不对
+          　　　　_this.$message.error("邮箱格式错误");
+          　　　　return false;
+            　　  }else{
+            this.$axios.post(process.env.BASE_API + src, formData, config).then(function (res) {
+              if (res.data.ret === 200) {
+                /*这里做处理*/
+                _this.$message.success(_this.$t('script.AmendSuccess'));//修改成功
+                _this.disab = true;
+                _this.cang = true;
+                _this.cang1 = false;
+                _this.userInFo();
+              }if(res.data.ret == 407){
+                _this.$message.error("邮箱格式错误");
+              }
+            })
+            　   }
+        }
       },
 //    取消
       cancel(){
+        this.userInFo();
         this.disab = true;
-        this.req = false;
         this.cang = true;
         this.cang1 = false;
       },
       //    获取用户名密码
       userInFo() {
         userinfo().then((res) => {
-          console.log(res);
           this.ruleFormOne = res.data.data;
+          let address = res.data.data.address,
+              avatar = res.data.data.avatar,
+              email = res.data.data.email,
+              idnumber = res.data.data.idnumber,
+              nickname = res.data.data.nickname,
+              qq = res.data.data.qq,
+              signature = res.data.data.signature,
+              tel = res.data.data.tel,
+              wechat = res.data.data.wechat;
+          if(address != "null"){
+//          console.log(address);
+          }else{this.ruleFormOne.address = ""}
+          if(avatar != "null"){
+//          console.log(avatar);
+          }else{
+            this.ImgUrl = process.env.BASE_API + "/static/img/_20180622145804.png";
+            this.$store.state.countImg = this.ImgUrl;
+          }
+          if(email != "null"){
+//          console.log(email);
+          }else{this.ruleFormOne.email = ""}
+          if(idnumber != "null"){
+//          console.log(idnumber);
+          }else{this.ruleFormOne.idnumber = ""}
+          if(nickname != "null"){
+//          console.log(nickname);
+          }else{this.ruleFormOne.nickname = ""}
+          if(qq != "null"){
+//          console.log(qq);
+          }else{this.ruleFormOne.qq = ""}
+          if(signature != "null"){
+//          console.log(signature);
+          }else{this.ruleFormOne.signature = ""}
+          if(tel != "null"){
+//          console.log(tel);
+          }else{this.ruleFormOne.tel = ""}
+          if(wechat != "null"){
+//          console.log(wechat);
+          }else{this.ruleFormOne.wechat = ""}
           this.ImgUrl = process.env.BASE_API + this.ruleFormOne.avatar;
-          console.log(this.ImgUrl);
+          this.$store.state.countImg = this.ImgUrl;
+          this.$store.state.countName = this.ruleFormOne.username;
           if(res.data.data.avatar != ""){
             this.Image = true;
           }

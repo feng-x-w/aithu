@@ -14,6 +14,7 @@ import taskM from '@/components/task/taskM'
 import result from '@/components/result/result'
 import newfile from '@/components/aaa/new_file'
 import voice from '@/components/VoiceIndexing/voice'
+import config from '@/components/configuration/config'
 
 Vue.use(Router)
 
@@ -108,6 +109,11 @@ const router = new Router({
           path: '/newfile',
           name: 'newfile',
           component: newfile
+        },
+        {
+          path: '/config',
+          name: 'config',
+          component: config
         }
       ]
     }

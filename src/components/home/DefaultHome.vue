@@ -1,24 +1,27 @@
 <style scoped>
-  .tasktop{
+  .tasktop {
     width: 80%;
     margin: 6% auto 20px;
     font-size: 18px;
     line-height: 40px;
   }
-  .taskmid{
+  
+  .taskmid {
     width: 75%;
     margin: 0 auto;
     font-size: 18px;
     line-height: 40px;
   }
-  .taskmid>h3{
+  
+  .taskmid>h3 {
     font-size: 20px;
-    
   }
-  .taskmid>ul{
+  
+  .taskmid>ul {
     padding: 0 20px;
   }
-  .taskmid>ul>li{
+  
+  .taskmid>ul>li {
     list-style-type: disc;
   }
 </style>
@@ -34,10 +37,10 @@
     <div class="taskmid">
       <h3>{{$t('DefaultHome.h3')}}:</h3>
       <ul>
-      	<li>{{$t('DefaultHome.ulli1')}}</li>
-      	<li>{{$t('DefaultHome.ulli2')}}</li>
-      	<li>{{$t('DefaultHome.ulli3')}}</li>
-      	<li>{{$t('DefaultHome.ulli4')}}</li>
+        <li>{{$t('DefaultHome.ulli1')}}</li>
+        <li>{{$t('DefaultHome.ulli2')}}</li>
+        <li>{{$t('DefaultHome.ulli3')}}</li>
+        <li>{{$t('DefaultHome.ulli4')}}</li>
       </ul>
     </div>
   </div>
@@ -50,13 +53,13 @@
       Breadcrumb
     },
     methods: {
-      
+
     },
     data() {
       return {
-        
+
       }
     }
-    
+
   }
 </script>

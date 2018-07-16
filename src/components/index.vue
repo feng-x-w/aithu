@@ -129,7 +129,7 @@
 					</el-collapse-item>
 					<el-collapse-item :title="$t('voiceIndex.modelManager')" name="bbb" style="text-align: left;" key="3"><!--//模型管理-->
 						<router-link class="btn" to="/home" tag="el-button"><!---->
-              <i class="fa fa-volume-up fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.modelManager')}}<!--声纹模型-->
+              <i class="fa fa-volume-up fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.voiceModle')}}<!--声纹模型-->
             </router-link>
 						<router-link class="btn" to="/drill" tag="el-button"><!---->
               <i class="fa fa-language fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.languageModle')}}<!--语种模型-->
@@ -140,12 +140,15 @@
 						<router-link class="btn" to="/homeTwo" tag="el-button"><!---->
               <i class="fa fa-key fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.keywordModle')}}<!--关键词模型-->
             </router-link>
-					</el-collapse-item>
-					<!--<el-collapse-item title="语音索引" name="ddd" style="text-align: left;" key="4">
             <router-link class="btn" to="/voice" tag="el-button">
-              <i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;语音索引
+              <i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.voiceIndex')}}
             </router-link>
-          </el-collapse-item>-->
+					</el-collapse-item>
+					<el-collapse-item title="参数配置" name="ddd" style="text-align: left;" key="4">
+            <router-link class="btn" to="/config" tag="el-button">
+              <i class="fa fa-list fa-lg"></i>&nbsp;&nbsp;&nbsp;{{$t('voiceIndex.voiceIndex')}}
+            </router-link>
+          </el-collapse-item>
 				</el-collapse>
 			</el-aside>
 			<el-main>

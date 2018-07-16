@@ -11,6 +11,7 @@ const service = axios.create({
   transformRequest: [function(data) {
     // 对 data 进行任意转换处理
     return Qs.stringify(data);
+//  return data;
   }],
 });
 

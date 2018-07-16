@@ -2,12 +2,15 @@
   .NextClass {
     padding: 12px;
   }
+  
   .NextClass> {
     color: darkred;
   }
+  
   .el-col-11 {
     width: 87.83333%;
   }
+  
   .custom-tree-node {
     flex: 1;
     display: flex;
@@ -16,6 +19,7 @@
     font-size: 14px;
     padding-right: 8px;
   }
+  
   .target {
     position: fixed;
     text-align: center;
@@ -26,59 +30,73 @@
     height: 100%;
     z-index: 100;
   }
+  
   .target_add {
     width: 40%;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background-color: white;
     padding: 25px 50px;
     padding-left: 15px;
     border-radius: 9px;
   }
+  
   .target_add>h1 {
     font-family: "微软雅黑";
     margin-bottom: 10px;
   }
+  
   .filter-tree {
     width: 100%;
     margin-top: 10px;
   }
+  
   .filter-tree>li {
     width: 100%;
     font-size: 14px;
     padding: 5px;
     overflow: hidden;
   }
+  
   .filter-tree>li>span {
     float: left;
   }
+  
   .filter-tree>li>div {
     float: right;
   }
+  
   .filter-tree>li:hover {
     background-color: #e5e5e5;
   }
-  .nowpage{
-    background-color: #d6d6d6;;
+  
+  .nowpage {
+    background-color: #d6d6d6;
+    ;
   }
+  
   .addmans {
     background-color: rgba(0, 0, 0, .5);
   }
+  
   .addmans>.target_add {
     width: 80%;
     overflow: hidden;
   }
+  
   .el-form-item {
-    margin-bottom: 19px;
+    margin-bottom: 15px;
   }
+  
   .target_left {
     float: left;
     width: 50%;
     border-right: 1px solid #d4d4d4;
     padding-right: 25px;
   }
+  
   .target_right {
     float: right;
     width: 45%;
@@ -86,21 +104,26 @@
     text-align: left;
     overflow: auto;
   }
-  .el-aside{
+  
+  .el-aside {
     overflow: initial;
   }
+  
   .tasktable {
     width: 100%;
     margin: 0 auto;
     text-align: left;
     /*border: 1px solid red;*/
   }
+  
   .tasktable>tr {
     border: 1px solid #e3e3e3;
   }
+  
   .tasktable>tr:hover {
     background-color: #ebebeb;
   }
+  
   .tasktable>tr>th {
     border: 1px solid #e3e3e3;
     color: #909399;
@@ -109,26 +132,29 @@
     font-weight: 600;
     padding: 10px;
   }
+  
   .tasktable>tr>td {
     border: 1px solid #e3e3e3;
     padding: 10px;
     font-size: 13px;
   }
-  .tasktable>tr>.addre{
+  
+  .tasktable>tr>.addre {
     display: inline-block;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     border: none;
   }
-  .tasktable>tr>td>.addre1{
+  
+  .tasktable>tr>td>.addre1 {
     width: 100px;
     /*display: inline-block;*/
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .wei{
+  /*.wei{
     width: 99.8%;
     text-align: center;
     font-size: 16px;
@@ -136,51 +162,51 @@
     border: 1px solid #e3e3e3;
     border-top: 0;
     padding: 15px 0;
-  }
-  .el-button--text{
+  }*/
+  
+  .el-button--text {
     padding: 0;
   }
-  .mobiao{
+  
+  .mobiao {
     margin: 10px;
     margin-top: 0;
     margin-left: 0;
   }
-  .menb{
+  
+  .menb {
     position: fixed;
     text-align: center;
-    background-color:rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 100;
   }
-  .menb>div{
+  
+  .menb>div {
     position: fixed;
     text-align: center;
-    /*background-color: rgba(0, 0, 0, .5);*/
     top: 50%;
     left: 50%;
     width: 39%;
     z-index: 120;
   }
-  /*.el-input{
-    margin: 8px 0;
-  }*/
-  .TargetGroup{
-    /*background: -webkit-linear-gradient(right, #fff, #e7e7e7);  Safari 5.1 - 6.0*/ 
-    /*background: -o-linear-gradient(right, #fff, #e7e7e7);  Opera 11.1 - 12.0*/ 
-    /*background: -moz-linear-gradient(right, #fff, #e7e7e7);  Firefox 3.6 - 15*/ 
-    /*background: linear-gradient(right, #fff, #e7e7e7);  标准的语法*/ 
-   background: -webkit-gradient(linear, right top, left top, from(#fbfbfb), to(#e7e7e7));
+  
+  .TargetGroup {
+    background: -webkit-gradient(linear, right top, left top, from(#fbfbfb), to(#e7e7e7));
     margin: -8px 0 10px -11px;
     font-size: 14px;
     padding: 10px;
   }
-  .el-main{
-    padding-top: 0;/* !important*/
+  
+  .el-main {
+    padding-top: 0;
+    /* !important*/
   }
   /*上传头像*/
+  
   .avatar-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
@@ -188,9 +214,11 @@
     position: relative;
     overflow: hidden;
   }
+  
   .avatar-uploader .el-upload:hover {
     border-color: #409EFF;
   }
+  
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -199,34 +227,63 @@
     line-height: 178px;
     text-align: center;
   }
+  
   .avatar {
     width: 178px;
     height: 178px;
     display: block;
   }
-  .Image{
-    width: 100%;
+  
+  .Image {
+    width: 152px;
+    height: 152px;
+    margin: 0 auto;
     text-align: center;
+    position: relative;
   }
-  .Image>.el-button{
+  
+  .Image>.btnload {
+    position: absolute;
+    border: 1px solid gainsboro;
+    width: 149px;
+    height: 149px;
+    font-size: 105px;
+    font-weight: 100;
+  }
+  
+  .Image>.el-button {
     margin: 3px 0;
   }
-  .Image>p{
+  
+  .Image>p {
     font-size: 12px;
     text-align: center;
     color: gray;
+    position: absolute;
+    left: 12px;
+    bottom: -20px;
   }
-  .Images{
+  
+  .Images {
     width: 150px;
     height: 150px;
   }
 </style>
 <style>
-	.el-upload-list--text{
-    height: 85px;
-    overflow: auto;
+  .el-upload-list--text {
+    height: 111px;
+    overflow-y: auto;
   }
   
+  .wei {
+    width: 99.8%;
+    text-align: center;
+    font-size: 16px;
+    color: #6F7180;
+    border: 1px solid #e3e3e3;
+    border-top: 0;
+    padding: 15px 0;
+  }
 </style>
 <template>
   <div class="NextClass">
@@ -276,226 +333,292 @@
         <el-input :placeholder="$t('NextC.placeholder')" v-model="filterText" ref="type1">
         </el-input>
         <ul class="filter-tree">
-          <!--<li @click="weifen" v-bind:class="{ nowpage: this.iGid-(this.iGid-1)==selectItem }">未分组</li>-->
           <li v-for="(i,index) in data2" :id="i.gid" ref="tree2" @click="show(i,i.gid)" v-bind:class="{ nowpage: i.gid==selectItem }">
             <span>{{i.groupname}}</span>
-            <div @click.stop title="修改" v-if="i.groupname != '未分组'"><!-- -->
+            <div @click.stop :title="$t('NextClass.alter')" v-if="i.groupname != '未分组'">
+              <!--修改-->
               <el-button type="text" @click="alte(i.gid,i.groupname,i.remark,i)">
                 <i class="el-icon-edit"></i>
-              </el-button><!--修改-->
-              <el-button style="color: red;" type="text" @click="del(i.gid)" title="删除">
+              </el-button>
+              <!--修改-->
+              <el-button style="color: red;" type="text" @click="del(i.gid)" :title="$t('NextClass.delete')">
+                <!--删除-->
                 <i class="el-icon-delete"></i>
-              </el-button><!--删除-->
+              </el-button>
+              <!--删除-->
             </div>
           </li>
         </ul>
       </el-aside>
-<div class="menb" v-show="alter">
-  <!--<div>-->
-    <div class="target_add">
-      <h1>修改目标组</h1>
-      <el-form :model="rulefm_one" :rules="rules_target" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="rulefm_one.name" name="groupname"></el-input>
-        </el-form-item>
-        <el-form-item label="描述" prop="desc">
-          <el-input type="textarea" v-model="rulefm_one.desc"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="openalter">立即修改</el-button>
-          <!--<el-button @click="resetForm()">重置</el-button>-->
-          <el-button @click="showtarget" type="danger" plain style="margin-left: 10px !important;">取消</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-  <!--</div>-->
-</div>
+      <div class="menb" v-show="alter">
+        <!--<div>-->
+        <div class="target_add">
+          <h1>{{$t('NextClass.alterTargetGroup')}}</h1>
+          <!--修改目标组-->
+          <el-form :model="rulefm_one" :rules="rules_target" label-width="100px" class="demo-ruleForm">
+            <el-form-item :label="$t('NextClass.name')" prop="name">
+              <!--名称-->
+              <el-input v-model="rulefm_one.name" name="groupname"></el-input>
+            </el-form-item>
+            <el-form-item :label="$t('NextClass.description')" prop="desc">
+              <!--描述-->
+              <el-input type="textarea" v-model="rulefm_one.desc"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="openalter">{{$t('NextClass.alterImmediately')}}</el-button>
+              <!--立即修改-->
+              <!--<el-button @click="resetForm()">重置</el-button>-->
+              <el-button @click="showtarget1" type="danger" plain style="margin-left: 10px !important;">{{$t('NextClass.cancel')}}</el-button>
+              <!--取消-->
+            </el-form-item>
+          </el-form>
+        </div>
+        <!--</div>-->
+      </div>
       <el-main>
         <div class="addUser">
-          <el-button class="mobiao" type="primary" @click="addTarget" size="mini">添加目标组</el-button>
+          <el-button class="mobiao" type="primary" @click="addTarget" size="mini">{{$t('NextClass.addTargetGroup')}}</el-button>
+          <!--添加目标组-->
           <!--<button >添加目标组</button>-->
           <div class="target" v-show="target">
             <div class="target_add">
-              <h1>新建目标组</h1>
+              <h1>{{$t('NextClass.createTargetGroup')}}</h1>
+              <!--新建目标组-->
               <el-form :model="rulefm" :rules="rules_target" ref="formName" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="名称" prop="name">
+                <el-form-item :label="$t('NextClass.name')" prop="name">
+                  <!--名称-->
                   <el-input v-model="rulefm.name" name="groupname"></el-input>
                 </el-form-item>
-                <el-form-item label="描述">
+                <el-form-item :label="$t('NextClass.description')">
+                  <!--描述-->
                   <el-input type="textarea" v-model="rulefm.desc"></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('rulefm')">创建</el-button>
-                  <el-button @click="resetForm()" style="margin: 0 10px !important;">重置</el-button>
-                  <el-button @click="showtarget" type="danger" plain>关闭</el-button>
+                  <el-button type="primary" @click="submitForm('rulefm')">{{$t('NextClass.create')}}</el-button>
+                  <!--创建-->
+                  <!--<el-button @click="resetForm('formName')" style="margin: 0 10px !important;">{{$t('NextClass.reset')}}</el-button><!--重置-->
+                  <el-button @click="showtarget('formName')" type="danger" plain>{{$t('NextClass.close')}}</el-button>
+                  <!--关闭-->
                 </el-form-item>
               </el-form>
             </div>
           </div>
-          <el-button type="primary" @click="addman" size="mini">添加目标人</el-button>
-          <!--<button @click="addman">添加目标人</button>-->
+          <!--添加目标人-->
+          <el-button type="primary" @click="addman" size="mini">{{$t('NextClass.addTarget')}}</el-button>
+          <!--添加目标人-->
           <div class="target addmans" v-show="addMan">
             <div class="target_add">
-              <h1>新建目标人</h1>
-<el-form :model="addrulefm" :rules="add_rules_target" ref="addrulefm" label-width="100px" class="demo-ruleForm">
-                <div class="target_left"> 
+              <h1>{{$t('NextClass.createTarget')}}</h1>
+              <!--新建目标人-->
+              <el-form :model="addrulefm" :rules="add_rules_target" ref="addrulefm" label-width="100px" class="demo-ruleForm">
+                <div class="target_left">
                   <table border="0">
-                    <tr><td>
-                        <el-form-item label="姓名" prop="name">
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.name1')" prop="name">
+                          <!--姓名-->
                           <el-input v-model="addrulefm.name"></el-input>
                         </el-form-item>
-                    </td><td rowspan="4">
+                      </td>
+                      <td rowspan="4">
                         <div class="Image">
-                          <!--<img src="../../../assets/_20180622145804.png"/>-->
-<img class="Images" v-show="Image" :src="ImgUrl" height="200" alt="image preview..."/><br />
-<input ref="file" type="file" @change="previewFile($event)" style="display: none;"/>
-<el-button @click="upimg" size="mini">上传头像</el-button>
-<p>头像不能超过500k</p>
-
+                          <div class="btnload" @click="upimg">
+                            {{msg}}
+                          </div>
+                          <img class="Images" v-show="Image" :src="ImgUrl" height="200" alt="image preview..." /><br />
+                          <input ref="file" type="file" @change="previewFile($event)" style="display: none;border: 1px solid black;" />
+                          <p>{{$t('NextClass.sizeReq')}}</p>
+                          <!--头像不能超过500k-->
                         </div>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="证件号">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.ID')">
+                          <!--证件号-->
                           <el-input v-model="addrulefm.idcard"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="出声年月">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.birthday')">
+                          <!--出声年月-->
                           <el-col>
                             <el-form-item>
-                              <el-date-picker type="date" value="123" placeholder="选择日期" v-model="addrulefm.birth" style="width: 100%;"></el-date-picker>
+                              <el-date-picker type="date" value="123" :placeholder="$t('NextClass.chooseDate')" v-model="addrulefm.birth" style="width: 100%;"></el-date-picker>
+                              <!--选择日期-->
                             </el-form-item>
                           </el-col>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="性别">
-                          <el-select v-model="addrulefm.gender" placeholder="性别">
-                            <el-option label="男" value="0" name="0"></el-option>
-                            <el-option label="女" value="1" name="1"></el-option>
-                            <el-option label="未知" value="" name=""></el-option>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.gender')">
+                          <!--性别-->
+                          <el-select v-model="addrulefm.gender" placeholder="gender">
+                            <!--性别-->
+                            <el-option :label="$t('NextClass.gender1')" value="0" name="0"></el-option>
+                            <!--男-->
+                            <el-option :label="$t('NextClass.gender2')" value="1" name="1"></el-option>
+                            <!--女-->
+                            <el-option :label="$t('NextClass.unknown')" value="" name=""></el-option>
+                            <!--未知-->
                           </el-select>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="民族">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.nation')">
+                          <!--民族-->
                           <el-input v-model="addrulefm.nation"></el-input>
                         </el-form-item>
-                    </td><td>
-                        <el-form-item label="家庭住址">
+                      </td>
+                      <td>
+                        <el-form-item :label="$t('NextClass.homeAddress')">
+                          <!--家庭住址-->
                           <el-input v-model="addrulefm.room"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="手机号码">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.phone')">
+                          <!--手机号码-->
                           <el-input v-model="addrulefm.tel"></el-input>
                         </el-form-item>
-                    </td><td>
-                        <el-form-item label="现居住地">
+                      </td>
+                      <td>
+                        <el-form-item :label="$t('NextClass.currentAddress')">
+                          <!--现居住地-->
                           <el-input v-model="addrulefm.address"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-<el-form-item label="gid">
-  <el-select v-model="addrulefm.gid" placeholder="请选择目标组">
-    <!--<option value="0" checked>未分组</option>-->
-    <!--<el-option label="未分组" value="0" checked>未分组</el-option>-->
-    <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid"></el-option>
-  </el-select>
-</el-form-item>
-                    </td><td>
-                        <el-form-item label="描述">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item label="gid">
+                          <el-select v-model="addrulefm.gid" :placeholder="$t('NextClass.chooseTargetGroup')">
+                            <!--请选择目标组-->
+                            <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid"></el-option>
+                          </el-select>
+                        </el-form-item>
+                      </td>
+                      <td>
+                        <el-form-item :label="$t('NextClass.description')">
+                          <!--描述-->
                           <el-input type="textarea" v-model="addrulefm.desc"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td colspan="2">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
                         <el-form-item>
-                          <el-button type="primary" @click="addparson($event)" :disabled="buer">创建</el-button>
+                          <el-button type="primary" @click="addparson($event, 'addrulefm')" :disabled="buer">{{$t('NextClass.create')}}</el-button>
+                          <!--创建-->
                           <!--<el-button @click="resetForm()">重置</el-button>-->
-                          <el-button @click="showtarget" type="danger" style="margin-left: 10px !important;" plain>关闭</el-button>
+                          <el-button @click="showtarget('addrulefm')" type="danger" style="margin-left: 10px !important;" plain>{{$t('NextClass.close')}}</el-button>
+                          <!--关闭-->
                         </el-form-item>
-                    </td></tr>
+                      </td>
+                    </tr>
                   </table>
                 </div>
                 <div class="target_right">
                   <!--创建目标人右侧信息-->
-<h1>模型文件列表</h1>
-<el-upload 
-  class="upload-demo" 
-  ref="uploadone" 
-  :action="https"
-  :on-success="handleSuccessone"
-  :on-error="handleErrorone"
-  :file-list="fileListone" 
-  :data="UpDataone"
-  accept=".wav,.mp3,.flac"
-  multiple
-  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUploadone">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
-</el-upload>
-<el-button style="margin: 3px 0;" type="primary" :loading="xunlianone" @click="drillone" :disabled="xulian">训练</el-button>
-  <template>
-      <table class="tasktable"><!---->
-        <tr>
-          <th>文件名</th>
-          <th>文件大小</th>
-          <th>操作</th>
-        </tr>
-        <tr v-for="i in speechone">
-          <td>
-            {{i.filename}}
-          </td>
-          <td>
-            {{i.filesize}}
-          </td>
-          <td>
-              <el-button type="text" @click="play(i.tsid)" title="播放">
-                <i class="el-icon-caret-right" style="font-size: 20px;"></i><!--播放-->
-              </el-button>
-              <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
-                <i class="el-icon-delete"></i><!--删除-->
-              </el-button>
-          </td>
-        </tr>
-      </table>
-  </template>
-<div class="block">
-  <!--<span class="demonstration">大于 7 页时的效果</span>-->
-  <!--<el-pagination
+                  <h1>{{$t('NextClass.modleFileTable')}}</h1>
+                  <!--模型文件列表-->
+                  <el-upload class="upload-demo" ref="uploadone" :action="https" :on-success="handleSuccessone" :on-error="handleErrorone" :file-list="fileListone" :data="UpDataone" accept=".wav,.mp3,.flac" :before-upload="beforeAvatarUpload" multiple :auto-upload="false">
+                    <el-button slot="trigger" size="small" type="primary">{{$t('NextClass.chooseFile')}}</el-button>
+                    <!--选取文件-->
+                    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUploadone">{{$t('NextClass.upolad')}}</el-button>
+                    <!--上传到服务器-->
+                    <div slot="tip" class="el-upload__tip">{{$t('NextClass.uploadReq')}}</div>
+                    <!--只能上传.WAV,.MP3,.FLAC文件-->
+                  </el-upload>
+                  <el-button style="margin: 3px 0;" type="primary" :loading="xunlianone" @click="drillone" :disabled="xulian">{{$t('NextClass.training')}}</el-button>
+                  <!--训练-->
+                  <template>
+                    <table class="tasktable">
+                      <!---->
+                      <tr>
+                        <th>{{$t('NextClass.fileName')}}</th>
+                        <!--文件名-->
+                        <th>{{$t('NextClass.fileSize')}}</th>
+                        <!--文件大小-->
+                        <th>{{$t('NextClass.operation')}}</th>
+                        <!--操作-->
+                      </tr>
+                      <tr v-for="i in speechone">
+                        <td>
+                          {{i.filename}}
+                        </td>
+                        <td>
+                          {{i.filesize}}
+                        </td>
+                        <td>
+                          <el-button type="text" @click="play(i.tsid)" :title="$t('NextClass.play')">
+                            <i class="el-icon-caret-right" style="font-size: 20px;"></i>
+                            <!--播放-->
+                          </el-button>
+                          <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" :title="$t('NextClass.delete')">
+                            <!--删除-->
+                            <i class="el-icon-delete"></i>
+                            <!--删除-->
+                          </el-button>
+                        </td>
+                      </tr>
+                    </table>
+                  </template>
+                  <div class="block">
+                    <!--<span class="demonstration">大于 7 页时的效果</span>-->
+                    <!--<el-pagination
     small
     page-size="5"
     layout="prev, pager, next"
     :total="10">
   </el-pagination>-->
-  
-</div> 
+
+                  </div>
                 </div>
               </el-form>
             </div>
           </div>
         </div>
         <table class="tasktable">
-          <tr><!-- @selection-change="handleSelectionChange"  @row-click="handleclick"-->
-            <th>姓名</th>
-            <th>证件号</th>
-            <th>出生年月</th>
-            <th>性别</th>
-            <th>民族</th>
-            <th>家庭住址</th>
-            <th>现居住地</th>
-            <th>目标组</th>
-            <th>状态</th>
-            <th>操作</th>
+          <tr>
+            <th>{{$t('NextClass.name1')}}</th>
+            <!--姓名-->
+            <th>{{$t('NextClass.ID')}}</th>
+            <!--证件号-->
+            <th>{{$t('NextClass.birthday')}}</th>
+            <!--出生年月-->
+            <th>{{$t('NextClass.gender')}}</th>
+            <!--性别-->
+            <th>{{$t('NextClass.nation')}}</th>
+            <!--民族-->
+            <th>{{$t('NextClass.homeAddress')}}</th>
+            <!--家庭住址-->
+            <th>{{$t('NextClass.currentAddress')}}</th>
+            <!--现居住地-->
+            <th>{{$t('NextClass.targetGroup')}}</th>
+            <!--目标组-->
+            <th>{{$t('NextClass.state')}}</th>
+            <!--状态-->
+            <th>{{$t('NextClass.operation')}}</th>
+            <!--操作-->
           </tr>
           <tr v-for="i in crew">
             <td> {{i.speaker}} </td>
             <td> {{i.idcard}} </td>
             <td> {{i.birth}} </td>
             <td>
-              <span v-if="i.gender==0">男</span>
-              <span v-if="i.gender==1">女</span>
+              <span v-if="i.gender==0">{{$t('NextClass.gender1')}}</span>
+              <!--男-->
+              <span v-if="i.gender==1">{{$t('NextClass.gender2')}}</span>
+              <!--女-->
             </td>
             <td> {{i.nation}} </td>
             <td>
@@ -504,182 +627,207 @@
             <td class="addre" width="100px"> {{i.address}} </td>
             <td> {{i.groupname}} </td>
             <td style="width: 37px;">
-              <span v-if="i.status == 0" style="white-space: nowrap;">不可用</span>
-              <span v-if="i.status == 1">可用</span>
+              <span v-if="i.status == 0" style="white-space: nowrap;">{{$t('NextClass.unusable')}}</span>
+              <!--不可用-->
+              <span v-if="i.status == 1">{{$t('NextClass.usable')}}</span>
+              <!--可用-->
             </td>
             <td style="width: 38px;">
-                <el-button type="text" @click="handleEdit(i.mid)" title="详情">
-                  <i class="el-icon-info"></i>
-                </el-button>
-                
-                <el-button style="color: red;" type="text" @click="modelDelete(i.mid)" title="删除">
-                  <i class="el-icon-delete"></i>
-                </el-button><!-- @click="handleEdit(i.mid)"-->
+              <el-button type="text" @click="handleEdit(i.mid)" :title="$t('NextClass.detail')">
+                <!--详情-->
+                <i class="el-icon-info"></i>
+              </el-button>
+
+              <el-button style="color: red;" type="text" @click="modelDelete(i.mid)" :title="$t('NextClass.delete')">
+                <!--删除-->
+                <i class="el-icon-delete"></i>
+              </el-button>
             </td>
           </tr>
         </table>
-        <div class="wei" v-show="kong">暂无数据</div>
-        <el-pagination
-          v-show="fenye"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          @prev-click="handlePrevChange"
-          @next-click="handleNextChange"
-          :current-page="currentPage"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="pagesize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="totalCount">
+        <div class="wei" v-show="kong">{{$t('NextClass.noData')}}</div>
+        <!--暂无数据-->
+        <el-pagination v-show="fenye" @size-change="handleSizeChange" @current-change="handleCurrentChange" @prev-click="handlePrevChange" @next-click="handleNextChange" :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="totalCount">
         </el-pagination>
         <!--目标人资料-->
         <div class="handle" v-show="targetdatas">
           <div class="target addmans">
             <div class="target_add">
-              <h1>目标人资料</h1>
+              <h1>{{$t('NextClass.targetData')}}</h1>
+              <!--目标人资料-->
               <el-form label-width="100px" class="demo-ruleForm">
                 <div class="target_left">
                   <table border="0">
-                    <tr><td>
-                        <el-form-item label="姓名">
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.name1')" required>
+                          <!--姓名-->
                           <el-input v-model="detail.speaker"></el-input>
                         </el-form-item>
-                    </td><td rowspan="4">
+                      </td>
+                      <td rowspan="4">
                         <div class="Image">
-                          <!-- {{this.detail.gid}}-->
-<!--<img width="180px" heigth="238px" style="margin: 10px;" :src='imageUrl'/>-->
-<img class="Images" :src="imageUrl" height="200" alt="image preview..."/><br />
-<input ref="filetwo" type="file" @change="previewFiletwo($event)" style="display: none;"/>
-<el-button @click="upimgtwo" size="mini">上传头像</el-button>
-<p>头像不能超过500k</p>
-<!--this.detail.speaker-->
+                          <div class="btnload" @click="upimgtwo">
+                          </div>
+                          <img class="Images" :src="imageUrl" height="200" alt="image preview..." /><br />
+                          <input ref="filetwo" type="file" @change="previewFiletwo($event)" style="display: none;" />
+                          <p>{{$t('NextClass.sizeReq')}}</p>
+                          <!--头像不能超过500k-->
                         </div>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="证件号">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.ID')">
+                          <!--证件号-->
                           <el-input v-model="detail.idcard"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="出声年月">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.birthday')">
+                          <!--出声年月-->
                           <el-col :span="11">
                             <el-form-item>
-                              <el-date-picker type="date" placeholder="选择日期" v-model="detail.birth"></el-date-picker>
+                              <el-date-picker type="date" :placeholder="$t('NextClass.chooseDate')" v-model="detail.birth"></el-date-picker>
+                              <!--选择日期-->
                             </el-form-item>
                           </el-col>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="性别">
-                          <el-select v-model="detail.gender" placeholder="性别">
-                            <el-option label="男" value="0"></el-option>
-                            <el-option label="女" value="1"></el-option>
-                            <el-option label="未知" value="-1"></el-option>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.gender')">
+                          <!--性别-->
+                          <el-select v-model="detail.gender" :placeholder="$t('NextClass.gender')">
+                            <!--性别-->
+                            <el-option :label="$t('NextClass.gender1')" value="0"></el-option>
+                            <!--男-->
+                            <el-option :label="$t('NextClass.gender2')" value="1"></el-option>
+                            <!--女-->
+                            <el-option :label="$t('NextClass.unknown')" value="-1"></el-option>
+                            <!--未知"-->
                           </el-select>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="民族">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.nation')">
+                          <!--民族-->
                           <el-input v-model="detail.nation"></el-input>
                         </el-form-item>
-                    </td><td>
-                        <el-form-item label="家庭住址">
+                      </td>
+                      <td>
+                        <el-form-item :label="$t('NextClass.homeAddress')">
+                          <!--家庭住址-->
                           <el-input v-model="detail.room"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-                        <el-form-item label="手机号码">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item :label="$t('NextClass.phone')">
+                          <!--手机号码-->
                           <el-input v-model="detail.tel"></el-input>
                         </el-form-item>
-                    </td><td>
-                        <el-form-item label="现居住地">
+                      </td>
+                      <td>
+                        <el-form-item :label="$t('NextClass.currentAddress')">
+                          <!--现居住地-->
                           <el-input v-model="detail.address"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td>
-<el-form-item label="gid">
-  <el-select v-model="detail.gid" placeholder="请选择目标组">
-    <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid"></el-option>
-  </el-select>
-</el-form-item>
-                    </td><td>
-                        <el-form-item label="描述">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <el-form-item label="gid">
+                          <el-select v-model="detail.gid" :placeholder="$t('NextClass.chooseTargetGroup')">
+                            <!--请选择目标组-->
+                            <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid"></el-option>
+                          </el-select>
+                        </el-form-item>
+                      </td>
+                      <td>
+                        <el-form-item :label="$t('NextClass.description')">
+                          <!--描述-->
                           <el-input type="textarea" v-model="detail.desc"></el-input>
                         </el-form-item>
-                    </td></tr>
-                    <tr><td colspan="2">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
                         <el-form-item>
-                          <el-button type="primary" @click="amend($event)">修改</el-button>
+                          <el-button type="primary" @click="amend($event)">{{$t('NextClass.alter')}}</el-button>
+                          <!--修改-->
                           <!--<el-button @click="resetForm()">重置</el-button>-->
-                          <el-button @click="showtarget" type="danger" plain style="margin-left: 10px !important;">关闭</el-button>
+                          <el-button @click="showtarget1" type="danger" plain style="margin-left: 10px !important;">{{$t('NextClass.close')}}</el-button>
+                          <!--关闭-->
                         </el-form-item>
-                    </td></tr>
+                      </td>
+                    </tr>
                   </table>
                 </div>
                 <div class="target_right">
-                  <h1>模型文件列表</h1>
-<el-upload 
-  class="upload-demo" 
-  ref="upload" 
-  :action="https"
-  :on-preview="handlePreview" 
-  :on-remove="handleRemove" 
-  :on-success="handleSuccess"
-  :on-error="handleError"
-  :file-list="fileList" 
-  :data="UpData"
-  accept=".wav,.mp3,.flac"
-  multiple
-  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传.WAV,.MP3,.FLAC文件</div>
-</el-upload>
-
-                  <!--<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>-->
-                  <el-button type="primary" :loading="xunlian" @click="drill">训练</el-button>
-  <template>
-    <table class="tasktable">
-      <tr>
-        <th>文件名</th>
-        <th>文件大小</th>
-        <th>操作</th>
-      </tr>
-      <tr v-for="i in speech">
-        <td>
-          {{i.filename}}
-        </td>
-        <td>
-          {{i.filesize}}
-        </td>
-        <td>
-            <el-button type="text" @click="play(i.tsid)" title="播放">
-              <i class="el-icon-caret-right" style="font-size: 20px;"></i><!--播放-->
-            </el-button>
-            <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" title="删除">
-              <i class="el-icon-delete"></i><!--删除-->
-            </el-button>
-        </td>
-      </tr>
-    </table>
-  </template>
-<div class="block">
-  <!--<span class="demonstration">大于 7 页时的效果</span>-->
-  <!--<el-pagination
+                  <h1>{{$t('NextClass.modleFileTable')}}</h1>
+                  <!--模型文件列表-->
+                  <el-upload class="upload-demo" ref="upload" :action="https" :on-success="handleSuccess" :on-error="handleError" :file-list="fileList" :before-upload="beforeAvatarUpload" :data="UpData" accept=".wav,.mp3,.flac" multiple :auto-upload="false">
+                    <el-button slot="trigger" size="small" type="primary">{{$t('NextClass.chooseFile')}}</el-button>
+                    <!--选取文件-->
+                    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">{{$t('NextClass.upolad')}}</el-button>
+                    <!--上传到服务器-->
+                    <div slot="tip" class="el-upload__tip">{{$t('NextClass.uploadReq')}}</div>
+                    <!--只能上传.WAV,.MP3,.FLAC文件-->
+                  </el-upload>
+                  <el-button style="margin: 3px 0;" type="primary" :loading="xunlian" @click="drill">{{$t('NextClass.training')}}</el-button>
+                  <!--训练-->
+                  <template>
+                    <table class="tasktable">
+                      <tr>
+                        <th>{{$t('NextClass.fileName')}}</th>
+                        <!--文件名-->
+                        <th>{{$t('NextClass.fileSize')}}</th>
+                        <!--文件大小-->
+                        <th>{{$t('NextClass.operation')}}</th>
+                        <!--操作-->
+                      </tr>
+                      <tr v-for="i in speech">
+                        <td>
+                          {{i.filename}}
+                        </td>
+                        <td>
+                          {{i.filesize}}
+                        </td>
+                        <td>
+                          <el-button type="text" @click="play(i.tsid)" :title="$t('NextClass.play')">
+                            <i class="el-icon-caret-right" style="font-size: 20px;"></i>
+                            <!--播放-->
+                          </el-button>
+                          <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" :title="$t('NextClass.delete')">
+                            <!--删除-->
+                            <i class="el-icon-delete"></i>
+                            <!--删除-->
+                          </el-button>
+                        </td>
+                      </tr>
+                    </table>
+                  </template>
+                  <div class="block">
+                    <!--<span class="demonstration">大于 7 页时的效果</span>-->
+                    <!--<el-pagination
     small
     page-size="5"
     layout="prev, pager, next"
     :total="1000">
   </el-pagination>-->
-  
-</div> 
+
+                  </div>
                 </div>
               </el-form>
             </div>
           </div>
-        </div>
-        <div class="block">
-          <!--<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[5, 10, 15, 20]" :page-size="100" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
-          </el-pagination>-->
         </div>
       </el-main>
     </el-container>
@@ -688,31 +836,28 @@
 
 <script>
   import $axios from 'axios';
-//这样就可以通过$axios发起请求了
-  import { group, target, cuan, addTargetParson, detail, newVideo, drillModel, dele, Alter, modelDele, updateModel, gname, inquire, speechDel} from '@/api/target'
+  //这样就可以通过$axios发起请求了
+  import { group, target, cuan, addTargetParson, detail, newVideo, drillModel, dele, Alter, modelDele, updateModel, gname, inquire, speechDel } from '@/api/target'
   import { datas } from '@/assets/js/common'
   let id = 1000;
   export default {
-    filters:{
+    filters: {
       datas
     },
-//  页面初始化
+    //  页面初始化
     created() {
       this.getData()
     },
-//  监听
+    //  监听
     watch: {
-      filterText:function(val){
-//      this.$message.success(val);
-        console.log(val);
-        gname(val).then((res)=>{
-          console.log(res.data.data);
+      filterText: function(val) {
+        gname(val).then((res) => {
           this.data2 = res.data.data;
         })
       }
     },
-//  计算属性
-    computed:{
+    //  计算属性
+    computed: {
       UpData() {
         return {
           mid: this.filemid
@@ -722,137 +867,107 @@
         return {
           mid: this.newfilemid
         }
-      },
-      FileReader(){
-        
       }
     },
-//  方法属性
+    //  方法属性
     methods: {
-//    fileinfo(){
-//      
-//    },
-      upimg(){
+      upimg() {
         this.$refs.file.click();
         this.reader = new FileReader();
       },
-      previewFile(ev){
+      previewFile(ev) {
         this.file = ev.target.files[0];
         let urls = ev.target.files;
         this.reader.readAsDataURL(urls[0]);
-        this.reader.onload = () =>{
+        this.reader.onload = () => {
           this.ImgUrl = this.reader.result;
-          console.log(this.file);
-          if(this.file != ""){
+          if(this.file != "") {
             this.Image = true;
+            this.msg = "";
           }
         }
       },
-      upimgtwo(){
+      upimgtwo() {
         this.$refs.filetwo.click();
         this.readertwo = new FileReader();
       },
-      previewFiletwo(ev){
+      previewFiletwo(ev) {
         this.filetwo = ev.target.files[0];
         let urls = ev.target.files;
         this.readertwo.readAsDataURL(urls[0]);
-        this.readertwo.onload = () =>{
+        this.readertwo.onload = () => {
           this.imageUrl = this.readertwo.result;
-          console.log(this.filetwo);
-//        this.file = this.detail.avatar;
         }
       },
-//    上传头像
-        great(){
-          document.getElementById('saveImage').onchange = function () {
-            var imgFile = this.files[0];
-            var fr = new FileReader();
-            fr.onload = function () {
-              document.getElementById('portrait').src = fr.result;
-            };
-            fr.readAsDataURL(imgFile);
-          }
-        },
-//    查询
-      inquired(){
+      //    查询
+      inquired() {
         this.currentPage = 1;
         this.selectItem = -1;
-//      let bt;
-        if(this.formInline.birth){
-          this.bt = this.formInline.birth.toLocaleDateString();
-          console.log(bt);
-        }else{
+        if(this.formInline.birth) {
+          this.bt = Math.round(this.formInline.birth.getTime() / 1000); //toLocaleDateString this.formInline.birth.getTime()
+        } else {
           this.bt = this.formInline.birth = "";
         }
-        this.find(this.currentPage,this.pagesize);
-//      inquire(this.formInline.speaker,this.formInline.idcard,bt,this.formInline.gender,this.formInline.nation,this.formInline.room,this.formInline.address,this.formInline.gid).then((res)=>{
-//        console.log(res);
-//        this.crew = res.data.data;
-//        if(this.crew.length != 0){
-//          this.kong = false;
-//        }else{
-//          this.kong = true;
-//        }
-//        
-//      })
+        this.find(this.currentPage, this.pagesize);
       },
-//    查询按钮获取数据封装函数
-      find(page,pagesize){
+      //    查询按钮获取数据封装函数
+      find(page, pagesize) {
         this.thisi = 1;
-        inquire(this.formInline.speaker,this.formInline.idcard,this.bt,this.formInline.gender,this.formInline.nation,this.formInline.room,this.formInline.address,this.formInline.gid,page,pagesize).then((res)=>{
-          console.log(res);
-          if(res.data.ret == 200){
+        inquire(this.formInline.speaker, this.formInline.idcard, this.bt, this.formInline.gender, this.formInline.nation, this.formInline.room, this.formInline.address, this.formInline.gid, page, pagesize).then((res) => {
+          //        console.log(res);
+          if(res.data.ret == 200) {
             this.crew = res.data.data;
             this.totalCount = res.data.totalcount;
-            if(this.crew.length != 0){
-              this.kong = false;
-              this.fenye = true;
-            }else{
+            if(this.totalCount == 0) {
               this.kong = true;
               this.fenye = false;
+            } else {
+              this.kong = false;
+              this.fenye = true;
             }
-          }else{
+          } else {
             this.totalCount = res.data.totalcount;
           }
         })
       },
-//    点击打开目标组修改alert
-      alte(gid,groupname,desc,i){
-//      console.log(gid,groupname,desc,i);
-        this.alter=true;
+      //    点击打开目标组修改alert
+      alte(gid, groupname, desc, i) {
+        //      console.log(gid,groupname,desc,i);
+        this.alter = true;
         this.gId = gid;
         this.rulefm_one.name = groupname;
         this.rulefm_one.desc = desc;
       },
-//    修改组名
-      openalter(){
-//      console.log(gid);
-        Alter(this.rulefm_one.name,this.gId,this.rulefm_one.desc).then((res)=>{
-//        console.log(res);
-          if(res.data.ret == 200){
-            this.$message.success("修改成功");
-            this.alter=false;
+      //    修改组名
+      openalter() {
+        //      console.log(gid);
+        Alter(this.rulefm_one.name, this.gId, this.rulefm_one.desc).then((res) => {
+          //        console.log(res);
+          if(res.data.ret == 200) {
+            this.$message.success(this.$t('script.AmendSuccess')); //"修改成功"
+            this.alter = false;
             this.getData();
-          }if(res.data.ret == 406){
-            this.$message.error("组名重复");
+          }
+          if(res.data.ret == 406) {
+            this.$message.error(this.$t('script.groupRepetition')); //"组名重复"
           }
         })
       },
-//    目标组删除
-      del(gid){
-        console.log(gid);
-        this.$confirm('此操作将永久删除该目标组, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+      //    目标组删除
+      del(gid) {
+        //      console.log(gid);
+        this.$confirm(this.$t('script.Delgroup'), this.$t('script.title'), { //'此操作将永久删除该目标组, 是否继续?'//'提示'
+          confirmButtonText: this.$t('script.Confirm'), //确定
+          cancelButtonText: this.$t('script.Cancel'), //取消
           type: 'warning',
           center: true
         }).then(() => {
-          dele(gid).then((res)=>{
-            console.log(res);
-            if(res.data.ret == 200){
+          dele(gid).then((res) => {
+            //          console.log(res);
+            if(res.data.ret == 200) {
               this.$message({
                 type: 'success',
-                message: '删除成功!'
+                message: this.$t('script.DelSuccess') //'删除成功!'
               });
               this.getData()
             }
@@ -860,471 +975,398 @@
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: this.$t('script.CancelDel') //'已取消删除'
           });
         });
       },
-//    训练点击事件
-      drill(){
-//      正在训练，点击取消关闭本窗口，稍后可查看训练结果。
-        if(this.speech.length != 0){
-          console.log(this.speech.length);
+      //    训练点击事件
+      drill() {
+        if(this.speech.length != 0) {
           this.xunlian = true;
-          this.$alert('正在训练，稍后可查看训练结果。',{
-            confirmButtonText: '确定'
+          this.$alert(this.$t('script.Popout'), { //"正在训练，稍后可查看训练结果。"
+            confirmButtonText: this.$t('script.Confirm') //'确定'
           });
-  //      console.log(this.filemid);
-          drillModel(this.filemid).then((res)=>{
-            console.log(res);
-            if(res.data.ret == 200){
-              this.$message.success("训练成功");
+          drillModel(this.filemid).then((res) => {
+            if(res.data.ret == 200) {
+              this.$message.success(this.$t('script.DrillSuccess')); //"训练成功"
               this.xunlian = false;
               cuan(this.iGid).then((res) => {
-                if(res.data.ret == 200){
-                    this.crew = res.data.data;
-                    this.kong=false;
+                if(res.data.ret == 200) {
+                  this.crew = res.data.data;
+                  this.kong = false;
                 }
               })
             }
           })
-        }else{
+        } else {
           this.$message.error("没有语音文件");
         }
-          
+
       },
-//    创建目标人时的点击训练
-      drillone(){
-//      正在训练，点击取消关闭本窗口，稍后可查看训练结果。
-        if(this.speechone.length != 0){
-          console.log(this.speechone.length);
+      //    创建目标人时的点击训练
+      drillone() {
+        if(this.speechone.length != 0) {
           this.xunlianone = true;
-          this.$alert('正在训练，稍后可查看训练结果。',{
-            confirmButtonText: '确定'
+          this.$alert(this.$t('script.Popout'), { //"正在训练，稍后可查看训练结果。"
+            confirmButtonText: this.$t('script.Confirm') //'确定'
           });
-  //      console.log(this.filemid);
-          drillModel(this.newfilemid).then((res)=>{
-            console.log(res);
-            if(res.data.ret == 200){
-              this.$message.success("训练成功");
+          drillModel(this.newfilemid).then((res) => {
+            if(res.data.ret == 200) {
+              this.$message.success(this.$t('script.DrillSuccess')); //"训练成功"
               this.xunlianone = false;
               cuan(this.iGid).then((res) => {
-                if(res.data.ret == 200){
-                    this.crew = res.data.data;
-                    this.kong=false;
+                if(res.data.ret == 200) {
+                  this.crew = res.data.data;
+                  this.kong = false;
                 }
               })
             }
           })
-        }else{
-          this.$message.error("没有语音文件");
+        } else {
+          this.$message.error(this.$t('script.NoFile')); //"没有语音文件"
         }
       },
-//    添加目标人显示蒙板
+      //    添加目标人显示蒙板
       addman() {
         this.addMan = !this.addMan;
-//      console.log(this.addrulefm.gid);
+        this.msg = "+";
+        //      console.log(this.addrulefm.gid);
       },
-//    点击未分组
-      weifen(){
-        this.selectItem = this.iGid-(this.iGid-1);
-        console.log(this.iGid-(this.iGid-1));
-        cuan(0).then((res) => {
-          this.iGid = 0;
-          console.log(0);
-          if(res.data.ret == 200){
-            this.crew = res.data.data;
-//          console.log(this.crew);
-            this.kong=false;
-            this.totalCount = res.data.data.length;
-//          console.log(this.totalCount);
-          }
-          if(res.data.ret == 404){
-          this.$message.error("该目标组未创建模型");
-          this.kong=true;
-          this.crew = "";
-          }
-        })
-      },
-//    点击任意目标组
-      show(i,index) {
+      //    点击任意目标组
+      show(i, index) {
         this.thisi = 0;
         this.currentPage = 1;
-        console.log(i,index);
         this.selectItem = i.gid;
-//      cuan(i.gid).then((res) => {
-//        this.iGid = i.gid;
-//        console.log(i.gid);
-//        if(res.data.ret == 200){
-//          this.crew = res.data.data;
-////          console.log(this.crew);
-//          this.kong=false;
-//          this.totalCount = res.data.data.length;
-////          console.log(this.totalCount);
-//        }
-//        if(res.data.ret == 404){
-//        this.$message.error("该目标组未创建模型");
-//        this.kong=true;
-//        this.crew = "";
-//        }
-//      })
         this.getdatatarget(i.gid, this.currentPage, this.pagesize);
       },
-//    点击任意组获取数据封装函数
-      getdatatarget(gid, page, pagesize){
+      //    点击任意组获取数据封装函数
+      getdatatarget(gid, page, pagesize) {
         cuan(gid, page, pagesize).then((res) => {
           this.iGid = gid;
-          console.log(gid);
-          if(res.data.ret == 200){
+          if(res.data.ret == 200) {
             this.crew = res.data.data;
-            console.log(res);
-            this.kong=false;
+            this.kong = false;
             this.fenye = true;
             this.totalCount = res.data.totalcount;
-//          console.log(this.totalCount);
-          }
-          if(res.data.ret == 404){
-//          this.$message.error("该目标组未创建模型");
-            this.totalCount = res.data.totalcount;
-            this.kong=true;
-            this.fenye = false;
-            this.crew = "";
+            if(this.totalCount == 0) {
+              this.kong = true;
+              this.fenye = false;
+            }
           }
         })
       },
-//    页面初始化渲染
+      //    页面初始化渲染
       getData() {
-        group().then((res)=>{
+        group().then((res) => {
           this.data2 = res.data.data;
-          console.log(res);
         })
-//      $axios.get('http://192.168.1.118/sr/model/group').then(res => {
-//        
-//      }).catch(error => console.log(error));
       },
-//    点击显示添加目标组蒙板
+      //    点击显示添加目标组蒙板
       addTarget() {
         this.target = true;
       },
-//    点击取消隐藏蒙板
-      showtarget() {
+      //    点击取消隐藏蒙板
+      showtarget(formName) {
+        this.Image = false;
+        this.$refs[formName].resetFields();
         this.ImgUrl = "";
-        this.imageUrl = "";
         this.xunlianone = false;
-        this.alter=false;
+        this.alter = false;
         this.target = false;
-        this.targetdatas = false;
         this.addMan = false;
         this.buer = false;
         this.xulian = true;
         this.speechone = [];
         this.newfilemid = "";
-this.addrulefm.name=""; this.addrulefm.gid=""; this.addrulefm.idcard=""; 
-this.addrulefm.birth=""; this.addrulefm.gender=""; this.addrulefm.nation=""; 
-this.addrulefm.room=""; this.addrulefm.address=""; this.addrulefm.tel=""; this.addrulefm.desc="";
+        this.addrulefm.name = "";
+        this.addrulefm.gid = "";
+        this.addrulefm.idcard = "";
+        this.addrulefm.birth = "";
+        this.addrulefm.gender = "";
+        this.addrulefm.nation = "";
+        this.addrulefm.room = "";
+        this.addrulefm.address = "";
+        this.addrulefm.tel = "";
+        this.addrulefm.desc = "";
       },
-//      操作（详情）
+      //    点击取消隐藏蒙板
+      showtarget1() {
+        this.imageUrl = "";
+        this.xunlianone = false;
+        this.alter = false;
+        this.target = false;
+        this.targetdatas = false;
+        this.xulian = true;
+      },
+      //      操作（详情）
       handleEdit(mid) {
-//      console.log(mid);
         this.targetdatas = true;
         this.filemid = mid;
-//      console.log(this.filemid);
         this.mId = mid
-        
         this.xl();
       },
-//    详情页面上传语音成功后获取数据刷新
-      xl(){
-        detail(this.mId).then((res)=>{
+      //    详情页面
+      xl() {
+        detail(this.mId).then((res) => {
           this.detail = res.data.data;
           this.speech = res.data.data.speech;
-          if(this.detail.avatar == ""){
-            this.imageUrl = "/static/img/_20180622145804.png";
-          }else{
-            this.imageUrl = this.detail.avatar;
+          console.log(this.detail.avatar);
+          console.log(typeof(this.detail.avatar));
+          if(!this.detail.avatar) {
+            this.imageUrl = process.env.BASE_API + "/static/img/_20180622145804.png";
+          } else {
+            this.imageUrl = process.env.BASE_API + this.detail.avatar;
           }
-          if(this.detail.gender == -1){
+          if(this.detail.gender == -1) {
             this.detail.gender = "未知";
           }
-          if(this.detail.gender == 0){
+          if(this.detail.gender == 0) {
             this.detail.gender = "男";
           }
-          if(this.detail.gender == 1){
+          if(this.detail.gender == 1) {
             this.detail.gender = "女";
           }
         })
       },
-//    创建目标人时上传语音成功后获取数据刷新
-      xlone(){
-        detail(this.newfilemid).then((res)=>{
-          console.log(res.data.data);
-//        console.log();
+      //    创建目标人时上传语音成功后获取数据刷新
+      xlone() {
+        detail(this.newfilemid).then((res) => {
           this.detail = res.data.data;
           this.speechone = res.data.data.speech;
         })
       },
-//    删除模型
-      modelDelete(mid){
-        this.$confirm('此操作将永久删除该目标人, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+      //    删除模型
+      modelDelete(mid) {
+        this.$confirm(this.$t('script.DelPerson'), this.$t('script.title'), { //'此操作将永久删除该目标人, 是否继续?'// '提示'
+          confirmButtonText: this.$t('script.Confirm'), //'确定'
+          cancelButtonText: this.$t('script.Cancel'), //'取消'
           type: 'warning',
           center: true
         }).then(() => {
-          modelDele(mid).then((res)=>{
-            if(res.data.ret == 200){
-              this.$message.success("删除成功");
-//            this.show(this.iGid);
-    if(this.thisi == 0){
-      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-    }else{
-      this.find(this.currentPage,this.pagesize);
-    }
-//  if(this.totalCount === 0){
-//    this.fenye = false;
-//  }else{
-//    this.fenye = true;
-//  }
-//            this.getdatatarget(this.iGid, this.currentPage, this.pagesize)
-//            this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-//              cuan(this.iGid).then((res) => {
-//                if(res.data.ret == 200){
-//                  this.crew = res.data.data;
-//                  this.kong=false;
-//                  this.totalCount = res.data.data.length;
-//                  console.log(this.totalCount);
-//                }
-//                if(res.data.ret == 404){
-//                this.$message.error("该目标组已清空");
-//                this.crew = "";
-//                this.kong=true;
-//                }
-//              })
+          modelDele(mid).then((res) => {
+            if(res.data.ret == 200) {
+              this.$message.success(this.$t('script.DelSuccess')); //"删除成功"
+              if(this.thisi == 0) {
+                this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+              } else {
+                this.find(this.currentPage, this.pagesize);
+              }
             }
-            console.log(res);
           })
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: this.$t('script.CancelDel') //'已取消删除'
           });
         });
-        
-      },
-      //      操作（删除）
-//    handleDelete(index, row) {
-//      //        console.log(index);
-//      //        console.log(row);
-//      this.tableData.splice(index, 1);
-//    },
-//每页显示数据量变更
-handleSizeChange: function(val) {
-    this.pagesize = val;//this.criteria,搜索条件
-    if(this.thisi == 0){
-      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-    }else{
-      this.find(this.currentPage,this.pagesize);
-    }
-},
 
-//页码变更
-handleCurrentChange: function(val) {
-    this.currentPage = val;//this.criteria,搜索条件
-    if(this.thisi == 0){
-      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-    }else{
-      this.find(this.currentPage,this.pagesize);
-    }
-},  
-//上一页
-handlePrevChange:function(){
-    if(this.thisi == 0){
-      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-    }else{
-      this.find(this.currentPage,this.pagesize);
-    }
-},
-//下一页
-handleNextChange:function(){
-    if(this.thisi == 0){
-      this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-    }else{
-      this.find(this.currentPage,this.pagesize);
-    }
-},//criteria, 
-//    新建目标组
+      },
+      //每页显示数据量变更
+      handleSizeChange: function(val) {
+        this.pagesize = val; //this.criteria,搜索条件
+        if(this.thisi == 0) {
+          this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+        } else {
+          this.find(this.currentPage, this.pagesize);
+        }
+      },
+
+      //页码变更
+      handleCurrentChange: function(val) {
+        this.currentPage = val; //this.criteria,搜索条件
+        if(this.thisi == 0) {
+          this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+        } else {
+          this.find(this.currentPage, this.pagesize);
+        }
+      },
+      //上一页
+      handlePrevChange: function() {
+        if(this.thisi == 0) {
+          this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+        } else {
+          this.find(this.currentPage, this.pagesize);
+        }
+      },
+      //下一页
+      handleNextChange: function() {
+        if(this.thisi == 0) {
+          this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
+        } else {
+          this.find(this.currentPage, this.pagesize);
+        }
+      },
+      //    新建目标组
       submitForm(formName) {
         this.$refs.formName.validate((valid) => {
           if(valid) {
             target(this.rulefm.id, this.rulefm.name, this.rulefm.desc).then((res) => {
-              console.log(res);
               if(res.data.ret == 200) {
-                console.log();
-                this.$message.success("上传成功");
+                this.$message.success(this.$t('script.FoundSuccess')); //"创建成功"
                 this.target = false;
                 this.rulefm.name = "";
                 this.rulefm.desc = "";
                 this.getData();
               } else {
-                this.$message.error("上传失败");
+                this.$message.error(this.$t('script.groupRepetition')); //"组名重复"
               }
             })
           } else {
-            console.log('error submit!!');
             return false;
           }
         });
       },
-//    新建目标人
-      addparson(ev) {
-        console.log(this.file);
-        console.log(typeof(this.file));
-        ev.preventDefault();
-        let formData = new FormData();
-        formData.append('speaker', this.addrulefm.name);
-        formData.append('gid', this.addrulefm.gid);
-        formData.append('idcard', this.addrulefm.idcard);
-        formData.append('birth', this.addrulefm.birth);
-        formData.append('gender', this.addrulefm.gender);
-        formData.append('nation', this.addrulefm.nation);
-        formData.append('room', this.addrulefm.room);
-        formData.append('tel', this.addrulefm.tel);
-        formData.append('address', this.addrulefm.address);
-        formData.append('gid', this.addrulefm.gid);
-        formData.append('desc', this.addrulefm.desc);
-        formData.append('file', this.file);
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
+      //    新建目标人
+      addparson(ev, formName) {
+        this.$refs[formName].validate((valid) => {
+          if(valid) {
+            let addgettime = '';
+            if(this.addrulefm.birth) {
+              addgettime = Math.round(this.addrulefm.birth.getTime() / 1000);
+            }
+            ev.preventDefault();
+            let formData = new FormData();
+            formData.append('speaker', this.addrulefm.name);
+            formData.append('gid', this.addrulefm.gid);
+            formData.append('idcard', this.addrulefm.idcard);
+            formData.append('birth', addgettime); //this.formInline.birth Math.round(this.addrulefm.birth.getTime()/1000)
+            formData.append('gender', this.addrulefm.gender);
+            formData.append('nation', this.addrulefm.nation);
+            formData.append('room', this.addrulefm.room);
+            formData.append('tel', this.addrulefm.tel);
+            formData.append('address', this.addrulefm.address);
+            formData.append('gid', this.addrulefm.gid);
+            formData.append('desc', this.addrulefm.desc);
+            formData.append('file', this.file);
+            let config = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+            const filet = this.file.type;
+            const isJPEG = filet === 'image/jpeg';
+            const isJPG = filet === 'image/jpg';
+            const isPNG = filet === 'image/png';
+            const isLt500k = this.file.size / 1024 / 1024 < 0.5;
+            let src = '/sr/model/add';
+            if(this.file) {
+              if(isJPEG || isJPG || isPNG) {
+                if(isLt500k) {
+                  this.newtarget(src, formData, config);
+                } else {
+                  this.$message.error("上传头像大小不能超过500k"); //"上传头像大小不能超过500k"
+                }
+              } else {
+                this.$message.error("上传头像必须是.jpeg、.jpg、.png格式"); //"上传头像必须是.jpeg、.jpg、.png格式"
+              }
+            } else {
+              this.newtarget(src, formData, config);
+            }
+          } else {
+            console.log('error submit!!');
+            this.$message.error("请将信息填写完整！") //"请将信息填写完整！"
           }
-        }
-//      Object.assign(formData,this.addrulefm);
-        let _this = this;
-        this.$axios.post(this.http+'/sr/model/add', formData, config).then(function (res) {
-          if (res.data.ret === 200) {
-//          alert("创建成功");
-            /*这里做处理*/
-           _this.newfilemid = res.data.data.mid;
-           _this.$message.success("创建成功");
-           _this.buer = true;
-           _this.iGid = _this.addrulefm.gid;
-           _this.getdatatarget(_this.selectItem, _this.currentPage, _this.pagesize);
-          }if(res.data.ret == 405){
-            _this.$message.error("目标人已存在");
-//          alert("用户名重复");
-          }
-        })
+        });
 
-//      addTargetParson(formData, config).then((res)=>{
-//        if(res.data.ret == 200){
-//          console.log(res);
-//        }
-//      })
-        
-        
-        
-//      this.$refs.upload.submit();
-//      let addrulefmBirth;
-//    if(typeof(this.addrulefm.birth) != "string"){//
-//        addrulefmBirth = this.addrulefm.birth.toLocaleDateString();
-//      }else{
-//        addrulefmBirth = this.addrulefm.birth;
-//      }
-//      this.$refs.addrulefm.validate((valid) => {
-//        if(valid) {
-//          addTargetParson(this.addrulefm.name, this.addrulefm.gid, this.addrulefm.idcard, addrulefmBirth, this.addrulefm.gender, this.addrulefm.nation, this.addrulefm.room, this.addrulefm.address, this.addrulefm.tel, this.addrulefm.desc, this.addrulefm.pic).then((res) => {
-////            console.log(addrulefmBirth);
-//            if(res.data.ret == 200) {
-//              
-//              this.newfilemid = res.data.data.mid;
-//              this.$message.success("创建成功");
-//              this.$refs.upload.submit();
-//              this.buer = true;
-//              this.iGid = this.addrulefm.gid
-//              this.selectItem = this.iGid;
-//this.getdatatarget(this.selectItem, this.currentPage, this.pagesize);
-////cuan(this.iGid).then((res) => {
-////if(res.data.ret == 200){
-////  this.crew = res.data.data;
-////  this.kong=false;
-////}
-////})
-//            }if(res.data.ret == 405){
-//              this.$message.error("目标人已存在");
-//            }
-//          })
-//        } else {
-//          this.$message.error("失败");
-//        }
-//      })
       },
-//    修改目标人
-      amend(ev){
-        
-        if(this.detail.birth == null){
-          this.detail.birth = "";
-        }
-        let detailBirth;
-      if(typeof(this.detail.birth) != "string"){//
-          detailBirth = this.detail.birth.toLocaleDateString();
-        }else{
-          detailBirth = this.detail.birth;
-        }
-        if(this.detail.pic == 1){
-          this.detail.pic = "";
-        }
-          this.iGid = this.detail.gid;
-          
-        ev.preventDefault();
-        let formData = new FormData();
-//      speaker,idcard,birth,gender,nation,room,address,tel,gid,mid,desc,file
-        formData.append('speaker', this.detail.speaker);
-        formData.append('mid', this.detail.mid);
-        formData.append('idcard', this.detail.idcard);
-        formData.append('birth', detailBirth);
-        formData.append('gender', this.detail.gender);
-        formData.append('nation', this.detail.nation);
-        formData.append('room', this.detail.room);
-        formData.append('tel', this.detail.tel);
-        formData.append('address', this.detail.address);
-        formData.append('gid', this.detail.gid);
-        formData.append('desc', this.detail.desc);
-        formData.append('file', this.filetwo);
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }
+      //    新建目标人上传接口
+      newtarget(src, formData, config) {
         let _this = this;
-        this.$axios.post(this.http+'/sr/model/update', formData, config).then(function (res) {
-          if (res.data.ret === 200) {
-//          alert("修改成功");
-            /*通过获取的mid刷新到修改后的目标组内*/
-//          _this.newfilemid = res.data.data.mid;
-            _this.$message.success("创建成功");
-//          _this.buer = true;
-//          _this.iGid = _this.addrulefm.gid;
-            _this.getdatatarget(_this.detail.gid, _this.currentPage, _this.pagesize);
-          }if(res.data.ret == 405){
-            _this.$message.error("修改失败");
-//          alert("用户名重复")
+        this.$axios.post(this.http + src, formData, config).then(function(res) {
+          if(res.data.ret === 200) {
+            /*这里做处理*/
+            _this.newfilemid = res.data.data.mid;
+            _this.$message.success(_this.$t('script.FoundSuccess')); //"创建成功"
+            _this.buer = true;
+            _this.iGid = _this.addrulefm.gid;
+            _this.getdatatarget(_this.selectItem, _this.currentPage, _this.pagesize);
+          }
+          if(res.data.ret == 405) {
+            _this.$message.error(_this.$t('script.PeopleRepetition')); //"目标人已存在"
           }
         })
-          
-//        updateModel(this.detail.speaker,this.detail.idcard,detailBirth,this.detail.gender,this.detail.nation,this.detail.room,this.detail.address,this.detail.tel,this.detail.gid,this.detail.mid,this.detail.desc,this.detail.pic).then((res)=>{
-//          if(res.data.ret == 200){
-//            this.$message.success("修改成功");
-//            console.log(detailBirth);
-////          this.targetdatas=false;
-//this.getdatatarget(this.detail.gid, this.currentPage, this.pagesize);
-//          }else{
-//            this.$message.error("修改失败");
-//          }
-//        })
-        
       },
-//    重置输入框
+      //    修改目标人
+      amend(ev) {
+        if(this.detail.speaker != "") {
+          if(this.detail.birth == null) {
+            this.detail.birth = "";
+          }
+          let detailBirth;
+          if(typeof(this.detail.birth) != "string") { //
+            detailBirth = Math.round(this.detail.birth.getTime() / 1000); //toLocaleDateString this.detail.birth 
+            console.log(detailBirth);
+          } else {
+            if(this.detail.birth) {
+              let getime = new Date(this.detail.birth);
+              detailBirth = Math.round(getime.getTime() / 1000);
+            } else {
+              detailBirth = '';
+            }
+          }
+          if(this.detail.pic == 1) {
+            this.detail.pic = "";
+          }
+          this.iGid = this.detail.gid;
+          ev.preventDefault();
+          let formData = new FormData();
+          formData.append('speaker', this.detail.speaker);
+          formData.append('mid', this.detail.mid);
+          formData.append('idcard', this.detail.idcard);
+          formData.append('birth', detailBirth);
+          formData.append('gender', this.detail.gender);
+          formData.append('nation', this.detail.nation);
+          formData.append('room', this.detail.room);
+          formData.append('tel', this.detail.tel);
+          formData.append('address', this.detail.address);
+          formData.append('gid', this.detail.gid);
+          formData.append('desc', this.detail.desc);
+          formData.append('file', this.filetwo);
+          let config = {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+          const filetype = this.filetwo.type;
+          const isJPEG = filetype === 'image/jpeg';
+          const isJPG = filetype === 'image/jpg';
+          const isPNG = filetype === 'image/png';
+          const isLt500k = this.filetwo.size / 1024 / 1024 < 0.5;
+          let src = '/sr/model/update';
+          if(this.filetwo) {
+            if(isJPEG || isJPG || isPNG) {
+              if(isLt500k) {
+                this.imgloading(src, formData, config);
+              } else {
+                this.$message.error("上传头像大小不能超过500k");
+              }
+            } else {
+              this.$message.error("上传头像必须是.jpeg、.jpg、.png格式");
+            }
+          } else {
+            this.imgloading(src, formData, config);
+          }
+        } else {
+          this.$message.error('姓名不能为空!');
+          return false;
+        }
+
+      },
+      //    修改目标人上传接口
+      imgloading(src, formData, config) {
+        let _this = this;
+        this.$axios.post(this.http + src, formData, config).then(function(res) {
+          if(res.data.ret === 200) {
+            _this.$message.success(_this.$t('script.AmendSuccess')); //"修改成功"
+            _this.getdatatarget(_this.detail.gid, _this.currentPage, _this.pagesize);
+          }
+          if(res.data.ret == 405) {
+            _this.$message.error(_this.$t('script.AmendError')); //"修改失败"
+          }
+        })
+      },
+      //    重置输入框
       resetForm() {
-        //      this.$refs[formName].resetField();
         this.rulefm.name = "";
         this.rulefm.desc = "";
       },
@@ -1334,111 +1376,83 @@ handleNextChange:function(){
       },
       //创建目标人时上传语音
       submitUploadone() {
-        if(this.newfilemid !=""){
-          
+        if(this.newfilemid != "") {
           this.$refs.uploadone.submit();
-        }else{
+        } else {
           this.$message.error("请先创建目标人");
         }
       },
-//    上传成功时的钩子函数
-      handleSuccess(response, file, fileList){
-        console.log(fileList);
-        this.i+=1;
-        if(fileList.length == this.i){
-          this.$message.success("上传成功");
-          this.xulian=false;
-          fileList.splice(0,fileList.length);
+      //    上传成功时的钩子函数
+      handleSuccess(response, file, fileList) {
+        this.i += 1;
+        if(fileList.length == this.i) {
+          this.$message.success(this.$t('script.UploadSuccess')); //"上传成功"
+          this.xulian = false;
+          fileList.splice(0, fileList.length);
           this.xl();
           this.i = 0;
         }
       },
-//    上传文件失败时的钩子函数
-      handleError(){
+      //    上传文件失败时的钩子函数
+      handleError() {
         this.i = 0;
       },
-//    创建目标人时上传成功时的钩子函数
-      handleSuccessone(response, file, fileList){
-        console.log(fileList);
-        this.i+=1;
-        if(fileList.length == this.i){
-          this.$message.success("上传成功");
-          fileList.splice(0,fileList.length);
-          this.xulian=false;
+      //    创建目标人时上传成功时的钩子函数
+      handleSuccessone(response, file, fileList) {
+        this.i += 1;
+        if(fileList.length == this.i) {
+          this.$message.success(this.$t('script.UploadSuccess')); //"上传成功"
+          fileList.splice(0, fileList.length);
+          this.xulian = false;
           this.xlone();
           this.i = 0;
         }
       },
-//    创建目标人时上传文件失败时的钩子函数
-      handleErrorone(){
+      //    创建目标人时上传文件失败时的钩子函数
+      handleErrorone() {
         this.i = 0;
       },
-//    详情语音列表播放按钮
-      play(scope){
-        console.log(scope);
+      //    详情语音列表播放按钮
+      play(scope) {
+        //console.log(scope);
       },
-//    详情语音列表删除按钮
-      speechDel(tsid){
-        console.log(tsid);
-        speechDel(tsid).then((res)=>{
-          console.log(res);
-          if(res.data.ret == 200){
-            this.$message.success("删除成功");
+      //    详情语音列表删除按钮
+      speechDel(tsid) {
+        //console.log(tsid);
+        speechDel(tsid).then((res) => {
+          //console.log(res);
+          if(res.data.ret == 200) {
+            this.$message.success(this.$t('script.DelSuccess')); //"删除成功"
             this.xl();
             this.xlone();
           }
         })
       },
-      //文件列表移除文件时的钩子
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      //点击文件列表中已上传的文件时的钩子
-      handlePreview(file) {
-        console.log(file);
-      },
-//    上传头像
-      fundata(){
-        var formData = new FormData();
-      },
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-//    判断上传的头像大小
+      //    上传文件限制
       beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
+        const iswav = file.type === 'audio/wav';
+        const ismp3 = file.type === 'audio/mp3';
+        const isflac = file.type === 'audio/flac';
+        const isLt10M = file.size / 1024 / 1024 < 20;
+        if(!iswav && !ismp3 && !isflac) {
+          this.$message.error(this.$t('script.FileRestrictions1')); //'上传文件只能是.WAV,.MP3,.FLAC格式!'
         }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
+        if(!isLt10M) {
+          this.$message.error(this.$t('script.FileRestrictions2')); //'上传文件大小一次不能超过 20MB!'
         }
-        return isJPG && isLt2M;
+        return iswav || ismp3 || isflac && isLt10M;
       }
     },
     data() {
-      const data = [{
-        id: 1,
-        label: '一级 1'
-      }, {
-        id: 2,
-        label: '一级 2'
-      }, {
-        id: 3,
-        label: '一级 3'
-      }];
+      const data = [];
       return {
-        Image:false,
-        https:"http://192.168.1.118/sr/model/speech/add",
+        msg: "+",
+        Image: false,
+        https: process.env.BASE_API + "/sr/model/speech/add",
         fenye: false,
-        thisi:0,
-//      imgshi:'/static/img/'+ this.imageUrl +'.jpg',
-//      上传头像
-//      thisi:1,
+        thisi: 0,
+        //      上传头像
         imageUrl: '',
-//      xiug:true,
         //当前页码
         currentPage: 1,
         //默认每页数据量
@@ -1446,45 +1460,45 @@ handleNextChange:function(){
         //默认数据总数
         totalCount: 0,
         //页码数据
-        i:0,
-        bt:'',
+        i: 0,
+        bt: '',
         name: '',
         age: '',
         file: '',
         filetwo: '',
-        filemid:'',
+        filemid: '',
         fileList: [],
         fileListone: [],
-        speech:[],
-        speechone:[],
-        crew:[],
+        speech: [],
+        speechone: [],
+        crew: [],
         data: [],
-        detail:{},
-        selectItem:-2,
-        xulian:true,
-        kong:true,
-        xunlian:false,
-        xunlianone:false,
+        detail: {},
+        selectItem: -2,
+        xulian: true,
+        kong: true,
+        xunlian: false,
+        xunlianone: false,
         target: false,
         addMan: false,
         details: false,
         targetdatas: false,
-        alter:false,
-        mId:'',
-        gId:"",
-        iGid:"",
+        alter: false,
+        mId: '',
+        gId: "",
+        iGid: "",
         buer: false,
         data4: JSON.parse(JSON.stringify(data)),
         data5: JSON.parse(JSON.stringify(data)),
         formInline: {
-          speaker:"",
-          idcard:"",
-          birth:"",
-          gender:"",
-          nation:"",
-          room:"",
-          address:"",
-          gid:""
+          speaker: "",
+          idcard: "",
+          birth: "",
+          gender: "",
+          nation: "",
+          room: "",
+          address: "",
+          gid: ""
         },
 
         filterText: '',
@@ -1495,7 +1509,7 @@ handleNextChange:function(){
         },
         addrulefm: {
           name: '',
-          gid:'',
+          gid: '',
           idcard: '',
           birth: '',
           gender: '',
@@ -1503,22 +1517,22 @@ handleNextChange:function(){
           room: '',
           tel: '',
           address: '',
-          desc:'',
-          pic:''
+          desc: '',
+          pic: ''
         },
-        ImgUrl:'',
-        reader:'',
-        readertwo:'',
+        ImgUrl: '',
+        reader: '',
+        readertwo: '',
         add_rules_target: {
           name: [{
               required: true,
-              message: '请输入姓名',
+              message: this.$t('script.ImportName'), //'请输入姓名'
               trigger: 'blur'
             },
             {
               min: 2,
               max: 15,
-              message: '长度在 2 到 15 个字符',
+              message: this.$t('script.nameSizeRestrictions'), //'长度在 2 到 15 个字符'
               trigger: 'blur'
             }
           ]
@@ -1536,36 +1550,22 @@ handleNextChange:function(){
         rules_target: {
           name: [{
               required: true,
-              message: '请输入目标组名称',
+              message: this.$t('script.ImportgroupName'), //'请输入目标组名称'
               trigger: 'blur'
             },
             {
               min: 1,
               max: 15,
-              message: '长度在 1 到 15 个字符',
+              message: this.$t('script.groupSizeRestrictions'), //'长度在 1 到 15 个字符'
               trigger: 'blur'
             }
           ]
         },
-        rules: {
-          name: [{
-              required: true,
-              message: '请输入活动名称',
-              trigger: 'blur'
-            },
-            {
-              min: 3,
-              max: 5,
-              message: '长度在 3 到 5 个字符',
-              trigger: 'blur'
-            }
-          ]
-        },
-//      新建模型上传语音需要的mid，点击关闭清空
-        newfilemid:"",
-//      模型组展示
+        //      新建模型上传语音需要的mid，点击关闭清空
+        newfilemid: "",
+        //      模型组展示
         data2: [],
-        http:'http://192.168.1.118'
+        http: process.env.BASE_API
       }
     }
   }
