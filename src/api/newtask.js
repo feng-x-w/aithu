@@ -98,3 +98,9 @@ export function download(filepath) {
         filepath:filepath
     })
 }
+//点击文件查看文件内容
+export function fileselect(path) {
+    return request.post('/task/file/select',{
+        path:path
+    })
+}

@@ -3,7 +3,21 @@
     padding: 10px;
     padding-bottom: 0;
   }
+ .identify-results>tr>.addre {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: none;
+  }
   
+  .identify-results>tr>td>.addre1 {
+    width: 100px;
+    /*display: inline-block;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   .taskmid {
     padding: 10px;
     padding-top: 0;
@@ -81,7 +95,7 @@
     margin-bottom: 10px;
   }
   
-  .box1 {
+  .box1,.box2 {
     width: 70%;
     position: fixed;
     background-color: white;
@@ -92,7 +106,9 @@
     border-radius: 9px;
     line-height: 25px;
   }
-  
+  .box2{
+  	width: 40%;
+  }
   .box1>h2 {
     text-align: center;
     margin-bottom: 5px;
@@ -148,7 +164,7 @@
     line-height: 10px;
     height: 10px;
     font-weight: 500;
-    display: inline-block;
+    /* display: inline-block; */
     padding: 5px 6px;
   }
   
@@ -162,12 +178,14 @@
     color: #ababab;
     font-size: 13px;
   }
+  .taskmid>table>tr>td{
+    padding: 10px;
+  }
 </style>
 <style>
   .el-table td {
     padding: 0 !important;
   }
-  
   .taskmid>table {
     width: 100%;
     margin: 0 auto;
@@ -248,9 +266,8 @@
       </el-form>
     </div>
     <div class="taskmid">
-      <table border="1">
+      <table border="1" class="identify-results">
         <tr>
-
           <th>{{$t('resultManager.taskName')}}</th>
           <th>{{$t('resultManager.file')}}</th>
           <th>{{$t('resultManager.targetName')}}</th>
@@ -266,13 +283,15 @@
           <th>{{$t('resultManager.operationTime')}}</th>
           <th>{{$t('resultManager.state')}}</th>
         </tr>
-        <tr v-for="(i,key) in tableData">
+        <tr v-for="(i,key) in tableData" :key="key">
           <td>{{i.taskname}}
             <!--<span class="custom" v-if="i.taskname == string">{{ResponseStatus}}</span>-->
           </td>
-          <td><span class="sps" :title="i.speechname"><img width="35" src="../../assets/wav.png"/></span></td>
+          <td :title="i.speechname" @click="audioshow(i.filepath)"><!---->
+          	<div class="addre1">{{i.speechname}}</div>
+          </td>
           <td>{{i.speaker}}
-            <!--<span class="custom" v-if="!i.speaker">{{ResponseStatus}}</span>-->
+
           </td>
           <td>{{i.gender}}
             <!--<span class="custom" v-if="i.gender != '男' && i.gender != '女'">{{ResponseStatus}}</span>-->
@@ -340,6 +359,14 @@
           <a :title="$t('resultManager.download')" style="float: right;margin: 10px;" class="atiao" target="_blank" :href="https+'/task/download?filepath='+textpath">{{$t('resultManager.download')}}</a>
         </div>
       </div>
+      	<!--播放-->
+      <div class="mrsk" v-show="audiobound">
+        <div class="box2" @click.stop>
+          <h2>{{$t('resultManager.file')}}<span @click="show();stopplay()" class="boxs fa fa-remove"></span></h2>
+          	<p><img src="../../assets/MP3.png" alt=""></p>
+            <audio :src="srcc" controls autoplay id="audio" style="width: 500px;"></audio>
+        </div>
+      </div>
       <!--关键词弹框   语言脚本-->
       <div class="mrsk" v-show="masker">
         <div class="box">
@@ -349,7 +376,7 @@
               <th style="width: 100px;">{{$t('resultManager.keyword')}}</th>
               <th>{{$t('resultManager.times')}}(s)</th>
             </tr>
-            <tr v-for="i in keyword">
+            <tr v-for="(i,key) in keyword" :key="key">
               <td style="width: 100px;">{{i.keyword}}</td>
               <td>{{i.offtime}}</td>
             </tr>
@@ -365,10 +392,12 @@
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
+  // import Mplay from '../../components/mplay/mplay'
   import { result, AllTasks, QueryTasks, download } from '@/api/newtask' //
   export default {
     components: {
       Breadcrumb
+      // Mplay
     },
     created() {
       this.initialize();
@@ -379,17 +408,28 @@
         this.masker = true;
         this.keyword = i.keyword;
         this.keywordname = i.taskname;
+        console.log(this.keywordname);
       },
       //    点击隐藏
       show() {
         this.masker = false;
         this.mas = false;
+        this.audiobound = false;
+      },
+      stopplay(){
+      	var audio=document.getElementById("audio")
+      	audio.pause();
+      	audio.currentTime = 0;
       },
       //    关键词
       antistop(text, textpath) {
         this.mas = true;
         this.textall = text;
         this.textpath = textpath;
+      },
+      audioshow(srcc){
+      	this.audiobound=true;
+      	this.srcc=this.https+srcc;
       },
       //每页显示数据量变更
       handleSizeChange: function(val) {
@@ -447,6 +487,7 @@
       //    调用接口显示数据封装为函数
       alldata(Taskid, CurrentPage, PageSize) {
         AllTasks(Taskid, CurrentPage, PageSize).then((res) => {
+        	console.log(res);
           if(res.data.ret == 200) {
             this.tableData = res.data.data;
             this.totalCount = res.data.totalcount;
@@ -532,7 +573,7 @@
             }
           }
           if(res.data.ret == 404) {
-            this.$message.error(res.data.msg);
+            // this.$message.error(res.data.msg);
             this.tableData = "";
             this.fenye = false;
             this.kong = true;
@@ -547,7 +588,9 @@
         keyword: [],
         keywordname: '',
         mas: false,
+        audiobound:false,
         textall: '',
+        srcc:'',
         masker: false,
         kong: false,
         taskidcard: '',

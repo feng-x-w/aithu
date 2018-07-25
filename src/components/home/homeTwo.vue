@@ -125,7 +125,7 @@
     </div>
     <hr />
     <div class="antistop">
-      <div class="antistop1" v-for="i in datakeyword">
+      <div class="antistop1" v-for="(i,key) in datakeyword" :key="key">
         {{i.keyword}}
       </div>
       <div class="antistop1" v-show="xiao">
@@ -152,7 +152,7 @@
           <!--添加-->
         </el-form>
       </div>
-      <div class="ipt list" v-for="i in list">
+      <div class="ipt list" v-for="(i,key) in list" :key="key">
         <div class="left">
           {{i.name}}
         </div>

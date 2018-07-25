@@ -1,6 +1,4 @@
 <style scoped>
-  .drill {}
-  
   .drillTop {
     margin: 10px;
   }
@@ -104,10 +102,6 @@
     padding-left: 30px;
   }
   
-  .shangR>ul>.asdd>li {
-    /*padding: 10px;*/
-  }
-  
   .shangR>ul>.asdd>li>input {
     width: 20px;
     float: left;
@@ -125,7 +119,7 @@
     background-color: #e3e3e3;
   }
   
-  .tasktable {
+  /* .tasktable {
     width: 100%;
     margin: 0 auto;
     text-align: left;
@@ -148,7 +142,7 @@
     border: 1px solid #e3e3e3;
     padding: 0 10px;
     font-size: 13px;
-  }
+  } */
   
   .wei {
     width: 99.8%;
@@ -158,6 +152,9 @@
     border: 1px solid #e3e3e3;
     border-top: 0;
     padding: 15px 0;
+  }
+  .taskmid>table>tr>td{
+    padding: 0px 10px;
   }
 </style>
 <style>
@@ -222,7 +219,7 @@
               <el-input type="textarea" v-model="languagesList.desc"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="newla">{{$t('drill.creat')}}</el-button>
+              <el-button type="primary" plain @click="newla">{{$t('drill.creat')}}</el-button>
               <!--创建-->
               <el-button @click="onEsc('languagesList')" type="danger" plain style="margin-left: 10px !important;">{{$t('drill.close')}}</el-button>
               <!--关闭-->
@@ -246,9 +243,9 @@
                 <el-input type="textarea" prop="desc" v-model="amendLanguagesList.desc"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="addlangu">{{$t('drill.modification')}}</el-button>
+                <el-button type="primary" plain @click="addlangu">{{$t('drill.modification')}}</el-button>
                 <!--修改-->
-                <el-button type="danger" @click="onEsc('amendLanguagesList')" style="margin-left: 10px !important;">{{$t('drill.close')}}</el-button>
+                <el-button type="danger" plain @click="onEsc('amendLanguagesList')" style="margin-left: 10px !important;">{{$t('drill.close')}}</el-button>
                 <!--关闭-->
               </el-form-item>
             </el-form>
@@ -276,11 +273,11 @@
                       <th> {{$t('drill.fileSize')}} </th>
                       <th> {{$t('drill.operation')}} </th>
                     </tr>
-                    <tr v-for="i in speechi">
+                    <tr v-for="(i,index) in speechi" :key="index">
                       <td> {{i.filename}} </td>
                       <td> {{i.filesize}} </td>
                       <td>
-                        <el-button type="text" @click="newTask(i.tsid)" :title="$t('drill.details')">
+                        <el-button type="text" :title="$t('drill.details')"><!-- @click="newTask(i.tsid)"-->
                           <i class="el-icon-caret-right" style="font-size: 20px;"></i>
                           <!--播放-->
                         </el-button>
@@ -324,7 +321,7 @@
             <th>{{$t('drill.operation')}}</th>
             <!--操作-->
           </tr>
-          <tr v-for="i in tableData">
+          <tr v-for="(i,index) in tableData" :key="index">
             <td> {{i.language}} </td>
             <td> {{i.desc}} </td>
             <td>
@@ -449,14 +446,14 @@
         const iswav = file.type === 'audio/wav';
         const ismp3 = file.type === 'audio/mp3';
         const isflac = file.type === 'audio/flac';
-        const isLt10M = file.size / 1024 / 1024 < 20;
+        const isLt10M = file.size / 1024 / 1024 < 50;
         if(!iswav && !ismp3 && !isflac) {
           this.$message.error(this.$t('script.FileRestrictions1')); //'上传文件只能是.WAV,.MP3,.FLAC格式!'
         }
         if(!isLt10M) {
           this.$message.error(this.$t('script.FileRestrictions2')); //'上传文件大小一次不能超过 20MB!'
         }
-        return iswav || ismp3 || isflac && isLt10M;
+        return (iswav || ismp3 || isflac) && isLt10M;
       },
       //    上传成功时的钩子函数
       handleS(response, file, fileList) {

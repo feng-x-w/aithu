@@ -14,7 +14,12 @@ import taskM from '@/components/task/taskM'
 import result from '@/components/result/result'
 import newfile from '@/components/aaa/new_file'
 import voice from '@/components/VoiceIndexing/voice'
-import config from '@/components/configuration/config'
+import nodeConfig from '@/components/configuration/nodeConfig'
+import parameterConfig from '@/components/configuration/parameterConfig'
+import AuthorityManagement from '@/components/AuthorityManagement/AuthorityManagement'
+import organization from '@/components/AuthorityManagement/children/organization'
+import role from '@/components/AuthorityManagement/children/role'
+// import useradmin from '@/components/AuthorityManagement/children/useradmin'
 
 Vue.use(Router)
 
@@ -111,10 +116,37 @@ const router = new Router({
           component: newfile
         },
         {
-          path: '/config',
-          name: 'config',
-          component: config
+          path: '/nodeConfig',
+          name: 'nodeConfig',
+          component: nodeConfig
+        },
+        {
+          path: '/parameterConfig',
+          name: 'parameterConfig',
+          component: parameterConfig
+        },
+        // {
+        //   path: '/AuthorityManagement',
+        //   name: 'AuthorityManagement',
+        //   component: AuthorityManagement,
+        //   children:[
+        {
+          path: '/organization',
+          name: 'organization',
+          component: organization
+        },{
+          path: '/role',
+          name: 'role',
+          component: role
         }
+        // ,
+        // {
+        //   path: '/useradmin',
+        //   name: 'useradmin',
+        //   component: useradmin
+        // }
+        //   ]
+        // }
       ]
     }
   ]

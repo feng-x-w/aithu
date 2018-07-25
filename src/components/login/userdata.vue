@@ -48,11 +48,12 @@
   }
   .text{
     position: absolute;
-    left: 48px;
-    bottom: -20px;
+    left: 50%;
+    bottom: -50px;
+    transform: translate(-50%);
   }
   .loadmeng{
-    z-index: 199;
+    z-index: 8;
     cursor:not-allowed;
   }
 </style>
@@ -69,7 +70,7 @@
           <div class="load loadmeng" v-show="disab"></div>
 <img class="Images" v-show="Image" :src="ImgUrl" height="200" width="200" alt="image preview..."/><br />
 <input ref="file" type="file" @change="previewFile($event)" style="display: none;"/>
-<p class="text" style="font-size: 12px;color: gray;">头像不能超过500k</p>
+<p class="text" style="font-size: 12px;color: gray;">{{$t('script.imageRestrictions2')}}</p>
         </div>
           
       </el-aside>
@@ -220,9 +221,9 @@
             if(isJPEG || isJPG || isPNG){
               if(isLt500k){
                 this.ModifiedData(src, formData, config);
-              }else{this.$message.error("上传头像大小不能超过500k");
+              }else{this.$message.error(this.$t('script.FileImgRestrictions2'));
               }
-            }else{this.$message.error("上传头像必须是.jpeg、.jpg、.png格式");
+            }else{this.$message.error(this.$t('script.FileImgRestrictions1'));
             }
           }else{this.ModifiedData(src, formData, config);
           }
@@ -240,12 +241,12 @@
               _this.cang1 = false;
               _this.userInFo();
             }if(res.data.ret == 407){
-              _this.$message.error("邮箱格式错误");
+              _this.$message.error(this.$t('script.EmailFormat'));//邮箱格式错误
             }
           })
         }else{
           if(!reg.test(this.ruleFormOne.email)){ //正则验证不通过，格式不对
-          　　　　_this.$message.error("邮箱格式错误");
+          　　　　_this.$message.error(this.$t('script.EmailFormat'));//邮箱格式错误
           　　　　return false;
             　　  }else{
             this.$axios.post(process.env.BASE_API + src, formData, config).then(function (res) {
@@ -257,7 +258,7 @@
                 _this.cang1 = false;
                 _this.userInFo();
               }if(res.data.ret == 407){
-                _this.$message.error("邮箱格式错误");
+                _this.$message.error(this.$t('script.EmailFormat'));//邮箱格式错误
               }
             })
             　   }

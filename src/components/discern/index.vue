@@ -93,10 +93,6 @@
     padding-left: 30px;
   }
   
-  .shangR>ul>.asdd>li {
-    /*padding: 10px;*/
-  }
-  
   .shangR>ul>.asdd>li>input {
     width: 20px;
     float: left;
@@ -116,6 +112,18 @@
   
   .el-select {
     float: left;
+  }
+  .taskmid>table>tr>td{
+    padding: 0px 10px;
+  }
+  .wei {
+    width: 99.8%;
+    text-align: center;
+    font-size: 16px;
+    color: #6F7180;
+    border: 1px solid #e3e3e3;
+    border-top: 0;
+    padding: 15px 0;
   }
 </style>
 
@@ -168,20 +176,20 @@
       <!--
       <div class="target" v-show="target">
         <div class="target_add">
-          <h1>{{$t('index.createGender')}}</h1><!--新建性别--
+          <h1>{{$t('index.createGender')}}</h1>新建性别
           <el-form :model="languagesList" ref="languagesList" label-width="100px" class="demo-ruleForm">
-            <el-form-item :label="$t('index.gender')" required><!--//性别--
-              <el-select v-model="languagesList.language" name="language" :placeholder="$t('index.gender')"><!--//性别--
-                <el-option :label="$t('index.gender1')" value="0"></el-option><!--//男--
-                <el-option :label="$t('index.gender2')" value="1"></el-option><!--//女--
+            <el-form-item :label="$t('index.gender')" required>//性别
+              <el-select v-model="languagesList.language" name="language" :placeholder="$t('index.gender')">//性别
+                <el-option :label="$t('index.gender1')" value="0"></el-option>//男
+                <el-option :label="$t('index.gender2')" value="1"></el-option>//女
               </el-select>
             </el-form-item>
-            <el-form-item :label="$t('index.description')"><!--//描述--
+            <el-form-item :label="$t('index.description')">//描述
               <el-input type="textarea" v-model="languagesList.desc"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="newla">{{$t('index.creat')}}</el-button><!--创建--
-              <el-button @click="onEsc" type="danger" plain style="margin-left: 10px !important;">{{$t('index.close')}}</el-button><!--关闭--
+              <el-button type="primary" @click="newla">{{$t('index.creat')}}</el-button>创建
+              <el-button @click="onEsc" type="danger" plain style="margin-left: 10px !important;">{{$t('index.close')}}</el-button>关闭
             </el-form-item>
           </el-form>
         </div>
@@ -210,9 +218,9 @@
                 <el-input type="textarea" prop="desc" v-model="amendLanguagesList.desc"></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="addlangu">{{$t('index.modification')}}</el-button>
+                <el-button plain type="primary" @click="addlangu">{{$t('index.modification')}}</el-button>
                 <!--修改-->
-                <el-button type="danger" @click="onEsc" style="margin-left: 10px !important;">{{$t('index.close')}}</el-button>
+                <el-button plain type="danger" @click="onEsc" style="margin-left: 10px !important;">{{$t('index.close')}}</el-button>
                 <!--关闭-->
               </el-form-item>
             </el-form>
@@ -239,11 +247,11 @@
                       <th> {{$t('index.fileSize')}} </th>
                       <th> {{$t('index.operation')}} </th>
                     </tr>
-                    <tr v-for="i in speechi">
+                    <tr v-for="(i,index) in speechi" :key="index">
                       <td> {{i.filename}} </td>
                       <td> {{i.filesize}} </td>
                       <td>
-                        <el-button type="text" @click="newTask(i.id)" :title="$t('index.details')">
+                        <el-button type="text" :title="$t('index.details')"><!-- @click="newTask(i.id)"-->
                           <i class="el-icon-caret-right" style="font-size: 20px;"></i>
                           <!--播放-->
                         </el-button>
@@ -286,7 +294,7 @@
             <th>{{$t('index.operation')}}</th>
             <!--操作-->
           </tr>
-          <tr v-for="i in tableData">
+          <tr v-for="(i,index) in tableData" :key="index">
             <td> {{i.gender}}
             </td>
             <td> {{i.desc}}
@@ -311,6 +319,7 @@
             </td>
           </tr>
         </table>
+      <div class="wei" v-show="kong">{{$t('resultManager.noDate')}}</div>
       </div>
       <!--<el-pagination
           @size-change="handleSizeChange"
@@ -395,14 +404,14 @@
         const iswav = file.type === 'audio/wav';
         const ismp3 = file.type === 'audio/mp3';
         const isflac = file.type === 'audio/flac';
-        const isLt10M = file.size / 1024 / 1024 < 20;
+        const isLt10M = file.size / 1024 / 1024 < 50;
         if(!iswav && !ismp3 && !isflac) {
           this.$message.error(this.$t('script.FileRestrictions1')); //'上传文件只能是.WAV,.MP3,.FLAC格式!'
         }
         if(!isLt10M) {
           this.$message.error(this.$t('script.FileRestrictions2')); //'上传文件大小一次不能超过 20MB!'
         }
-        return iswav || ismp3 || isflac && isLt10M;
+        return (iswav || ismp3 || isflac) && isLt10M;
       },
       //    上传成功时的钩子函数
       handleS(response, file, fileList) {
@@ -432,10 +441,22 @@
       },
       //    查询
       modelS() {
-        console.log(this.form.mlanguage, this.form.status);
+        // console.log(this.form.mlanguage, this.form.status);
         modelsearch(this.form.mlanguage, this.form.status).then((res) => {
-          console.log(res);
-          this.tableData = res.data.data;
+          // console.log(res);
+          if(res.data.ret == 200){
+            if(res.data.data.length != 0){
+              this.kong = false;
+              console.log(this.kong);
+              console.log(res.data.data);
+              this.tableData = res.data.data;
+            }else{
+              this.kong = true;
+              console.log(this.kong + "123");
+              console.log(res.data.data);
+              this.tableData = res.data.data;
+            }
+          }
         })
       },
       //    训练语音
@@ -503,6 +524,7 @@
     },
     data() {
       return {
+        kong:false,
         https: process.env.BASE_API + "/gre/model/speech/add",
         xli: true,
         Mid: '',
@@ -526,20 +548,6 @@
           language: '',
           desc: ''
         },
-        //      rules_target: {
-        //        language: [{
-        //            required: true,
-        //            message: '请输入目标组名称',
-        //            trigger: 'blur'
-        //          },
-        //          {
-        //            min: 1,
-        //            max: 15,
-        //            message: '长度在 1 到 15 个字符',
-        //            trigger: 'blur'
-        //          }
-        //        ]
-        //      },
         form: {
           mlanguage: '',
           status: '',

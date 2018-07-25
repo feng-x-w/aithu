@@ -109,12 +109,12 @@
 
 <template>
 	<div><!-- class="header"-->
-	  <div class="head">
+	  <!-- <div class="head">
 	    
-	  </div>
+	  </div> -->
 	  <div class="header">
 	    <div class="LeftLogo">
-  			<img src="../../assets/文件/logo2.png" />&nbsp;
+  			<!-- <img src="../../assets/文件/logo2.png" />&nbsp; -->
   			<span>
   			  {{$t('logo.title')}}
   			</span>
@@ -129,6 +129,7 @@
   				<ul>
   					<router-link tag="li" to="/userdata">{{$t('header_deng.user')}}</router-link><!-- @click="user"-->
   					<router-link tag="li" to="/changepass">{{$t('header_deng.changepass')}}</router-link><!-- @click="changepass"-->
+  					<!-- <router-link tag="li" to="/AuthorityManagement">权限管理</router-link> -->
   					<router-link tag="li" to="/login">{{$t('header_deng.LogOut')}}</router-link><!-- @click="login"-->
   				</ul>
   			</div>

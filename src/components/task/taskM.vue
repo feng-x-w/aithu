@@ -57,12 +57,12 @@
   }
   
   .mask>.show_taskadd {
-    width: 40%;
+    width: 50%;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    max-height: 300px;
+    max-height: 337px;
     padding: 25px 50px;
     background-color: white;
     overflow: hidden;
@@ -101,31 +101,59 @@
     padding: 15px 0;
   }
   
-  .shangR>h1 {
-    margin: 10px 0;
+  .shangR>h3 {
+    margin: 5px 0;
   }
   
-  .shangR>ul>.asdd {
-    padding-left: 30px;
+  .shangR>.mainmid{
+    border: 1px solid #f3f3f3;
+    overflow: hidden;
   }
   
-  .shangR>ul>.asdd>li {}
-  
-  .shangR>ul>.asdd>li>input {
-    width: 20px;
+  .shangR>.mainmid>.left{
+    border-right: 1px solid #ebebeb;
     float: left;
-    margin: 14px 0 0 -20px;
+    width: 25%;
+    height: 267px;
+    overflow: auto;
   }
   
-  .shangR>ul>.asdd>li>label {
-    width: 100%;
-    display: inline-block;
-    padding: 10px;
-    padding-left: 20px;
+  .shangR>.mainmid>.right{
+    border-left: 1px solid #ebebeb;
+    float: right;
+    width: 74%;
+    height: 267px;
+    overflow: auto;
   }
   
-  .shangR>ul>.asdd:hover {
-    background-color: #e3e3e3;
+  .shangR>.mainmid>.left>ul>li {
+    padding: 2px 10px;
+    border: 1px solid white;
+    margin: 1px;
+  }
+  
+  .shangR>.mainmid>.left>ul>.active {
+    background-color: #c2e5ff;
+    border: 1px solid #88ccff;
+  }
+    
+  .shangR>.mainmid>.left>ul>.active:hover {
+    background-color: #aedcff;
+    border: 1px solid #88ccff;
+  }
+  
+  .shangR>.mainmid>.left>ul>li>i {
+    font-size: 12px;
+    color: #dfb12a;
+  }
+  .fafiles{
+    font-size: 12px;
+    color: #dfb12a;
+  }
+  
+  .shangR>.mainmid>.left>ul>li:hover {
+    background-color: #E5F3FE;
+    border: 1px solid white;
   }
   
   .qwe {
@@ -139,7 +167,7 @@
     float: right;
     color: #5d5d5d;
     padding: 0px 4px;
-    display: inline-block;
+    /* display: inline-block; */
     height: 19px;
     line-height: 19px;
   }
@@ -148,6 +176,27 @@
     background-color: #ffbebe85;
     border: 1px solid #ff0000;
     color: #f53c3c;
+  }
+  .taskmid>table>tr{
+    border: none;
+  }
+  .taskmid>table>.tr:hover{
+    background-color: #c2e5ff66;;
+  }
+  .taskmid>table>tr>th{
+    border: none;
+  }
+  .taskmid>table>tr>td{
+    border: none;
+    padding: 10px 10px;
+  }
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
   }
 </style>
 <style>
@@ -159,7 +208,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    height: 211px;
+    height: 111px;
     overflow-y: auto;
   }
 </style>
@@ -252,7 +301,7 @@
                 <el-select v-model="form.typeId" @change="change" :placeholder="$t('taskM.chooseGroupName')">
                   <!--请选择组名-->
                   <el-option label=" " value="0"></el-option>
-                  <el-option v-for="item in targetname" :label="item.name" :value="item.id"></el-option>
+                  <el-option v-for="(item,index) in targetname" :key="index" :label="item.name" :value="item.id"></el-option>
                 </el-select>
                 <span class="show fa fa-remove" @click="show"></span>
               </el-form-item>
@@ -303,29 +352,44 @@
             <!--选取文件-->
             <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">{{$t('taskM.upolad')}}</el-button>
             <!--上传到服务器-->
-            <el-button size="small" type="primary" @click="Remote" v-show="dianji1">{{$t('taskM.remoteLoad')}}</el-button>
+            <el-button v-if="fileList" size="small" type="primary" @click="Remote">{{$t('taskM.remoteLoad')}}</el-button>
             <!--远端上传-->
+            <span class="boxs fa fa-remove" style="margin-left:5px;" @click="shut"></span>
+            <!-- <span class="boxs boxstui fa fa-arrow-left" @click="retreat"></span> -->
             <div slot="tip" class="el-upload__tip">{{$t('taskM.uploadReq')}}</div>
             <!--只能上传.WAV,.MP3,.FLAC,.APE文件-->
           </el-upload>
         </div>
         <div class="shangR" v-show="xiaoshi">
-          <h2>{{$t('taskM.chooseFolder')}}</h2>
-          <!--请选择文件夹-->
-          <ul>
-            <div class="asdd" v-for="(i,key) in addfiles" @click="cName(key)">
-              <li>
-                <!-- @click="cName(key)"-->
-                <input type="radio" name="fils" :id="key" /> <label :for="key">{{i.name}}</label>
-                <br />
-              </li>
+          <h3>
+            {{$t('taskM.chooseFolder')}}
+            <span class="boxs fa fa-remove" style="margin-left:5px;" @click="shutTwo"></span><!--  -->
+            <span class="boxs boxstui fa fa-arrow-left" @click="retreatTwo" ></span><!---->
+          </h3>
+          <div class="mainmid">
+            <div class="left">
+              <!--请选择文件夹-->
+              <el-tree highlight-current :data="addfiles" :props="defaultProps" @node-click="handleNodeClick">
+                <span class="custom-tree-node" slot-scope="{ node, data }">
+                  <span><i class="fafiles fa fa-folder-open"></i>{{ node.label }}</span>
+                </span>
+              </el-tree>
             </div>
-
+            <div class="right left">
+              <ul>
+                <li v-for="(i,key) in displayfile" :key="key"><!-- @dblclick="into(i,key)"-->
+                  <i class="fafiles fa fa-file" v-if="i.type=='file'"></i>
+                  <i class="fafiles fa fa-folder-open" v-if="i.type=='dir'"></i>
+                  {{i.label}}
+                </li>
+              </ul>
+            </div>
+          </div>
+          
             <div style="text-align: right;padding-top: 5px;">
-              <el-button type="submit" size="small" @click="ftotfiles()">{{$t('taskM.confirmUpload')}}</el-button>
+              <el-button style="margin:2px;" type="submit" size="small" @click="ftotfiles()">{{$t('taskM.confirmUpload')}}</el-button>
               <!--确认上传-->
             </div>
-          </ul>
         </div>
       </div>
     </div>
@@ -338,7 +402,7 @@
           <th>{{$t('taskM.time')}}</th>
           <th>{{$t('taskM.operation')}}</th>
         </tr>
-        <tr v-for="i in tableData">
+        <tr v-for="(i,index) in tableData" :key="index">
           <td>
             {{i.taskname}}
           </td>
@@ -392,7 +456,7 @@
 
 <script>
   import Breadcrumb from '../../components/Breadcrumb/Breadcrumb'
-  import { newtaskadd, tasklist, taskStart, result, files, ftot, search } from '@/api/newtask'
+  import { newtaskadd, tasklist, taskStart, result, files, ftot, search, fileselect } from '@/api/newtask'
   import { list } from '@/api/antistop'
   export default {
     components: {
@@ -449,6 +513,7 @@
       //    查询
       seek() {
         this.indx = 1;
+        this.currentPage = 1;
         if(this.tasksearch.starttime) {
           this.stt = Math.round(this.tasksearch.starttime.getTime() / 1000); //toLocaleDateString() this.tasksearch.starttime.getTime()
           console.log(parseFloat(this.stt));
@@ -517,29 +582,33 @@
         })
 
       },
-      cName(index) {
-        this.inde = index + 1;
-      },
       //    确认上传语音
       ftotfiles() {
+
         if(this.inde == "") {
           this.$message.error(this.$t('script.SelectTheFile')); //请选择文件夹进行上传
         } else {
-          this.show_task_add = false;
-          this.xiaoshi1 = true;
-          this.dianji1 = true;
-          this.xiaoshi = false;
-          this.show_task = false;
-          this.$message.success(this.$t('script.BeUploading')); //正在上传文件
-          ftot(this.addfiles[this.inde - 1].name, this.taskid).then((res) => {
-            console.log(res);
-            if(res.data.ret == 200) {
-              taskStart(this.taskid).then((res) => {
-                this.$message.success(this.$t('script.UploadComplete1')); //"上传成功,正在开始任务"
-                this.loading(this.currentPage, this.pagesize);
-              })
-            }
-          })
+          if(this.displayfile.length == 0){
+            this.$message.error("该文件夹内暂无数据");//该文件夹内暂无数据
+          }else{
+            this.show_task_add = false;
+            this.xiaoshi1 = true;
+            // this.dianji1 = true;
+            this.xiaoshi = false;
+            this.show_task = false;
+            this.$message.success(this.$t('script.BeUploading')); //正在上传文件
+            ftot(this.inde, this.taskid).then((res) => {
+              console.log(res);
+              if(res.data.ret == 200) {
+                taskStart(this.taskid).then((res) => {
+                  this.displayfile = [];
+                  // this.selectItem=-2;
+                  this.$message.success(this.$t('script.UploadComplete1')); //"上传成功,正在开始任务"
+                  this.loading(this.currentPage, this.pagesize);
+                })
+              }
+            })
+          }
         }
 
       },
@@ -549,7 +618,6 @@
           str = str.replace(/，/ig, ',');
           return str;
         }
-
         function unique(arr) {
           var res = [];
           for(var i = 0; i < arr.length; i++) {
@@ -572,7 +640,7 @@
               }
             } else {
               this.$message.error(this.$t('script.Complete'))
-            } //'请将关键词组或和关键词填写完整'
+            } //'请将关键词组或关键词填写完整'
           } else {
             this.form.typeId = 0;
             if(this.form.idx == 1 && this.form.pnum == '') {
@@ -590,7 +658,6 @@
           str = str.replace(/，/ig, ',');
           return str;
         }
-
         function unique(arr) {
           var res = [];
           for(var i = 0; i < arr.length; i++) {
@@ -617,6 +684,16 @@
           }
         }
       },
+      // watch:{
+      //   filelist:function(val,old){
+      //     console.log(val,old);
+      //     if(val){
+      //       this.$message.error("我是清空?")
+      //     }else{
+      //       this.$message.error("我是有数据?")
+      //     }
+      //   }
+      // },
       //    创建任务封装函数
       feng(ArrAy) {
         newtaskadd(this.form.name, this.form.tasknum, this.form.enhance, this.form.cleaning, this.form.sr, this.form.ks, this.form.li, this.form.gi, this.form.typeId, ArrAy, this.form.pnum, this.form.idx).then((res) => {
@@ -625,6 +702,9 @@
             console.log(this.taskid);
             this.show_task_childen = false;
             this.show_task_add = true;
+            this.xiaoshi = false;
+            this.xiaoshi1 = true;
+            this.dinaji1 = true;
           }
           if(res.data.ret == 401) {
             this.$message.error(this.$t('script.CreateModels1')); //'请先建立声纹模型'
@@ -644,7 +724,7 @@
         });
       },
       dianjia() {
-        this.dianji1 = false;
+        // this.dianji1 = false;
       },
       //    点击显示创建新任务蒙板
       newTask() {
@@ -694,7 +774,7 @@
         //      const iswav = file.type === 'audio/wav';
         //      const ismp3 = file.type === 'audio/mp3';
         //      const isflac = file.type === 'audio/flac';
-        const isLt10M = file.size / 1024 / 1024 < 30;
+        const isLt10M = file.size / 1024 / 1024 < 50;
         //      if (!iswav && !ismp3 && !isflac) {
         //        this.$message.error(this.$t('script.FileRestrictions1'));//'上传文件只能是.WAV,.MP3,.FLAC格式!'
         //      }
@@ -715,7 +795,7 @@
             this.$message.success(this.$t('script.UploadComplete1')); //"上传成功，正在开始任务"
             this.show_task = false;
             this.show_task_add = false;
-            this.dianji1 = true;
+            // this.dianji1 = true;
             this.i = 0;
             fileList.splice(0, fileList.length);
           })
@@ -761,9 +841,91 @@
         }
         console.log(this.form.typeName);
       },
+      // 点击关闭
+      shut(){
+        this.show_task = false;
+        this.initall();
+        this.show_task_add = false;
+        this.fileList = [];
+        // this.dianji1 = true;
+      },
+      shutTwo(){
+        this.show_task = false;
+        this.initall();
+        this.displayfile = [];
+        this.inde = '';
+        this.show_task_add = false;
+        // this.dianji1 = true;
+      },
+      // 点击后退
+      retreat(){
+        this.show_task_add = false;
+        this.show_task_childen = true;
+        this.fileList = [];
+        // this.dianji1 = true;
+      },
+      retreatTwo(){
+        this.displayfile = [];
+        this.xiaoshi1 = true;
+        this.xiaoshi = false;
+      },
+      // 文件夹选择上传
+      // selected(i,key){
+      //   this.selectItem = key;
+      //   this.inde = key+1;
+      //   console.log(i);
+      //   fileselect(i.path).then((res)=>{
+      //     if(res.data.ret == 200){
+      //       console.log(res.data.data);
+      //       function children(path, arr){
+
+      //       }
+      //       this.displayfile = res.data.data;
+      //     }else if(res.data.ret == 404){
+      //       this.displayfile = [];
+      //       this.$message.error("没有内容啦!");
+      //     }
+      //   })
+      // },
+      // into(i,key){
+      //   this.selectItem = key;
+      //   this.inde = key+1;
+      //   console.log(i.path);
+      //   // console.log(this.addfiles);
+      //   if(i.type == "dir"){
+      //     this.addfiles = this.displayfile;//parentname
+      //     fileselect(i.path).then((res)=>{
+      //       if(res.data.ret == 200){
+      //         console.log(res.data.data);
+      //         this.displayfile = res.data.data;
+      //       }else if(res.data.ret == 404){
+      //          this.$message.error("没有内容啦!"); 
+      //          this.displayfile = [];
+      //       }
+      //     })
+      //   }else{
+      //     this.$message.error("不可选择文件");
+      //   }
+      // },
+      handleNodeClick(i) {
+        console.log(i);
+        // this.selectItem = key;
+        this.inde = i.label;
+        console.log(this.inde);
+        console.log(i);
+        fileselect(i.path).then((res)=>{
+          if(res.data.ret == 200){
+            console.log(res.data.data);
+            this.displayfile = res.data.data;
+          }else if(res.data.ret == 404){
+            this.displayfile = [];
+          }
+        })
+      }
     },
     data() {
       return {
+        // selectItem:-1,
         stt: '',
         edt: '',
         indx: 0,
@@ -778,9 +940,10 @@
         targetantistop: false,
         voice: false,
         addfiles: [],
+        displayfile:[],
         inde: "",
         i: 0,
-        dianji1: true,
+        // dianji1: true,
         xiaoshi1: true,
         xiaoshi: false,
         kong: false,
@@ -818,7 +981,11 @@
           gi: 0,
           idx: 0
         },
-        http: process.env.BASE_API + "/task/upload"
+        http: process.env.BASE_API + "/task/upload",
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
       }
     }
 

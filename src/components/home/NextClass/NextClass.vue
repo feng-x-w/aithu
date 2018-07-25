@@ -148,7 +148,7 @@
   }
   
   .tasktable>tr>td>.addre1 {
-    width: 100px;
+    width: 50px;
     /*display: inline-block;*/
     overflow: hidden;
     text-overflow: ellipsis;
@@ -333,7 +333,7 @@
         <el-input :placeholder="$t('NextC.placeholder')" v-model="filterText" ref="type1">
         </el-input>
         <ul class="filter-tree">
-          <li v-for="(i,index) in data2" :id="i.gid" ref="tree2" @click="show(i,i.gid)" v-bind:class="{ nowpage: i.gid==selectItem }">
+          <li v-for="(i,index) in data2" :key="index" :id="i.gid" ref="tree2" @click="show(i,i.gid)" v-bind:class="{ nowpage: i.gid==selectItem }">
             <span>{{i.groupname}}</span>
             <div @click.stop :title="$t('NextClass.alter')" v-if="i.groupname != '未分组'">
               <!--修改-->
@@ -365,7 +365,7 @@
               <el-input type="textarea" v-model="rulefm_one.desc"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="openalter">{{$t('NextClass.alterImmediately')}}</el-button>
+              <el-button type="primary" plain @click="openalter">{{$t('NextClass.alterImmediately')}}</el-button>
               <!--立即修改-->
               <!--<el-button @click="resetForm()">重置</el-button>-->
               <el-button @click="showtarget1" type="danger" plain style="margin-left: 10px !important;">{{$t('NextClass.cancel')}}</el-button>
@@ -394,9 +394,9 @@
                   <el-input type="textarea" v-model="rulefm.desc"></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('rulefm')">{{$t('NextClass.create')}}</el-button>
+                  <el-button type="primary" plain @click="submitForm('rulefm')">{{$t('NextClass.create')}}</el-button>
                   <!--创建-->
-                  <!--<el-button @click="resetForm('formName')" style="margin: 0 10px !important;">{{$t('NextClass.reset')}}</el-button><!--重置-->
+                  <!--<el-button @click="resetForm('formName')" style="margin: 0 10px !important;">{{$t('NextClass.reset')}}</el-button>重置-->
                   <el-button @click="showtarget('formName')" type="danger" plain>{{$t('NextClass.close')}}</el-button>
                   <!--关闭-->
                 </el-form-item>
@@ -499,10 +499,10 @@
                     </tr>
                     <tr>
                       <td>
-                        <el-form-item label="gid">
+                        <el-form-item :label="$t('NextClass.TargetGroup')">
                           <el-select v-model="addrulefm.gid" :placeholder="$t('NextClass.chooseTargetGroup')">
                             <!--请选择目标组-->
-                            <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid"></el-option>
+                            <el-option v-for="(index,key) in data2" :key="key" :label="index.groupname" :value="index.gid"></el-option>
                           </el-select>
                         </el-form-item>
                       </td>
@@ -516,7 +516,7 @@
                     <tr>
                       <td colspan="2">
                         <el-form-item>
-                          <el-button type="primary" @click="addparson($event, 'addrulefm')" :disabled="buer">{{$t('NextClass.create')}}</el-button>
+                          <el-button plain type="primary" @click="addparson($event, 'addrulefm')" :disabled="buer">{{$t('NextClass.create')}}</el-button>
                           <!--创建-->
                           <!--<el-button @click="resetForm()">重置</el-button>-->
                           <el-button @click="showtarget('addrulefm')" type="danger" style="margin-left: 10px !important;" plain>{{$t('NextClass.close')}}</el-button>
@@ -551,7 +551,7 @@
                         <th>{{$t('NextClass.operation')}}</th>
                         <!--操作-->
                       </tr>
-                      <tr v-for="i in speechone">
+                      <tr v-for="(i,index) in speechone" :key="index">
                         <td>
                           {{i.filename}}
                         </td>
@@ -610,23 +610,23 @@
             <th>{{$t('NextClass.operation')}}</th>
             <!--操作-->
           </tr>
-          <tr v-for="i in crew">
-            <td> {{i.speaker}} </td>
-            <td> {{i.idcard}} </td>
-            <td> {{i.birth}} </td>
+          <tr v-for="(i,index) in crew" :key="index">
+            <td :title="i.speaker"><div class="addre1"> {{i.speaker}} </div></td><!--  class="addre" style="width:50px;" -->
+            <td :title="i.idcard"><div class="addre1"> {{i.idcard}} </div></td>
+            <td :title="i.birth"> {{i.birth}} </td>
             <td>
               <span v-if="i.gender==0">{{$t('NextClass.gender1')}}</span>
               <!--男-->
               <span v-if="i.gender==1">{{$t('NextClass.gender2')}}</span>
               <!--女-->
             </td>
-            <td> {{i.nation}} </td>
-            <td>
+            <td :title="i.nation"> {{i.nation}} </td>
+            <td :title="i.room">
               <div class="addre1"> {{i.room}} </div>
             </td>
-            <td class="addre" width="100px"> {{i.address}} </td>
-            <td> {{i.groupname}} </td>
-            <td style="width: 37px;">
+            <td :title="i.address" class="addre" style="width:50px;"> {{i.address}} </td>
+            <td :title="i.groupname"><div class="addre1"> {{i.groupname}} </div></td>
+            <td style="width: 40px;">
               <span v-if="i.status == 0" style="white-space: nowrap;">{{$t('NextClass.unusable')}}</span>
               <!--不可用-->
               <span v-if="i.status == 1">{{$t('NextClass.usable')}}</span>
@@ -743,10 +743,10 @@
                     </tr>
                     <tr>
                       <td>
-                        <el-form-item label="gid">
+                        <el-form-item :label="$t('NextClass.TargetGroup')">
                           <el-select v-model="detail.gid" :placeholder="$t('NextClass.chooseTargetGroup')">
                             <!--请选择目标组-->
-                            <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid"></el-option>
+                            <el-option v-for="(index,key) in data2" :label="index.groupname" :value="index.gid" :key="key"></el-option>
                           </el-select>
                         </el-form-item>
                       </td>
@@ -760,7 +760,7 @@
                     <tr>
                       <td colspan="2">
                         <el-form-item>
-                          <el-button type="primary" @click="amend($event)">{{$t('NextClass.alter')}}</el-button>
+                          <el-button type="primary" plain @click="amend($event)">{{$t('NextClass.alter')}}</el-button>
                           <!--修改-->
                           <!--<el-button @click="resetForm()">重置</el-button>-->
                           <el-button @click="showtarget1" type="danger" plain style="margin-left: 10px !important;">{{$t('NextClass.close')}}</el-button>
@@ -793,7 +793,7 @@
                         <th>{{$t('NextClass.operation')}}</th>
                         <!--操作-->
                       </tr>
-                      <tr v-for="i in speech">
+                      <tr v-for="(i,index) in speech" :key="index">
                         <td>
                           {{i.filename}}
                         </td>
@@ -808,7 +808,6 @@
                           <el-button type="text" @click="speechDel(i.tsid)" style="color: red;" :title="$t('NextClass.delete')">
                             <!--删除-->
                             <i class="el-icon-delete"></i>
-                            <!--删除-->
                           </el-button>
                         </td>
                       </tr>
@@ -1433,14 +1432,14 @@
         const iswav = file.type === 'audio/wav';
         const ismp3 = file.type === 'audio/mp3';
         const isflac = file.type === 'audio/flac';
-        const isLt10M = file.size / 1024 / 1024 < 20;
+        const isLt10M = file.size / 1024 / 1024 < 50;
         if(!iswav && !ismp3 && !isflac) {
           this.$message.error(this.$t('script.FileRestrictions1')); //'上传文件只能是.WAV,.MP3,.FLAC格式!'
         }
         if(!isLt10M) {
           this.$message.error(this.$t('script.FileRestrictions2')); //'上传文件大小一次不能超过 20MB!'
         }
-        return iswav || ismp3 || isflac && isLt10M;
+        return (iswav || ismp3 || isflac) && isLt10M;
       }
     },
     data() {
